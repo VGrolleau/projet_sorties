@@ -1,5 +1,7 @@
 /.idea/
 /composer.lock
+/src/Security/AppAuthenticator.php
+/.env
 
 ###> symfony/framework-bundle ###
 /.env.local
