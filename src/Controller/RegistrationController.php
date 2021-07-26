@@ -25,6 +25,9 @@ class RegistrationController extends AbstractController
     ): Response
     {
         $user = new User();
+        $user->setCreatedDate(new \DateTime());
+        $user->setIsAdmin(false);
+        $user->setIsActive(true);
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -33,7 +36,7 @@ class RegistrationController extends AbstractController
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('Password')->getData()
                 )
             );
 
