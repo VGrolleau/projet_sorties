@@ -45,6 +45,6 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/city, roles: ROLE_ADMIN }
         - { path: ^/campus, roles: ROLE_ADMIN }
-        - { path: ^/main_home, roles: ROLE_USER }
+        - { path: ^/sorties_home, roles: ROLE_USER }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/app_logout, roles: ROLE_USER }
