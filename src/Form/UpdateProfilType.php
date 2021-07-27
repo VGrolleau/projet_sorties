@@ -14,14 +14,13 @@ class UpdateProfilType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('firstname')
-            ->add('lastname')
-            ->add('phone')
+            ->add('username', null, ['label' => 'Surnom'])
+            ->add('firstname', null, ['label' => 'Prénom'])
+            ->add('lastname', null, ['label' => 'Nom'])
+            ->add('phone', null, ['label' => 'Téléphone'])
             ->add('email')
-            ->add('password')
-            //Confirmation de password
             ->add('campus', EntityType::class, [
+                'label' => 'Votre campus',
                 'class' => Campus::class,
                 'choice_label' => 'name'
             ])
