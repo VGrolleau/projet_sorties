@@ -18,7 +18,7 @@
         <div class="container">
             <header>
                 <h1>
-                    <a href="{# todo : lier le lien de la page d'accueil {{ path('main_home') }} #}" title="Home">
+                    <a href="{# todo : lier le lien de la page d'accueil  #}{{ path('main_home') }}" title="Home">
                         {# todo : intégrer le logo ici #}
                     </a>
                 </h1>
@@ -30,7 +30,6 @@
             </main>
 
             <footer>
-                {% include 'inc/nav.html.twig' %}
                 <div>&copy; {{ "now"|date("Y") }} Sorties</div>
             </footer>
         </div>

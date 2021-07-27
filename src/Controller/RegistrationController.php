@@ -25,6 +25,7 @@ class RegistrationController extends AbstractController
     ): Response
     {
         $user = new User();
+        $user->setRoles(["ROLE_USER"]);
         $user->setCreatedDate(new \DateTime());
         $user->setIsAdmin(false);
         $user->setIsActive(true);
