@@ -2,28 +2,37 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
+        <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+{#        <link rel="icon" href="{{ asset('img/icon.png') }}">#}
+
+        {% block extrastyles %}{% endblock %}
     </head>
+
     <body>
-        {% block body %}
+        <div class="container">
+            <header>
+                <h1>
+                    <a href="{# todo : lier le lien de la page d'accueil {{ path('main_home') }} #}" title="Home">
+                        {# todo : intégrer le logo ici #}
+                    </a>
+                </h1>
+                {% include 'inc/nav.html.twig' %}
+            </header>
 
-        <h1>Coucou de Alix</h1>
+            <main>
+                {% block body %}{% endblock %}
+            </main>
 
-        <h1></h1>
-        <h2>Test pull request</h2>
-
-            <p>testing suppression</p>
-
-        {% endblock %}
+            <footer>
+                {% include 'inc/nav.html.twig' %}
+                <div>&copy; {{ "now"|date("Y") }} Sorties</div>
+            </footer>
+        </div>
     </body>
 </html>
