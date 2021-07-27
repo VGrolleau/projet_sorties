@@ -3,70 +3,85 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationFormType;
 use App\Form\UpdateProfilType;
-use App\Security\AppAuthenticator;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+
 
 class UpdateProfilController extends AbstractController
 {
     /**
      * @Route("/updateprofil", name="update_profil")
      */
-    public function updateProfil(
-        Request $request,
-        UserPasswordEncoderInterface $passwordEncoder,
-        UserAuthenticatorInterface $authenticator,
-        AppAuthenticator $formAuthenticator
-    ): Response
+    public function updateProfil(Request $request): Response
     {
-        //$user = $this->getUser();
-        $userTemp = new User();
-        $form = $this->createForm(UpdateProfilType::class, $userTemp);
-
+        $user = $this->getUser();
+        $form = $this->createForm(UpdateProfilType::class, $user);
         $form->handleRequest($request);
-        /*  if(!($user->getUserIdentifier() === $userTemp->getUserIdentifier())){
-              $user->setUsername($userTemp->getUserIdentifier());
-          }
-        /*if(!($user->getFirstname() === $userTemp->getFirstname())){
-              $user->setFirstname($userTemp->getFirstname());
-          }
-          if(!($user->getlastname() === $userTemp->getlastname())){
-              $user->setlastname($userTemp->getlastname());
-          }
-          if(!($user->getPhone() === $userTemp->getPhone())){
-              $user->setPhone($userTemp->getPhone());
-          }
-          if(!($user->getEmail() === $userTemp->getEmail())){
-              $user->setEmail($userTemp->getEmail());
-          }
-          if(!($user->getCampus() === $userTemp->getCampus())){
-              $user->setCampus($userTemp->getCampus());
-          }*/
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $userTemp->setPassword(
-                $passwordEncoder->encodePassword(
-                    $userTemp,
-                    $form->get('Password')->getData()
-                )
-            );
+        $entityManager = $this->getDoctrine()->getManager();
+        if ($form->isSubmitted()) {
+            //séparé en 2 if pour pouvoir faire le refresh si le form n'est pas valide
+            if ($form->isValid()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userTemp);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+                $entityManager->persist($user);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
 
-            return $authenticator->authenticateUser($userTemp, $formAuthenticator, $request);
+                $this->addFlash('success', 'Profil modifié !');
+                return $this->redirectToRoute('update_profil');
+            } else {
+                //sinon ça bugue dans la session, ça me déconnecte
+                //refresh() permet de re-récupérer les données fraîches depuis la bdd
+                $entityManager->refresh($user);
+            }
         }
-
         return $this->render('updateprofil/upProfil.html.twig', [
-            'UpdateProfil' => $form->createView(),
-        ]);
+        'UpdateProfil' => $form->createView(),
+    ]);
     }
-}
+
+            /**
+             * Modification du profil
+             *
+             * @Route("/updateprofil/mot-de-passe", name="user_update_password")
+             */
+            public function editPassword(
+                Request $request,
+                EntityManagerInterface $entityManager,
+                UserPasswordEncoderInterface $passwordEncoder
+            ): Response
+            {
+                //récupère le user en session
+                //ne jamais récupérer le user en fonction de l'id dans l'URL !
+                /** @var User $user */
+                $user = $this->getUser();
+
+                $form = $this->createForm(EditPasswordType::class);
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+
+                    $hash = $passwordEncoder->encodePassword($user, $form->get('new_password')->getData());
+                    $user->setPassword($hash);
+
+                    $entityManager->persist($user);
+                    $entityManager->flush();
+
+                    $this->addFlash('success', 'Mot de passe modifié !');
+                    //sinon ça bugue dans la session, ça me déconnecte
+                    //refresh() permet de re-récupérer les données fraîches depuis la bdd
+                    $entityManager->refresh($user);
+
+                    return $this->redirectToRoute("user_profile", ["id" => $user->getId()]);
+                }
+
+                return $this->render('user/edit_password.html.twig', [
+                    'form' => $form->createView(),
+                ]);
+            }
+    }
+
