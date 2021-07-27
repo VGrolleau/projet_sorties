@@ -1,26 +1,13 @@
-.register{
+.register, .login, .updateProfil{
     text-align: center;
 }
-.register label{
+.register label, .login label, .updateProfil label{
     display: block;
 }
 
-.register input,textarea,select{
-    margin-bottom: 1rem;
-    box-sizing: border-box;
-    width: 150px;
-    max-width: 50%;
-}
-
-.login{
-    text-align: center;
-}
-
-.login label{
-    display: block;
-}
-
-.login input,textarea,select{
+.register input,.register textarea,.register select,
+.login input,.login textarea,.login select,
+.updateProfil input,.updateProfil textarea,.updateProfil select{
     margin-bottom: 1rem;
     box-sizing: border-box;
     width: 150px;
