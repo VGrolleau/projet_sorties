@@ -1,0 +1,28 @@
+.register{
+    text-align: center;
+}
+.register label{
+    display: block;
+}
+
+.register input,textarea,select{
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 150px;
+    max-width: 50%;
+}
+
+.login{
+    text-align: center;
+}
+
+.login label{
+    display: block;
+}
+
+.login input,textarea,select{
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 150px;
+    max-width: 50%;
+}
