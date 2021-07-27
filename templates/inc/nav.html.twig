@@ -6,7 +6,7 @@
                 <li><a href="{# todo : mettre lien vers page gestion Campus {{ path('campus') }} #}" title="Gérer les campus">Campus</a></li>
             {% endif %}
             <li><a href="{{ path('sorties_home') }}" title="Sorties">Accueil</a></li>
-            <li><a href="{# todo : mettre lien vers page Profil {{ path('profile') }} #}" title="Mon profil">Mon profil</a></li>
+            <li><a href="{{ path('update_profil') }}" title="Mon profil">Mon profil</a></li>
             <li><a href="{{ path('app_logout') }}" title="Déconnexion">Déconnexion ({{ app.user.firstname }})</a></li>
         {% else %}
             <li><a href="{{ path('app_login') }}" title="Connexion">Connexion</a></li>

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Update your profil
+{% endblock %}
+
+{% block body %}
+    <div class="updateProfil">
+        <h1>Mon profil</h1>
+        {{form_start(UpdateProfil)}}
+        {{form_row(UpdateProfil.username, {'attr':{'value': app.user.username}})}}
+        {{form_row(UpdateProfil.firstname, {'attr':{'value': app.user.firstname}})}}
+        {{form_row(UpdateProfil.lastname, {'attr':{'value': app.user.lastname}})}}
+        {{form_row(UpdateProfil.phone, {'attr':{'value': app.user.phone}})}}
+        {{form_row(UpdateProfil.email, {'attr':{'value': app.user.email}})}}
+        {{form_row(UpdateProfil.password)}}
+        {{form_row(UpdateProfil.campus)}}
+        <button type="submit">Enregistrer</button>
+
+        {{form_end(UpdateProfil)}}
+    </div>
+{% endblock %}
