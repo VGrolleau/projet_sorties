@@ -3,5 +3,41 @@
 {% block title %}Hello SortiesController!{% endblock %}
 
 {% block body %}
-    <h1>Create {{ parent() }} ✅</h1>
+    <div>
+        <h1>Create {{ parent() }} ✅</h1>
+
+        {{form_start(eventForm)}}
+        <div>
+            {{form_row(eventForm.name)}}
+            {{form_row(eventForm.startDate)}}
+            {{form_row(eventForm.registrationLimitDate)}}
+            {{form_row(eventForm.maxRegistrations)}}
+            {{form_row(eventForm.duration)}}
+            {{form_row(eventForm.infos)}}
+        </div>
+
+        <div>
+            <div>Campus : {{ app.user.campus.name }}</div>
+
+            {{form_row(locationForm.city)}}
+
+            <div>
+                {{ form_label(eventForm.location) }}
+                {{ form_widget(eventForm.location) }}
+                {{ form_errors(eventForm.location) }}
+            </div>
+{#            <div>Rue : {{ ci }}</div>#}
+
+            {{form_row(locationForm.street)}}
+            {{form_row(cityForm.zip)}}
+            {{form_row(locationForm.latitude)}}
+            {{form_row(locationForm.longitude)}}
+        </div>
+
+        <div>
+            <button type="submit">Publier la sortie</button>
+            <button type="reset">Annuler</button>
+        </div>
+        {{form_end(eventForm)}}
+    </div>
 {% endblock %}
