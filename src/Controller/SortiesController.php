@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,14 +17,14 @@ class SortiesController extends AbstractController
         return new RedirectResponse('/sorties/public/login');
     }
     /**
-     * @Route("/", name="sorties_home")
+     * @Route("/sorties_home", name="sorties_home")
      */
-    public function home(): Response
+    public function home(EventRepository $eventRepository): Response
     {
-
+        $event = $eventRepository->findSearch();
 
         return $this->render('sorties/home.html.twig', [
-
+            'events' => $event,
         ]);
     }
 

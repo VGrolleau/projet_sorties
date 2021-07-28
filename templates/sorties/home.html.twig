@@ -3,5 +3,13 @@
 {% block title %}Hello SortiesController!{% endblock %}
 
 {% block body %}
-    <h1>index {{ parent() }}! ✅</h1>
+    <h1>{{ app.user.username }}</h1>
+
+    <div class="container">
+        <div class="grid">
+            {% for event in events %}
+            {%  include 'sorties/list.html.twig' with {event: event} only %}
+        </div>
+    </div>
+
 {% endblock %}
