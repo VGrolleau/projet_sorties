@@ -8,7 +8,7 @@
     <div class="updateProfil">
         <h1>Mon profil</h1>
         <a href="{# {{ path('user_upload') }} #}">Changer ma photo</a><br>
-        <a href="{# {{ path('user_edit_password') }} #}">Modifier mon mot de passe</a>
+        <a href="{{ path('update_password') }}">Modifier mon mot de passe</a>
 
         {{form_start(UpdateProfil)}}
         {{form_widget(UpdateProfil)}}

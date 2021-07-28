@@ -2,34 +2,32 @@
 
 namespace App\Form;
 
-use App\Entity\Campus;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class RegistrationFormType extends AbstractType
+class UpdatePasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('lastname')
-            ->add('firstname')
-            ->add('phone')
-            ->add('campus', EntityType::class, [
-                'class' => Campus::class,
-                'choice_label' => 'name'
+            ->add('password', PasswordType::class, [
+                'label' => 'Mot de passe actuel',
+                'constraints' => [
+                    //on s'assure que le mot de passe actuel est bon !
+                    new UserPassword([
+                        'message' => 'Votre mot de passe actuel est invalide !'
+                    ])
+                ]
             ])
-            ->add('email')
-            ->add('Password', RepeatedType::class, [
+            ->add('new_password', RepeatedType::class, [
                 'mapped' => false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne correspondent pas !',
@@ -50,6 +48,9 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('ok', SubmitType::class, [
+                'label'=> 'Changer mon mot de passe'
             ])
         ;
     }
