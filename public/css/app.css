@@ -1,13 +1,14 @@
-.register, .login, .updateProfil{
+.register, .login, .updateProfil, .updateMDP{
     text-align: center;
 }
-.register label, .login label, .updateProfil label{
+.register label, .login label, .updateProfil label, .updateMDP label{
     display: block;
 }
 
 .register input,.register textarea,.register select,
 .login input,.login textarea,.login select,
-.updateProfil input,.updateProfil textarea,.updateProfil select{
+.updateProfil input,.updateProfil textarea,.updateProfil select,
+.updateMDP input,.updateMDP textarea,.updateMDP select{
     margin-bottom: 1rem;
     box-sizing: border-box;
     width: 150px;

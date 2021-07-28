@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Form\CityType;
 use App\Form\CreateEventType;
 use App\Form\LocationType;
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +24,12 @@ class SortiesController extends AbstractController
     /**
      * @Route("/sorties_home", name="sorties_home")
      */
-    public function home(): Response
+    public function home(EventRepository $eventRepository): Response
     {
-        return $this->render('sorties/home.html.twig', [
+        $event = $eventRepository->findSearch();
 
+        return $this->render('sorties/home.html.twig', [
+            'events' => $event,
         ]);
     }
 
