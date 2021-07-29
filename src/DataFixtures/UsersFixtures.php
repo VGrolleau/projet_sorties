@@ -31,6 +31,7 @@ class UsersFixtures extends Fixture implements DependentFixtureInterface
             $user->setLastname($faker->lastName);
             $user->setFirstname($faker->firstName);
             $user->setUsername($faker->userName);
+            $user->setRoles(["ROLE_USER"]);
             $user->setPhone($faker->phoneNumber);
             $user->setIsActive('1');
             $user-> setCampus($this-> getReference('campus_'.$faker->numberBetween(1,5)));
