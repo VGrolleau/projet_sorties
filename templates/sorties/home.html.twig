@@ -5,5 +5,20 @@
 {% block body %}
     <h1>{{ app.user.username }}</h1>
 
+    <h1> Date du jour : {{ "now" |date('d/m/Y') }}</h1>
+    <h1> Participant: {{ app.user.username }}</h1>
+<div class="row">
+        <div class="col-md-3">
+            {% include 'sorties/filter.html.twig' with {form: form} only %}
+        </div>
 
+        <div class="col-md-9">
+            <div class="grid">
+                    {% for event in events %}
+                    {%  include 'sorties/list.html.twig' with {event: event} only %}
+                    {% endfor %}
+            </div>
+        </div>
+</div>
+    <a href="{{ path('sorties_create') }}" title="Create event">Create event</a>
 {% endblock %}
