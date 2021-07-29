@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Data\SeachData;
+use App\Form\SearchForm;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,10 +23,12 @@ class SortiesController extends AbstractController
      */
     public function home(EventRepository $eventRepository): Response
     {
+        $data = new SeachData();
+        $form = $this->createForm(SearchForm::class);
         $event = $eventRepository->findSearch();
-
         return $this->render('sorties/home.html.twig', [
             'events' => $event,
+            'form' => $form->createView()
         ]);
     }
 

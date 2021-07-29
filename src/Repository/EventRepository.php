@@ -19,12 +19,13 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    /**
-     * Récupère les events avec une recherche
-     * @return Event[]
-     */
-    public function findSearch(): array
+    public function findSearch()
     {
-        return $this->findAll();
+        $queryBuilder = $this->createQueryBuilder('s');
+        $queryBuilder->join('s.eventState', 'eStat');
+        $queryBuilder->join('s.organizer', 'orga');
+        $queryBuilder->addOrderBy('s.creationDate','DESC');
+        $query = $queryBuilder->getQuery();
+        return $query->getResult();
     }
 }

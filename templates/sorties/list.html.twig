@@ -1,12 +1,20 @@
 <div class="list">
     <div class="list-name">
-        <h2>{{ event.name }}</h2>
+        {{ event.name | upper }}
     </div>
-    <div class="list-infos">
-        {{ event.duration }}
-        {{ event.registrationLimitDate }}
-        {{ event.maxRegistrations }}
-        {{ event.eventState }}
-        {{ event.organizer }}
+    <div class="list-duration">
+        durée: {{ event.duration }}
+    </div>
+    <div class="list-limiteDate">
+        date limite : {{ event.registrationLimitDate |date('d-m-Y')}}
+    </div>
+    <div class="list-maxRegiste">
+        max registre :{{ event.maxRegistrations }}
+    </div>
+    <div class="list-eventState">
+        Statut:   {{ event.eventState.name }}
+    </div>
+    <div class="list-username">
+        Orga:   {{ event.organizer.username }}
     </div>
 </div>
