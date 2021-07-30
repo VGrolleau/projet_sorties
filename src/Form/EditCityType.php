@@ -7,13 +7,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CityAdminType extends AbstractType
+class EditCityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('zip')
+            ->add('name', null, ['label' => 'Ville'])
+            ->add('zip', null, ['label' => 'Code postal'])
         ;
     }
 

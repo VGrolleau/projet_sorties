@@ -127,11 +127,12 @@ a:hover{
     color: #dc71c8;
 }
 
-.register, .login, .updateProfil, .updateMDP, .gestionVilles h2{
+.register, .login, .updateProfil, .updateMDP,
+.gestionVilles h2, .editCity{
     text-align: center;
 }
 .register label, .login label, .updateProfil label,
-.updateMDP label, .gestionVilles label{
+.updateMDP label, .gestionVilles label, .editCity label{
     display: block;
 }
 
@@ -139,7 +140,8 @@ a:hover{
 .login input,.login textarea,.login select,
 .updateProfil input,.updateProfil textarea,.updateProfil select,
 .updateMDP input,.updateMDP textarea,.updateMDP select,
-.gestionVilles input,.gestionVilles textarea,.gestionVilles select
+.gestionVilles input,.gestionVilles textarea,.gestionVilles select,
+.editCity input,.editCity textarea,.editCity select
 {
     margin-bottom: 1rem;
     box-sizing: border-box;
