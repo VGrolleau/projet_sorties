@@ -33,7 +33,7 @@ class AdminCampusController extends AbstractController
 
         if ($searchCampusForm->isSubmitted() && $searchCampusForm->isValid()) {
             $search = $searchCampusForm->getData();
-            $cities = $campusRepository->findByName($search['search']);
+            $campus = $campusRepository->findByName($search['search']);
         }
 
         if (!$campus) {
@@ -48,7 +48,7 @@ class AdminCampusController extends AbstractController
     }
 
     /**
-     * @Route("/admin/city/create", name="admin-campus-create")
+     * @Route("/admin/campus/create", name="admin-campus-create")
      */
     public function create(
         CampusRepository $campusRepository,
