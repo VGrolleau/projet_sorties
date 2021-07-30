@@ -127,19 +127,26 @@ a:hover{
     color: #dc71c8;
 }
 
-.register, .login, .updateProfil, .updateMDP{
+.register, .login, .updateProfil, .updateMDP, .gestionVilles h2{
     text-align: center;
 }
-.register label, .login label, .updateProfil label, .updateMDP label{
+.register label, .login label, .updateProfil label,
+.updateMDP label, .gestionVilles label{
     display: block;
 }
 
 .register input,.register textarea,.register select,
 .login input,.login textarea,.login select,
 .updateProfil input,.updateProfil textarea,.updateProfil select,
-.updateMDP input,.updateMDP textarea,.updateMDP select{
+.updateMDP input,.updateMDP textarea,.updateMDP select,
+.gestionVilles input,.gestionVilles textarea,.gestionVilles select
+{
     margin-bottom: 1rem;
     box-sizing: border-box;
     width: 150px;
     max-width: 50%;
+}
+
+.gestionVilles{
+margin-left: 20px;
 }

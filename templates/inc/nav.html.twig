@@ -2,7 +2,7 @@
     <ul>
         {% if app.user %}
             {% if path('sorties_home') and is_granted("ROLE_ADMIN") %}
-                <li><a href="{# todo : mettre lien vers page gestion City {{ path('city') }} #}" title="Gérer les ville">Ville</a></li>
+                <li><a href="{{ path('admin_city')}}" title="Gérer les ville">Ville</a></li>
                 <li><a href="{# todo : mettre lien vers page gestion Campus {{ path('campus') }} #}" title="Gérer les campus">Campus</a></li>
             {% endif %}
             <li><a href="{{ path('sorties_home') }}" title="Sorties">Accueil</a></li>

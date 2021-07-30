@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\City;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -22,19 +23,37 @@ class CityRepository extends ServiceEntityRepository
     // /**
     //  * @return City[] Returns an array of City objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByName($value)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $queryBuilder = $this->createQueryBuilder('c');
+        $queryBuilder->select('c')
+                     ->where('c.name like :name')
+                     ->setParameter('name', "%{$value}%")
+                     ->addOrderBy('c.name', 'ASC');
+
+        $query=$queryBuilder->getQuery();
+
+
+        //Commun aux deux
+
+
+        $paginator = new Paginator($query);
+        return $paginator;
     }
-    */
+
+    public function findAllCities()
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+        $queryBuilder->addSelect('c')
+                    ->addOrderBy('c.name', 'ASC');
+
+        $query=$queryBuilder->getQuery();
+
+        $paginator = new Paginator($query);
+
+        return $paginator;
+    }
 
     /*
     public function findOneBySomeField($value): ?City
