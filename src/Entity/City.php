@@ -34,9 +34,11 @@ class City
      */
     private $locations;
 
+
     public function __construct()
     {
         $this->locations = new ArrayCollection();
+        $this->collectionCities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,4 +99,8 @@ class City
 
         return $this;
     }
+
+
+
+
 }

@@ -42,6 +42,18 @@ class CityRepository extends ServiceEntityRepository
         return $paginator;
     }
 
+    public function findAllCities()
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+        $queryBuilder->addSelect('c')
+                    ->addOrderBy('c.name', 'ASC');
+
+        $query=$queryBuilder->getQuery();
+
+        $paginator = new Paginator($query);
+
+        return $paginator;
+    }
 
     /*
     public function findOneBySomeField($value): ?City

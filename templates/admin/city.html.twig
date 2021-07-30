@@ -30,15 +30,13 @@
                 <td>
                     <div style="width:100%; height:180px; overflow:auto;">
                         <table cellspacing="0" cellpadding="1" border="1" width="100%" >
-                            {{ form_start(cityForm) }}
-                            {% for city in cityForm.cities %}
-                                <tr>
-                                    <td>{{ form_row(city.name)}}</td>
-{#                                    <td>{{ city.zip }}</td>#}
-{#                                    <td><button type="submit">Modifier</button> - <a href="">Supprimer</a></td>#}
-                                </tr>
-                            {% endfor %}
-                            {{ form_end(cityForm) }}
+                                {% for city in cities %}
+                                    <tr>
+                                        <td>{{ city.name }}</td>
+                                        <td>{{ city.zip }}</td>
+                                        <td><button type="submit">Modifier</button> - <a href="">Supprimer</a></td>
+                                    </tr>
+                                {% endfor %}
                         </table>
                     </div>
                 </td>

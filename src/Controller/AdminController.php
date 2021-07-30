@@ -2,13 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\City;
-use App\Entity\CollectionCity;
-use App\Form\CityType;
-use App\Form\CollectionCityType;
+
 use App\Form\SearchCityType;
 use App\Repository\CityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,32 +22,27 @@ class AdminController extends AbstractController
         CityRepository $cityRepository
     ): Response
     {
+
+        $cities = $cityRepository->findAllCities();
+
         $searchCityForm = $this->createForm(SearchCityType::class);
-        $cities= $cityRepository->findAll();
-        $citys = new ArrayCollection();
-
-        foreach ($cities->getCities() as $city) {
-            $citys->add($city);
-        }
-
-        $cityForm = $this->createForm(CollectionCityType::class, $cities);
 
         $searchCityForm->handleRequest($request);
 
-
-        if ($searchCityForm->isSubmitted() && $searchCityForm->isValid()){
+        if ($searchCityForm->isSubmitted() && $searchCityForm->isValid()) {
             $search = $searchCityForm->getData();
             $cities = $cityRepository->findByName($search['search']);
         }
 
-        if (!$cities){
+        if (!$cities) {
             throw $this->createNotFoundException('Aucune ville n\'existe avec ce nom !');
         }
 
-        return $this->render('admin/city.html.twig', [
-            'cities' => $cities,
-            'searchCityForm' => $searchCityForm->createView(),
-            'cityForm' => $cityForm->createView(),
-        ]);
-    }
+
+            return $this->render('admin/city.html.twig', [
+                'cities' => $cities,
+                'searchCityForm' => $searchCityForm->createView()
+            ]);
+        }
+
 }
