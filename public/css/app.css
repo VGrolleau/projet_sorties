@@ -1,3 +1,132 @@
+body{
+    background: #f1e3ef;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Krona One', sans-serif;
+    font-family: 'Staatliches', cursive;
+    color: #4b063a;
+}
+
+header{
+    background: linear-gradient(180deg, #4b063a 0%, #330728 100%);
+    margin: auto;
+    padding: 20px;
+    height: 80px;
+    border-bottom: 40px solid #4b063a;
+}
+header img{
+    height: 100px;
+    float: left;
+    margin: 0 0 0 250px;
+}
+nav ul{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+nav ul li{
+    margin-right: 10px;
+    float: right;
+}
+nav ul li a{
+    font-size: 25px;
+    display: block;
+    float: right;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 15px 20px 5px 20px;
+    margin: 70px 20px 10px 20px;
+    border-radius: 10px;
+    border-top: 0px solid white;
+    opacity: 1;
+    transition: opacity, border-top-width 200ms ease 0s;
+
+}
+nav ul li a:hover {
+    border-top: 10px solid white;
+    opacity: 0.4;
+}
+
+.nom_et_date{
+    margin-right: 30px;
+    text-align: right;
+}
+.form{
+    float: left;
+    margin-left: 10%;
+    margin-bottom: 30px;
+}
+
+.table_list{
+    border: 4px solid #330728;
+    background-color: white;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    table-layout:fixed;
+    width: 90%;
+}
+table{
+    table-layout: fixed;
+}
+tr td:nth-child(1) {
+    width: 20%;
+}
+
+tr td:nth-child(2) {
+    width: 10%;
+}
+
+tr td:nth-child(3) {
+    width: 25%;
+}
+tr td:nth-child(4) {
+    width: 10%;
+}
+tr td:nth-child(5) {
+    width: 10%;
+}
+tr td:nth-child(5) {
+    width: 30%;
+}
+/*th {*/
+/*    color: white;*/
+/*    font-size: 25px;*/
+/*    background-color: #330728;*/
+/*    padding: 0 20px 0 20px;*/
+/*    width: 100%;*/
+/*    height: 60px;*/
+/*}*/
+
+.list {
+    height:250px;
+    overflow: auto;
+}
+.list td{
+    text-align: center;
+    height: 30px;
+    font-size: 15px;
+}
+.list_entete{
+    padding-right: 15px;
+}
+.list_entete td{
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    padding: 0 5px 0 5px;
+    height: 60px;
+    background-color: #330728;
+}
+a{
+    color: #bb2d98;
+    text-decoration: none;
+}
+a:hover{
+    color: #dc71c8;
+}
+
 .register, .login, .updateProfil, .updateMDP, .gestionVilles h2{
     text-align: center;
 }
