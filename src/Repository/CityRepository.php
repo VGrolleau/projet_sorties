@@ -26,17 +26,17 @@ class CityRepository extends ServiceEntityRepository
 
     public function findByName($value)
     {
-        $queryBuilder = $this->createQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('c');
         $queryBuilder->select('c')
                      ->where('c.name like :name')
-                     ->setParameter('name', '%'.$value.'%')
-                     ->addOrderBy('c.name', 'DESC');
+                     ->setParameter('name', "%{$value}%")
+                     ->addOrderBy('c.name', 'ASC');
 
         $query=$queryBuilder->getQuery();
 
 
         //Commun aux deux
-        $query->setMaxResults(50);
+
 
         $paginator = new Paginator($query);
         return $paginator;

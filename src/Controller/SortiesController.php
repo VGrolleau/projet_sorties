@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Data\SeachData;
 use App\Entity\Event;
 use App\Form\CityType;
 use App\Form\CreateEventType;
 use App\Form\LocationType;
+use App\Form\SearchForm;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,7 +20,7 @@ class SortiesController extends AbstractController
      * @Route("/", name="home_redirect")
      */
     public function home_redirect() {
-        return new RedirectResponse('/~wahac/sorties/public/login');
+        return new RedirectResponse('/projet_sorties/public/sorties_home');
     }
 
     /**
@@ -26,10 +28,12 @@ class SortiesController extends AbstractController
      */
     public function home(EventRepository $eventRepository): Response
     {
+        $data = new SeachData();
+        $form = $this->createForm(SearchForm::class);
         $event = $eventRepository->findSearch();
-
         return $this->render('sorties/home.html.twig', [
             'events' => $event,
+            'form' => $form->createView()
         ]);
     }
 
