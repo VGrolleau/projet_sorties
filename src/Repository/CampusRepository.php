@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Campus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,37 @@ class CampusRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Campus::class);
+    }
+
+    public function findByName($value)
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+        $queryBuilder->select('c')
+            ->where('c.name like :name')
+            ->setParameter('name', "%{$value}%")
+            ->addOrderBy('c.name', 'ASC');
+
+        $query=$queryBuilder->getQuery();
+
+
+        //Commun aux deux
+
+
+        $paginator = new Paginator($query);
+        return $paginator;
+    }
+
+    public function findAllCampus()
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+        $queryBuilder->addSelect('c')
+            ->addOrderBy('c.name', 'ASC');
+
+        $query=$queryBuilder->getQuery();
+
+        $paginator = new Paginator($query);
+
+        return $paginator;
     }
 
     // /**
