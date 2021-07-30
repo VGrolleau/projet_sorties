@@ -19,17 +19,33 @@
         <div>
             <div>Campus : {{ app.user.campus.name }}</div>
 
-            {{form_row(locationForm.city)}}
+            {{ form_row(locationForm.city) }}
 
             <div>
                 {{ form_label(eventForm.location) }}
                 {{ form_widget(eventForm.location) }}
                 {{ form_errors(eventForm.location) }}
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#locationModal">+</button>
             </div>
-{#            <div>Rue : {{ ci }}</div>#}
 
-            {{form_row(locationForm.street)}}
-            {{form_row(cityForm.zip)}}
+            <div>
+                <label for="street-select">Rue :</label>
+                <select id="street-select">
+                    {% for ev in eventRepo %}
+                        <option value="{{ ev.location.id }}">{{ ev.location.street }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="zip-select">Code postal :</label>
+                <select id="zip-select">
+                    {% for ev in eventRepo %}
+                        <option value="{{ ev.location.city.id }}">{{ ev.location.city.zip }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
             {{form_row(locationForm.latitude)}}
             {{form_row(locationForm.longitude)}}
         </div>
@@ -39,5 +55,97 @@
             <button type="reset">Annuler</button>
         </div>
         {{form_end(eventForm)}}
+
+        {# fenêtre modale, cachée par défaut, sera affichée au clic sur le + #}
+        <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="locationModalLabel">Ajouter un nouveau lieu de sortie</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{ form_start(locationForm, {'attr' : {'id': 'location_form'}}) }}
+                        {{ form_widget(locationForm) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">GO</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    </div>
+                    {{ form_end(locationForm) }}
+                </div>
+            </div>
+        </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        /**
+         * Ce code gère la soumission du formulaire de la modale en ajax
+         */
+        //quand on tente de soumettre le formulaire de création de lieu (modale)...
+        $("#location_form").on("submit", function(e){
+            //j'empêche la soumission normale (pour que la page ne se recharge pas)
+            e.preventDefault();
+            //j'envoie les données au serveur en ajax
+            $.ajax({
+                //ne marche que parce que je ne suis pas dans un fichier js externe
+                //url à laquelle je fais ma requête
+                "url": "{{ path('location_create') }}",
+                //je prends toutes les données du formulaire et je les balance avec ma requête
+                "data": $("#location_form").serialize(),
+                //en POST
+                "method": "post"
+            })
+                //sera appelée lorsque la requête est terminée
+                //je reçois la nouvelle "Location" en response, avec son id
+                .done(function(response){
+                    //je crée une nouvelle balise <option>, ayant pour value l'id du lieu
+                    let option = $("<option>").attr("value", response.location.id);
+                    //j'injecte le nom du lieu en contenu de la balise
+                    option.html(response.location.name);
+                    //je lui met la propriété selected afin qu'elle soit préselectionnée dans le select
+                    option.prop('selected', true);
+                    //j'ajoute dans le select (au début de la liste)
+                    $("#event_location").prepend(option);
+                    //je ferme la modale
+                    $('#locationModal').modal('hide');
+                });
+        });
+    </script>
+
+{#    <script>#}
+{#        /**#}
+{#         * Ce code gère le remplissage de la liste des villes en fonction du code postal tapé#}
+{#         */#}
+{#        //quand on tente de soumettre le formulaire de création de lieu (modale)...#}
+{#        $("#location_zip").on("keyup", function(e){#}
+{#            //récupère la valeur tapée#}
+{#            let zip = $("#location_zip").val();#}
+{#            if (zip.length < 5){#}
+{#                return;#}
+{#            }#}
+{#            //j'envoie les données au serveur en ajax#}
+{#            $.ajax({#}
+{#                //ne marche que parce que je ne suis pas dans un fichier js externe#}
+{#                //url à laquelle je fais ma requête#}
+{#                "url": "{{ path('location_find_cities_by_zip') }}",#}
+{#                //j'envoie le code postal tapé#}
+{#                "data": {#}
+{#                    'zip': zip#}
+{#                },#}
+{#                //en GET#}
+{#                "method": "get"#}
+{#            })#}
+{#                //sera appelée lorsque la requête est terminée#}
+{#                //je reçois une liste de ville en response, déjà formattée en html#}
+{#                .done(function(response){#}
+{#                    console.log(response);#}
+{#                    $("#location_city").html(response);#}
+{#                });#}
+{#        });#}
+{#    </script>#}
 {% endblock %}

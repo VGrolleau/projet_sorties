@@ -28,4 +28,13 @@ class EventRepository extends ServiceEntityRepository
         $query = $queryBuilder->getQuery();
         return $query->getResult();
     }
+
+    public function findInfosCreate()
+    {
+        $queryBuilder = $this->createQueryBuilder('ic');
+        $queryBuilder->leftJoin('ic.location', 'loc')
+            ->addSelect('loc');
+        $query = $queryBuilder->getQuery();
+        return $query->getResult();
+    }
 }
