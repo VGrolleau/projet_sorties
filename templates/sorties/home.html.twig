@@ -3,9 +3,7 @@
 {% block title %}Hello SortiesController!{% endblock %}
 
 {% block body %}
-    <h1>{{ app.user.username }}</h1>
-
-        <div class="form">
+       <div class="form">
             {% include 'sorties/filter.html.twig' with {form: form} only %}
         </div>
     <div class="nom_et_date">
