@@ -12,8 +12,9 @@
         {{ form_start(searchCityForm) }}
         {{ form_widget(searchCityForm) }}
         <button type="submit">Rechercher</button>
-
         {{form_end(searchCityForm)}}
+
+
         <table cellspacing="0" cellpadding="0" border="0" width="50%" height="200">
             <tr>
                 <td>
@@ -34,7 +35,7 @@
                                     <tr>
                                         <td>{{ city.name }}</td>
                                         <td>{{ city.zip }}</td>
-                                        <td><button type="submit">Modifier</button> - <a href="">Supprimer</a></td>
+                                        <td><a href="{{ path('admin-city-edit', {'id': city.id}) }}">Modifier</a> - <a href="{{ path('admin-city-delete', {'id': city.id}) }}">Supprimer</a></td>
                                     </tr>
                                 {% endfor %}
                         </table>
@@ -42,6 +43,8 @@
                 </td>
             </tr>
         </table>
+        </br>
+        <a href="{{ path('admin-city-create') }}">Ajouter une ville</a>
     </div>
 {% endblock %}
 
