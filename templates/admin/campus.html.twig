@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Campus
+{% endblock %}
+
+{% block body %}
+    <div class="gestionVilles">
+        <h2>Gérer les campus</h2>
+        <h4>Filtrer les sites</h4>
+
+        {{ form_start(searchCampusForm) }}
+        {{ form_widget(searchCampusForm) }}
+        <button type="submit">Rechercher</button>
+        {{form_end(searchCampusForm)}}
+
+
+        <table cellspacing="0" cellpadding="0" border="0" width="50%" height="200">
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="1" border="1" width="100%" >
+                        <tr>
+                            <th>Campus</th>
+                            <th>Actions</th>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="width:100%; height:180px; overflow:auto;">
+                        <table cellspacing="0" cellpadding="1" border="1" width="100%" >
+                            {% for campu in campus %}
+                                <tr>
+                                    <td>{{ campu.name }}</td>
+                                    <td><a href="{{ path('admin-campus-edit', {'id': campu.id}) }}">Modifier</a> - <a href="{{ path('admin-campus-delete', {'id': campu.id}) }}">Supprimer</a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        </br>
+        <a href="{{ path('admin-campus-create') }}">Ajouter une ville</a>
+    </div>
+{% endblock %}
+
