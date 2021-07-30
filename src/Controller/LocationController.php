@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,12 @@ class LocationController extends AbstractController
      */
     public function create(): Response
     {
-
+        $location = new Location();
+        $form = $this->createForm(Location::class, $location);
+//        $form->handleRequest($request);
 
         return $this->render('location/location.html.twig', [
-
+            'form' => $form->createView()
         ]);
     }
 

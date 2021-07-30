@@ -12,6 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Location
 {
+//    /**
+//     * @return string
+//     */
+//    public function __toString()
+//    {
+//        return $this->getName() . "<br>". $this->getStreet() . " " . $this->getCity();
+//    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

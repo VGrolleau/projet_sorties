@@ -12,6 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
+//    /**
+//     * @return string
+//     */
+//    public function __toString()
+//    {
+//        return $this->getLocation();
+//    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

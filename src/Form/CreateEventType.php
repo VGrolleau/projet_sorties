@@ -25,13 +25,13 @@ class CreateEventType extends AbstractType
             ->add('startDate', null, [
                 'label' => 'Date et heure de la sortie :',
                 'html5' => false,
-                'widget' => 'single_text',
+//                'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy HH:mm'
             ])
             ->add('registrationLimitDate', null, [
                 'label' => 'Date limite d\'inscription :',
                 'html5' => false,
-                'widget' => 'single_text',
+//                'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy HH:mm'
             ])
             ->add('maxRegistrations', null, [
