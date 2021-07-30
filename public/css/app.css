@@ -1,3 +1,5 @@
+@import url(//fonts.googleapis.com/icon?family=Material+Icons);
+
 body{
     background: #f1e3ef;
     font-family: 'Bebas Neue', cursive;
@@ -148,6 +150,132 @@ a:hover{
     width: 150px;
     max-width: 50%;
 }
+
+/****** CREATE EVENT ******/
+/*html{ box-sizing: border-box; }*/
+/**,*:before,*:after{ box-sizing: inherit; }*/
+
+/*.wrapper{*/
+/*    width: 650px;*/
+/*    margin: 0 auto;*/
+/*}*/
+
+/*.contenu{*/
+/*    display:flex;*/
+/*    flex-direction: column;*/
+/*    padding:10px;*/
+/*    background-color: #eee;*/
+/*}*/
+
+
+/*.modale{*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100vw;*/
+/*    height: 100vh;*/
+/*    z-index: 100;*/
+/*    background: rgba(0, 0, 0, .7);*/
+/*    display: none;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.boite{*/
+/*    position: relative;*/
+/*    padding: 50px;*/
+/*    background-color: #fff;*/
+/*    border-radius: 20px;*/
+/*}*/
+
+/*.boite .fermer{*/
+/*    position:absolute;*/
+/*    top: 20px;*/
+/*    right:20px;*/
+/*    cursor:pointer;*/
+/*    transform:scale(1);*/
+/*    transition:.3s;*/
+/*}*/
+
+/*.boite .fermer:hover{*/
+/*    transform:scale(1.3);*/
+/*}*/
+
+/*.ouvrir{*/
+/*    margin-top: 200px;*/
+/*    margin-bottom: 400px;*/
+/*    padding:15px 35px;*/
+/*    font-size:48px;*/
+/*    color:#fff;*/
+/*    border-radius:50px;*/
+/*    background-color: #BF360C;*/
+/*    cursor:pointer;*/
+/*    transform:scale(1);*/
+/*    transition:.3s;*/
+/*}*/
+
+/*.ouvrir:focus{*/
+/*    outline:none;*/
+/*}*/
+
+/*.ouvrir:hover{*/
+/*    transform:scale(1.1);*/
+/*    background: #E64A19;*/
+/*}*/
+
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1.5s both;
+}
+
+.modal-wrapper{
+    border-radius: 25px;
+    overflow: auto;
+    width: 600px;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+    animation: slideFromTop 1s both;
+}
+
+.modal[aria-hidden="true"] {
+    animation-name: fadeOut;
+}
+
+.modal[aria-hidden="true"] .modal-wrapper {
+    animation-name: slideToBottom;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@keyframes slideFromTop {
+    from {transform: translateY(-200px);}
+    to {transform: translateY(0);}
+}
+
+@keyframes slideToBottom {
+    from {transform: translateY(0);}
+    to {transform: translateY(200px);}
+}
+/************************************/
 
 .gestionVilles{
 margin-left: 20px;
