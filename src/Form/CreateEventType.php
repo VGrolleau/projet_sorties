@@ -7,6 +7,7 @@ use App\Entity\Event;
 use App\Entity\Location;
 use Doctrine\DBAL\Types\DateType;
 use Doctrine\DBAL\Types\TextType;
+use Doctrine\ORM\EntityRepository;
 use SebastianBergmann\CodeCoverage\Report\Text;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
