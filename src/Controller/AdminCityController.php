@@ -6,16 +6,17 @@ namespace App\Controller;
 use App\Entity\City;
 use App\Form\EditCityType;
 use App\Form\SearchCityType;
+use App\Form\SearchType;
 use App\Repository\CityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends AbstractController
+class AdminCityController extends AbstractController
 {
+
     /**
      * @Route("/admin/city", name="admin_city")
      */
@@ -24,7 +25,6 @@ class AdminController extends AbstractController
         CityRepository $cityRepository
     ): Response
     {
-
         $cities = $cityRepository->findAllCities();
 
         $searchCityForm = $this->createForm(SearchCityType::class);
@@ -41,11 +41,11 @@ class AdminController extends AbstractController
         }
 
 
-            return $this->render('admin/city.html.twig', [
-                'cities' => $cities,
-                'searchCityForm' => $searchCityForm->createView()
-            ]);
-        }
+        return $this->render('admin/city.html.twig', [
+            'cities' => $cities,
+            'searchCityForm' => $searchCityForm->createView()
+        ]);
+    }
 
     /**
      * @Route("/admin/city/create", name="admin-city-create")
