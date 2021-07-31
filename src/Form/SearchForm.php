@@ -20,8 +20,8 @@ class SearchForm extends AbstractType
     {
         $builder
             ->add('campus', EntityType::class,[
-                'label' => false,
                 'class' => Campus::class,
+                'choice_label'=> 'name'
             ])
 
             ->add('q', TextType::class, [

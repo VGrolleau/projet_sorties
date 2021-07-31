@@ -10,19 +10,19 @@
         <h1> Date du jour : {{ "now" |date('d/m/Y') }}</h1>
         <h1> Participant: {{ app.user.username }}</h1>
     </div>
-
-
                 <table class="table_list">
                     <tr>
                         <td>
                             <table class="list_entete" >
                                 <tr>
-                                    <td> event name</td>
-                                    <td> duration</td>
+                                    <td> Event name</td>
+                                    <td> Start Date</td>
                                     <td> Limite date</td>
-                                    <td> max registre</td>
+                                    <td> Registre/Max</td>
                                     <td> State</td>
-                                    <td> organizere</td>
+                                    <td> Registered </td>
+                                    <td> Organizere</td>
+                                    <td> Action</td>
                                 </tr>
                             </table>
                         </td>
@@ -34,11 +34,17 @@
                                     {% for event in events %}
                                             <tr>
                                                 <td> {{ event.name | upper }}</td>
-                                                <td>{{ event.duration }}</td>
+                                                <td> {{ event.startDate |date('d-m-Y')}}</td>
                                                 <td> {{ event.registrationLimitDate |date('d-m-Y')}}</td>
                                                 <td>{{ event.maxRegistrations }}</td>
                                                 <td>{{ event.eventState.name }}</td>
-                                                <td>{{ event.organizer.username }}</td>
+                                                <td><a href="{{ path('user_details',{'id': event.organizer.id}) }}">{{ event.organizer.username }}</a></td>
+                                                <td>{% if app.user != event.users and event.eventState.name != 'Finished' %}
+                                                       <a href="{{ path('sorties_detail',{'id': event.id}) }}">Afficher</a>
+                                                        {% else %}
+                                                        XXX
+                                                    {% endif %}
+                                                </td>
                                             </tr>
                                     {% endfor %}
                                 </table>
