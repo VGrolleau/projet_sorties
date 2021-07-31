@@ -173,7 +173,14 @@ a:hover{
 .viewProfil button{
     display: flex;
     justify-content: space-around;
-    margin: 25px 30%;
+    margin: 18px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+}
+
+#button_alone{
+    margin: 18px 30%;
 }
 
 /****** CREATE EVENT ******/

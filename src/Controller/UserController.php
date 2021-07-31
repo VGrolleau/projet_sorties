@@ -97,12 +97,14 @@ class UserController extends AbstractController
     ): Response
     {
         $user = $userRepository->find($id);
+        $userConnecte = $this->getUser();
         if (!$user){
             throw $this->createNotFoundException('oops! This user does not exists!');
         }
 
         return $this->render('user/viewprofil.html.twig', [
-            "user"=>$user
+            "user"=>$user,
+            "userConnecte" => $userConnecte
         ]);
     }
 
