@@ -30,19 +30,19 @@ class SearchFormType extends AbstractType
                         'placeholder' => 'Rechercher'
                     ]
                 ])
-            ->add('Sorties', CheckboxType::class, [
+            ->add('sorties', CheckboxType::class, [
                 'label'    => 'Sorties dont je suie l\'organisateur/trice',
                 'required' => false,
             ])
-            ->add('Sorties2', CheckboxType::class, [
+            ->add('sorties2', CheckboxType::class, [
                 'label'    => 'Sorties auxquelles je suis inscrit/e',
                 'required' => false,
             ])
-            ->add('Sorties3', CheckboxType::class, [
+            ->add('sorties3', CheckboxType::class, [
                 'label'    => 'Sorties auxquelles je ne suis pas inscrit/e',
                 'required' => false,
             ])
-            ->add('Sorties4', CheckboxType::class, [
+            ->add('sorties4', CheckboxType::class, [
             'label'    => 'Sorties passées',
             'required' => false,
             ])
@@ -54,7 +54,7 @@ class SearchFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SeachData::class,
-            'method' => 'Get',
+            'method' => 'GET',
             'csrf_protection'=> false
         ]);
     }
