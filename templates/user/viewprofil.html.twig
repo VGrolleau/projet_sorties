@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="viewProfil">
+        <h2>{{ user.username }}</h2>
+        <div class="viewProfil_ligne"><span class="viewProfil_label">Prénom : </span><span class="viewProfil_user">{{ user.firstname }}</span></div>
+        <div class="viewProfil_ligne"><span class="viewProfil_label">Nom : </span><span class="viewProfil_user">{{ user.lastname }}</span></div>
+        <div class="viewProfil_ligne"><span class="viewProfil_label">Téléphone : </span><span class="viewProfil_user">{{ user.phone }}</span></div>
+        <div class="viewProfil_ligne"><span class="viewProfil_label">Email : </span><span class="viewProfil_user">{{ user.email }}</span></div>
+        <div class="viewProfil_ligne"><span class="viewProfil_label">Campus : </span><span class="viewProfil_user">{{ user.campus }}</span></div>
+        <button><a href="{{ path('sorties_home') }}">Retour</a></button>
+    </div>
+{% endblock %}
+
+{% block title %}
+Profil de {{ user.username }}
+{% endblock %}
+
