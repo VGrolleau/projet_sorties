@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SeachData;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,14 +20,37 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function findSearch()
+    /**
+     * @param SeachData $seachData
+     * @return Event[]
+     */
+    public function findSearch(SeachData $seachData): array
     {
         $queryBuilder = $this->createQueryBuilder('s');
-        $queryBuilder->join('s.eventState', 'eStat');
-        $queryBuilder->join('s.organizer', 'orga');
-        $queryBuilder->addOrderBy('s.creationDate','DESC');
-        $query = $queryBuilder->getQuery();
-        return $query->getResult();
+        $queryBuilder = $queryBuilder
+                    ->join('s.eventState', 's_estat')
+                        ->addSelect('s_estat')
+                    ->join('s.organizer', 's_orga')
+                        ->addSelect('s_orga')
+                    ->addOrderBy('s.creationDate','DESC');
+        if (!empty($seachData->campus)){
+            $queryBuilder= $queryBuilder
+                ->andWhere('s.campus IN (:campus)')
+                ->setParameter('campus', $seachData->campus);
+        }
+
+        if (!empty($seachData->q)){
+            $queryBuilder = $queryBuilder
+                ->andWhere('s.name LIKE :q')
+                ->setParameter('q', "%{$seachData->q}%");
+        }
+
+        if (!empty($seachData->sorties4)){
+            $queryBuilder = $queryBuilder
+                ->andWhere(' s.eventState = 77');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     public function findInfosCreate()
