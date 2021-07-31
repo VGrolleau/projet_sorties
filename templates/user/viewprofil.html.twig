@@ -8,7 +8,9 @@
         <div class="viewProfil_ligne"><span class="viewProfil_label">Téléphone : </span><span class="viewProfil_user">{{ user.phone }}</span></div>
         <div class="viewProfil_ligne"><span class="viewProfil_label">Email : </span><span class="viewProfil_user">{{ user.email }}</span></div>
         <div class="viewProfil_ligne"><span class="viewProfil_label">Campus : </span><span class="viewProfil_user">{{ user.campus }}</span></div>
-        <button><a href="{{ path('sorties_home') }}">Retour</a></button>
+        {% if user.id is not same as(userConnecte.id)%}<div class="viewProfil_ligne"><button class="viewProfil_label" id="button_alone"><a href="{{ path('sorties_home') }}">Retour</a></button></div>{% endif %}
+        {% if user.id is same as(userConnecte.id)%}<div class="viewProfil_ligne"><button class="viewProfil_label"><a href="{{ path('sorties_home') }}">Retour</a></button>
+            <button class="viewProfil_user"><a href="{{ path('update_profil') }}">Modifier mon profil</a></button>{% endif %}</div>
     </div>
 {% endblock %}
 
