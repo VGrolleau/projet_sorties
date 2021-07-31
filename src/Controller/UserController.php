@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UpdatePasswordType;
 use App\Form\UpdateProfilType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +17,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user", name="update_profil")
+     *
+     * @Route("/user/updateprofil", name="update_profil")
      */
     public function updateProfil(Request $request): Response
     {
@@ -84,5 +86,25 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    /**
+     * @Route("/user/detail/{id}", name="user_details")
+     */
+    public function details(
+        int $id,
+        UserRepository $userRepository
+    ): Response
+    {
+        $user = $userRepository->find($id);
+        if (!$user){
+            throw $this->createNotFoundException('oops! This user does not exists!');
+        }
+
+        return $this->render('user/viewprofil.html.twig', [
+            "user"=>$user
+        ]);
     }
+
+}
 

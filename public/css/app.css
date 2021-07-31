@@ -130,7 +130,7 @@ a:hover{
 }
 
 .register, .login, .updateProfil, .updateMDP,
-.gestionVilles h2, .editCity{
+.gestionVilles h2, .editCity, .viewProfil{
     text-align: center;
 }
 .register label, .login label, .updateProfil label,
@@ -149,6 +149,31 @@ a:hover{
     box-sizing: border-box;
     width: 150px;
     max-width: 50%;
+}
+
+.viewProfil{
+    display: flex;
+    flex-direction: column;
+    margin: 30px 41%;
+    text-align: center;
+    align-content: center;
+}
+.viewProfil_label, .viewProfil_user{
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+    justify-content: space-between;
+}
+.viewProfil_ligne{
+    padding-bottom: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.viewProfil button{
+    display: flex;
+    justify-content: space-around;
+    margin: 25px 30%;
 }
 
 /****** CREATE EVENT ******/
