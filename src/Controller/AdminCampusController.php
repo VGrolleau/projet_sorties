@@ -41,7 +41,7 @@ class AdminCampusController extends AbstractController
         }
 
 
-        return $this->render('admin/campus.html.twig', [
+        return $this->render('admin/campus/campus.html.twig', [
             'campus' => $campus,
             'searchCampusForm' => $searchCampusForm->createView()
         ]);
@@ -79,7 +79,7 @@ class AdminCampusController extends AbstractController
             }
         }
 
-        return $this->render('admin/createcampus.html.twig', [
+        return $this->render('admin/campus/createcampus.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -118,7 +118,7 @@ class AdminCampusController extends AbstractController
             }
         }
 
-        return $this->render('admin/editcampus.html.twig', [
+        return $this->render('admin/campus/editcampus.html.twig', [
             "campus"=>$campus,
             'form' => $form->createView(),
         ]);

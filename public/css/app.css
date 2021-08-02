@@ -183,6 +183,84 @@ a:hover{
     margin: 18px 30%;
 }
 
+.imgProfil{
+    width: 150px;
+    height: auto;
+    max-width: 100%;
+
+}
+
+.gestionVilles{
+    margin: 20px;
+}
+
+/*::-webkit-scrollbar {*/
+/*    -webkit-appearance: none;*/
+/*    width: 7px;*/
+/*}*/
+/*::-webkit-scrollbar-thumb {*/
+/*    border-radius: 4px;*/
+/*    background-color: rgba(0,0,0,.5);*/
+/*    box-shadow: 0 0 1px rgba(255,255,255,.5);*/
+/*}*/
+/*.scrollContent{*/
+/*    padding-right: 20px;*/
+/*}*/
+
+table.scroll {
+    width: 45%;
+    border-spacing: 0;
+    border: 2px solid black;
+    position: relative;
+    margin: auto;
+}
+
+table.scroll th,
+table.scroll td,
+table.scroll tr,
+table.scroll thead,
+table.scroll tbody { display: block; }
+
+table.scroll thead tr {
+    /* fallback */
+    width: 97%;
+    /* minus scroll bar width */
+    width: -webkit-calc(100% - 16px);
+    width:    -moz-calc(100% - 16px);
+    width:         calc(100% - 16px);
+}
+
+table.scroll tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+table.scroll tbody {
+    height: 100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+table.scroll tbody td,
+table.scroll thead th {
+    width: calc(33% - 16px);
+    float: left;
+    border-right: 1px solid black;
+}
+
+thead tr th {
+    height: 30px;
+    line-height: 30px;
+    /*text-align: left;*/
+}
+
+tbody { border-top: 2px solid black; }
+
+tbody td:last-child, thead th:last-child {
+    border-right: none !important;
+}
 /****** CREATE EVENT ******/
 /*html{ box-sizing: border-box; }*/
 /**,*:before,*:after{ box-sizing: inherit; }*/
@@ -308,7 +386,3 @@ a:hover{
     to {transform: translateY(200px);}
 }
 /************************************/
-
-.gestionVilles{
-margin-left: 20px;
-}

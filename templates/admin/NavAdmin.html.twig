@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <ul>
+        <li><a href="{{ path('admin_city')}}" title="Gérer les ville">Gérer les villes</a></li>
+        <li><a href="{{ path('admin_campus')}}" title="Gérer les campus">Gérer les campus</a></li>
+{#        liste des user ( desactivation + supprimer) avec bouton création #}
+{#        liste des events avec supprimer + inscrire utilisateur#}
+    </ul>
+{% endblock %}
+
+{% block title %}Administrateur{% endblock %}
+

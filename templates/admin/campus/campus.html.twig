@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Campus
+{% endblock %}
+
+{% block body %}
+    <div class="gestionVilles">
+        <h2>Gérer les campus</h2>
+        <h4>Filtrer les sites</h4>
+
+        {{ form_start(searchCampusForm) }}
+        {{ form_widget(searchCampusForm) }}
+        <button type="submit">Rechercher</button>
+        {{form_end(searchCampusForm)}}
+
+        <div id="tableContainer" class="tableContainer">
+            <table  class="scroll">
+                <thead class="fixedHeader">
+                <tr class="alternateRow">
+                    <th>Campus</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody class="scrollContent">
+                    {% for campu in campus %}
+                        <tr class="normalRow">
+                            <td>{{ campu.name }}</td>
+                            <td><a href="{{ path('admin-campus-edit', {'id': campu.id}) }}">Modifier</a> -
+                                <a href="{{ path('admin-campus-delete', {'id': campu.id}) }}">Supprimer</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </br>
+        <a href="{{ path('admin-campus-create') }}">Ajouter un campus</a>
+    </div>
+{% endblock %}
+

@@ -90,6 +90,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $eventsOrganizer;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pictureFileName;
+
+    
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -332,52 +339,64 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+//
+//    /**
+//     * @ORM\Column(type="datetime", nullable=true)
+//     * @var \DateTime
+//     */
+//    private $passwordRequestedAt;
+//
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(type="string", length=255, nullable=true)
+//     */
+//    private $token;
+//
+//    /*
+//     * Get passwordRequestedAt
+//     */
+//    public function getPasswordRequestedAt()
+//    {
+//        return $this->passwordRequestedAt;
+//    }
+//
+//    /*
+//     * Set passwordRequestedAt
+//     */
+//    public function setPasswordRequestedAt($passwordRequestedAt)
+//    {
+//        $this->passwordRequestedAt = $passwordRequestedAt;
+//        return $this;
+//    }
+//
+//    /*
+//     * Get token
+//     */
+//    public function getToken()
+//    {
+//        return $this->token;
+//    }
+//
+//    /*
+//     * Set token
+//     */
+//    public function setToken($token)
+//    {
+//        $this->token = $token;
+//        return $this;
+//    }
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
-     */
-    private $passwordRequestedAt;
+public function getPictureFileName(): ?string
+{
+    return $this->pictureFileName;
+}
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $token;
+public function setPictureFileName(?string $pictureFileName): self
+{
+    $this->pictureFileName = $pictureFileName;
 
-    /*
-     * Get passwordRequestedAt
-     */
-    public function getPasswordRequestedAt()
-    {
-        return $this->passwordRequestedAt;
-    }
-
-    /*
-     * Set passwordRequestedAt
-     */
-    public function setPasswordRequestedAt($passwordRequestedAt)
-    {
-        $this->passwordRequestedAt = $passwordRequestedAt;
-        return $this;
-    }
-
-    /*
-     * Get token
-     */
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    /*
-     * Set token
-     */
-    public function setToken($token)
-    {
-        $this->token = $token;
-        return $this;
-    }
+    return $this;
+}
 
 }

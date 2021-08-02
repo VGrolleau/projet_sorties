@@ -41,7 +41,7 @@ class AdminCityController extends AbstractController
         }
 
 
-        return $this->render('admin/city.html.twig', [
+        return $this->render('admin/city/city.html.twig', [
             'cities' => $cities,
             'searchCityForm' => $searchCityForm->createView()
         ]);
@@ -79,7 +79,7 @@ class AdminCityController extends AbstractController
             }
         }
 
-        return $this->render('admin/createcity.html.twig', [
+        return $this->render('admin/city/createcity.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -113,7 +113,7 @@ class AdminCityController extends AbstractController
             }
         }
 
-        return $this->render('admin/editcity.html.twig', [
+        return $this->render('admin/city/editcity.html.twig', [
             "city"=>$city,
             'form' => $form->createView(),
         ]);

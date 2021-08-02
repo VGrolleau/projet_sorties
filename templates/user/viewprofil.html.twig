@@ -3,6 +3,7 @@
 {% block body %}
     <div class="viewProfil">
         <h2>{{ user.username }}</h2>
+        <img src="{{ asset('uploads/pictures/' ~ user.pictureFileName) }}" alt="View picture" class="imgProfil">
         <div class="viewProfil_ligne"><span class="viewProfil_label">Prénom : </span><span class="viewProfil_user">{{ user.firstname }}</span></div>
         <div class="viewProfil_ligne"><span class="viewProfil_label">Nom : </span><span class="viewProfil_user">{{ user.lastname }}</span></div>
         <div class="viewProfil_ligne"><span class="viewProfil_label">Téléphone : </span><span class="viewProfil_user">{{ user.phone }}</span></div>
