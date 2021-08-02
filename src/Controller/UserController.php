@@ -8,10 +8,12 @@ use App\Form\UpdateProfilType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 class UserController extends AbstractController
@@ -20,7 +22,10 @@ class UserController extends AbstractController
      *
      * @Route("/user/updateprofil", name="update_profil")
      */
-    public function updateProfil(Request $request): Response
+    public function updateProfil(
+        Request $request,
+        SluggerInterface $slugger
+    ): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UpdateProfilType::class, $user);
@@ -29,6 +34,29 @@ class UserController extends AbstractController
         if ($form->isSubmitted()) {
             //séparé en 2 if pour pouvoir faire le refresh si le form n'est pas valide
             if ($form->isValid()) {
+
+                $pictureFile = $form->get('picture')->getData();
+
+                if ($pictureFile){
+                    $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename.'-'.uniqid().'.'.$pictureFile->guessExtension();
+
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $pictureFile->move(
+                            $this->getParameter('pictures_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+
+                    // updates the 'brochureFilename' property to store the PDF file name
+                    // instead of its contents
+                    $user->setPictureFileName($newFilename);
+                }
 
                 $entityManager->persist($user);
                 $entityManager->flush();
@@ -43,7 +71,8 @@ class UserController extends AbstractController
             }
         }
         return $this->render('user/upProfil.html.twig', [
-        'UpdateProfil' => $form->createView(),
+            "user"=>$user,
+            'UpdateProfil' => $form->createView(),
          ]);
     }
 

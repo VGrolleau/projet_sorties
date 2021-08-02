@@ -15,22 +15,16 @@
         {{form_end(searchCityForm)}}
 
 
-        <table cellspacing="0" cellpadding="0" border="0" width="50%" height="200">
-            <tr>
-                <td>
-                    <table cellspacing="0" cellpadding="1" border="1" width="100%" >
-                        <tr>
+        <div id="tableContainer" class="tableContainer">
+            <table class="scroll">
+                <thead class="fixedHeader">
+                <tr class="alternateRow">
                             <th>Villes</th>
                             <th>Code postal</th>
                             <th>Actions</th>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div style="width:100%; height:180px; overflow:auto;">
-                        <table cellspacing="0" cellpadding="1" border="1" width="100%" >
+                </tr>
+                </thead>
+                <tbody class="scrollContent">
                                 {% for city in cities %}
                                     <tr>
                                         <td>{{ city.name }}</td>
@@ -38,11 +32,9 @@
                                         <td><a href="{{ path('admin-city-edit', {'id': city.id}) }}">Modifier</a> - <a href="{{ path('admin-city-delete', {'id': city.id}) }}">Supprimer</a></td>
                                     </tr>
                                 {% endfor %}
-                        </table>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                </tbody>
+            </table>
+        </div>
         </br>
         <a href="{{ path('admin-city-create') }}">Ajouter une ville</a>
     </div>
