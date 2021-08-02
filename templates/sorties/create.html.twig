@@ -9,6 +9,7 @@
         {{form_start(eventForm)}}
         <div>
             {{form_row(eventForm.name)}}
+{#            {{ form_row(eventForm.creationDate) }}#}
             {{form_row(eventForm.startDate)}}
             {{form_row(eventForm.registrationLimitDate)}}
             {{form_row(eventForm.maxRegistrations)}}
@@ -17,9 +18,10 @@
         </div>
 
         <div>
-            <div>Campus : {{ app.user.campus.name }}</div>
+{#            <div>Campus : {{ app.user.campus.name }}</div>#}
+            {{ form_row(eventForm.campus) }}
 
-            {{ form_row(locationForm.city) }}
+{#            {{ form_row(locationForm.city) }}#}
 
             <div>
                 {{ form_label(eventForm.location) }}
@@ -32,32 +34,34 @@
 {#                <div class="wrapper contenu">#}
 {#                    <a href="#modal1" class="ouvrir">Ouvrir la fenêtre modale</a>#}
 {#                </div>#}
-                <a href="#modal1" class="js-modal">Ouvrir modale</a>
+{#                <a href="#modal1" class="js-modal">Ouvrir modale</a>#}
 {#                <a href="/location/location.html.twig#modal2" class="js-modal">Ouvrir modale avec ajax</a>#}
-                <a href="#locationModal" class="js-modal">Ouvrir modale avec ajax</a>
+{#                <a href="#locationModal" class="js-modal">Ouvrir modale avec ajax</a>#}
 {#                <a href="{{ path('location_create') }}" class="js-modal">Ouvrir modale avec ajax</a>#}
             </div>
 
-            <div>
-                <label for="street-select">Rue :</label>
-                <select id="street-select">
-                    {% for ev in eventRepo %}
-                        <option value="{{ ev.location.id }}">{{ ev.location.street }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+            {{ form_row(eventForm.eventState) }}
 
-            <div>
-                <label for="zip-select">Code postal :</label>
-                <select id="zip-select">
-                    {% for ev in eventRepo %}
-                        <option value="{{ ev.location.city.id }}">{{ ev.location.city.zip }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+{#            <div>#}
+{#                <label for="street-select">Rue :</label>#}
+{#                <select id="street-select">#}
+{#                    {% for ev in eventRepo %}#}
+{#                        <option value="{{ ev.location.id }}">{{ ev.location.street }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
 
-            {{form_row(locationForm.latitude)}}
-            {{form_row(locationForm.longitude)}}
+{#            <div>#}
+{#                <label for="zip-select">Code postal :</label>#}
+{#                <select id="zip-select">#}
+{#                    {% for ev in eventRepo %}#}
+{#                        <option value="{{ ev.location.city.id }}">{{ ev.location.city.zip }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+
+{#            {{form_row(locationForm.latitude)}}#}
+{#            {{form_row(locationForm.longitude)}}#}
         </div>
 
         <div>
@@ -66,26 +70,26 @@
         </div>
         {{form_end(eventForm)}}
 
-        <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal" style="display: none">
-            <div class="modal-wrapper js-modal-stop">
-                <button class="js-modal-close">Fermer</button>
-                <h1 id="title-modal">Conditions d'utilisations</h1>
-                <h2>A true inspiration for the children.</h2>
-                <p>
-                    There's no part of that sentence I didn't like! Too much work. Let's burn it and say
-                    we dumped it in the sewer. As an interesting side note, as a head without a body, I
-                    envy the dead. We're also Santa Claus!
-                </p>
-                <input type="text">
-                <p>
-                    But I've never been to the moon! Oh, I don't have time for this. I have to go and buy
-                    a single piece of fruit with a coupon and then return it, making people wait behind me
-                    while I complain. <strong> Meh.</strong> <em> Tell her you just want to talk.</em> It
-                    has nothing to do with mating.
-                </p>
-                <a href="#">kdsojdwjf</a>
-            </div>
-        </aside>
+{#        <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal" style="display: none">#}
+{#            <div class="modal-wrapper js-modal-stop">#}
+{#                <button class="js-modal-close">Fermer</button>#}
+{#                <h1 id="title-modal">Conditions d'utilisations</h1>#}
+{#                <h2>A true inspiration for the children.</h2>#}
+{#                <p>#}
+{#                    There's no part of that sentence I didn't like! Too much work. Let's burn it and say#}
+{#                    we dumped it in the sewer. As an interesting side note, as a head without a body, I#}
+{#                    envy the dead. We're also Santa Claus!#}
+{#                </p>#}
+{#                <input type="text">#}
+{#                <p>#}
+{#                    But I've never been to the moon! Oh, I don't have time for this. I have to go and buy#}
+{#                    a single piece of fruit with a coupon and then return it, making people wait behind me#}
+{#                    while I complain. <strong> Meh.</strong> <em> Tell her you just want to talk.</em> It#}
+{#                    has nothing to do with mating.#}
+{#                </p>#}
+{#                <a href="#">kdsojdwjf</a>#}
+{#            </div>#}
+{#        </aside>#}
 
         {# fenêtre modale, cachée par défaut, sera affichée au clic sur le + #}
         <div id="locationModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal" style="display: none">
@@ -100,6 +104,15 @@
                     <div class="modal-body">
                         {{ form_start(locationForm, {'attr' : {'id': 'location_form'}}) }}
                         {{ form_widget(locationForm) }}
+{#                        {{ form_row(locationForm.city) }}#}
+{#                        <div>#}
+{#                            <label for="city-select">Ville :</label>#}
+{#                            <select id="city-select">#}
+{#                                {% for ev in eventRepo %}#}
+{#                                    <option value="{{ ev.location.city.id }}">{{ ev.location.city.name }}</option>#}
+{#                                {% endfor %}#}
+{#                            </select>#}
+{#                        </div>#}
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">GO</button>

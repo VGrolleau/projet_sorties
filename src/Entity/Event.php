@@ -6,6 +6,7 @@ use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -33,6 +34,7 @@ class Event
     private $name;
 
     /**
+     * @Assert\GreaterThanOrEqual(propertyPath="creationDate", message="La date doit être supérieure ou égale à la date du jour")
      * @ORM\Column(type="datetime")
      */
     private $startDate;
@@ -43,6 +45,8 @@ class Event
     private $duration;
 
     /**
+     * @Assert\GreaterThanOrEqual(propertyPath="creationDate", message="La date doit être supérieure ou égale à la date du jour")
+     * @Assert\LessThanOrEqual(propertyPath="startDate", message="La date doit être inférieure ou égale à la date de début de la sortie")
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $registrationLimitDate;

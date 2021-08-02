@@ -3,9 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Campus;
+use App\Entity\City;
 use App\Entity\Event;
+use App\Entity\EventState;
 use App\Entity\Location;
-use Doctrine\DBAL\Types\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+//use Doctrine\DBAL\Types\DateType;
 use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\EntityRepository;
 use SebastianBergmann\CodeCoverage\Report\Text;
@@ -22,32 +26,45 @@ class CreateEventType extends AbstractType
             ->add('name', null, [
                 'label' => 'Nom de la sortie :'
             ])
-            ->add('startDate', null, [
+            ->add('startDate', DateTimeType::class,[
                 'label' => 'Date et heure de la sortie :',
-                'html5' => false,
-//                'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy HH:mm'
-            ])
-            ->add('registrationLimitDate', null, [
-                'label' => 'Date limite d\'inscription :',
-                'html5' => false,
-//                'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy HH:mm'
-            ])
-            ->add('maxRegistrations', null, [
-                'label' => 'Nombre de places :'
+                'data'   => new \DateTime(),
+                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
             ])
             ->add('duration', null, [
                 'label' => 'Durée :'
             ])
+            ->add('registrationLimitDate', null, [
+                'label' => 'Date limite d\'inscription :',
+                'data'   => new \DateTime(),
+                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+            ])
+            ->add('maxRegistrations', null, [
+                'label' => 'Nombre de places :'
+            ])
             ->add('infos', null, [
                 'label' => 'Description et infos :'
             ])
-            ->add('location', EntityType::class, [
-                    'label' => 'Lieu :',
-                    'class' => Location::class,
-                    'choice_label' => 'name'
+            ->add('campus', EntityType::class, [
+                'label' => 'Campus :',
+                'class' => Campus::class,
+                'choice_label' => 'name'
             ])
+            ->add('eventState', EntityType::class, [
+                'label' => 'État de la sortie :',
+                'class' => EventState::class,
+                'choice_label' => 'name'
+            ])
+            ->add('location', EntityType::class, [
+                'label' => 'Lieu :',
+                'class' => Location::class,
+                'choice_label' => 'name'
+            ])
+//            ->add('city', EntityType::class, [
+//                'label' => 'Ville :',
+//                'class' => City::class,
+//                'choice_label' => 'name'
+//            ])
         ;
     }
 
