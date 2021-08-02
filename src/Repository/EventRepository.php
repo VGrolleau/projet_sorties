@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\LocationData;
 use App\Data\SeachData;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
