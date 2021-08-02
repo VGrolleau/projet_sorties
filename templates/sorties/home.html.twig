@@ -32,6 +32,7 @@
                             <div class="list" >
                                 <table>
                                     {% for event in events %}
+                                        {% if  event.eventState.name != 'In progress' or app.user == event.organizer %}
                                             <tr>
                                                 <td> {{ event.name | upper }}</td>
                                                 <td> {{ event.startDate |date('d-m-Y')}}</td>
@@ -39,13 +40,25 @@
                                                 <td>{{ event.maxRegistrations }}</td>
                                                 <td>{{ event.eventState.name }}</td>
                                                 <td><a href="{{ path('user_details',{'id': event.organizer.id}) }}">{{ event.organizer.username }}</a></td>
-                                                <td>{% if app.user != event.users and event.eventState.name != 'Finished' %}
-                                                       <a href="{{ path('sorties_detail',{'id': event.id}) }}">Afficher</a>
+                                                <td>{% if event.eventState.name != 'Finished' and event.eventState.name != 'Canceled' and event.eventState.name != 'In progress' %}
+                                                        <a href="{{ path('sorties_detail',{'id': event.id}) }}">Afficher</a>
+                                                        {% if app.user != event.organizer %}
+                                                            {% if app.user.events == event.users %}
+                                                                <a type="submit">se désister</a>
+                                                            {% else %}
+                                                                <a type="submit">s'inscrire</a>
+                                                            {% endif %}
                                                         {% else %}
-                                                        XXX
+                                                            <a type="submit">Annuler</a>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    {% if  app.user == event.organizer and event.eventState.name == 'In progress' %}
+                                                    <a href="{{ path('sorties_edit',{'id': event.id}) }}">Modifer</a>
+                                                    <a type="submit">Publier</a>
                                                     {% endif %}
                                                 </td>
                                             </tr>
+                                        {% endif %}
                                     {% endfor %}
                                 </table>
                             </div>

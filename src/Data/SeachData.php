@@ -18,6 +18,14 @@ class SeachData
      */
     public $q = '';
     /**
+     * @var \DateTime
+     */
+    public $start_Date;
+    /**
+     * @var \DateTime
+     */
+    public $end_Date;
+    /**
      * @var boolean
      */
     public $sorties = false;
