@@ -29,10 +29,12 @@ class EventRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('s');
         $queryBuilder = $queryBuilder
-                    ->join('s.eventState', 's_estat')
+                    ->leftJoin('s.eventState', 's_estat')
                         ->addSelect('s_estat')
-                    ->join('s.organizer', 's_orga')
+                    ->leftJoin('s.organizer', 's_orga')
                         ->addSelect('s_orga')
+                    ->leftJoin('s.users', 's_users')
+                        ->addSelect('s_users')
                     ->addOrderBy('s.creationDate','DESC');
         if (!empty($seachData->campus)){
             $queryBuilder= $queryBuilder
