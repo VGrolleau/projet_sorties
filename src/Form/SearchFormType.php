@@ -10,6 +10,8 @@ use App\Entity\Campus;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,8 +33,25 @@ class SearchFormType extends AbstractType
                         'placeholder' => 'Rechercher'
                     ]
                 ])
+
+            ->add('start_Date', DateTimeType::class,[
+                'html5' => true,
+                'widget' => 'single_text',
+                'label' => 'Entre :',
+                'data'   => new \DateTime(),
+                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+            ])
+
+            ->add('end_Date', DateTimeType::class,[
+                'html5' => true,
+                'widget' => 'single_text',
+                'label' => 'et',
+                'data'   => new \DateTime(),
+                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+            ])
+
             ->add('sorties', CheckboxType::class, [
-                'label'    => 'Sorties dont je suie l\'organisateur/trice',
+                'label'    => 'Sorties dont je suis l\'organisateur/trice',
                 'required' => false,
             ])
             ->add('sorties2', CheckboxType::class, [
