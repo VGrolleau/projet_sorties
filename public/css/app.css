@@ -261,78 +261,9 @@ tbody { border-top: 2px solid black; }
 tbody td:last-child, thead th:last-child {
     border-right: none !important;
 }
+/************************************/
+
 /****** CREATE EVENT ******/
-/*html{ box-sizing: border-box; }*/
-/**,*:before,*:after{ box-sizing: inherit; }*/
-
-/*.wrapper{*/
-/*    width: 650px;*/
-/*    margin: 0 auto;*/
-/*}*/
-
-/*.contenu{*/
-/*    display:flex;*/
-/*    flex-direction: column;*/
-/*    padding:10px;*/
-/*    background-color: #eee;*/
-/*}*/
-
-
-/*.modale{*/
-/*    position: fixed;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100vw;*/
-/*    height: 100vh;*/
-/*    z-index: 100;*/
-/*    background: rgba(0, 0, 0, .7);*/
-/*    display: none;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
-
-/*.boite{*/
-/*    position: relative;*/
-/*    padding: 50px;*/
-/*    background-color: #fff;*/
-/*    border-radius: 20px;*/
-/*}*/
-
-/*.boite .fermer{*/
-/*    position:absolute;*/
-/*    top: 20px;*/
-/*    right:20px;*/
-/*    cursor:pointer;*/
-/*    transform:scale(1);*/
-/*    transition:.3s;*/
-/*}*/
-
-/*.boite .fermer:hover{*/
-/*    transform:scale(1.3);*/
-/*}*/
-
-/*.ouvrir{*/
-/*    margin-top: 200px;*/
-/*    margin-bottom: 400px;*/
-/*    padding:15px 35px;*/
-/*    font-size:48px;*/
-/*    color:#fff;*/
-/*    border-radius:50px;*/
-/*    background-color: #BF360C;*/
-/*    cursor:pointer;*/
-/*    transform:scale(1);*/
-/*    transition:.3s;*/
-/*}*/
-
-/*.ouvrir:focus{*/
-/*    outline:none;*/
-/*}*/
-
-/*.ouvrir:hover{*/
-/*    transform:scale(1.1);*/
-/*    background: #E64A19;*/
-/*}*/
-
 .modal{
     position: fixed;
     top: 0;
@@ -384,5 +315,75 @@ tbody td:last-child, thead th:last-child {
 @keyframes slideToBottom {
     from {transform: translateY(0);}
     to {transform: translateY(200px);}
+}
+
+.create-event h1 {
+    text-align: center;
+}
+
+.create-event form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.global-div-form {
+    margin-bottom: 20px;
+}
+
+.global-div-form div {
+    margin-bottom: 20px;
+}
+
+.create-event ul {
+    list-style: none;
+    padding: 10px;
+    background-color: darkred;
+    border-radius: 5px;
+    color: #f1e3ef;
+}
+
+.create-event textarea {
+    vertical-align: middle;
+}
+
+.create-event textarea,
+.create-event input,
+.create-event select,
+.create-event label {
+    display: inline-block;
+}
+
+.create-event textarea,
+.create-event input {
+    width: 57%;
+}
+
+.create-event select {
+    width: 60%;
+}
+
+.create-event label {
+    width: 40%;
+}
+/************************************/
+
+/****** FLASH MESSAGES ******/
+.flash {
+    padding: 20px;
+    font-weight: bold;
+    margin: 1rem auto;
+    border-radius: 5px;
+    position: relative;
+    width: max-content;
+    color: #f1e3ef;
+}
+
+.flash-success {
+    background-color: green;
+}
+
+.flash-danger {
+    background-color: darkred;
 }
 /************************************/

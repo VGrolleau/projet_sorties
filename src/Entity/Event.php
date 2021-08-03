@@ -40,6 +40,7 @@ class Event
     private $startDate;
 
     /**
+     * @Assert\Positive(message="La durée doit être supérieure à zéro")
      * @ORM\Column(type="integer", nullable=true)
      */
     private $duration;
@@ -52,6 +53,7 @@ class Event
     private $registrationLimitDate;
 
     /**
+     * @Assert\Positive(message="Il doit y avoir au moins une place disponible")
      * @ORM\Column(type="integer", nullable=true)
      */
     private $maxRegistrations;

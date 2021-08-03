@@ -3,93 +3,81 @@
 {% block title %}Hello SortiesController!{% endblock %}
 
 {% block body %}
-    <div>
+    <div class="create-event">
         <h1>Create {{ parent() }} ✅</h1>
 
         {{form_start(eventForm)}}
-        <div>
-            {{form_row(eventForm.name)}}
-{#            {{ form_row(eventForm.creationDate) }}#}
-            {{form_row(eventForm.startDate)}}
-            {{form_row(eventForm.registrationLimitDate)}}
-            {{form_row(eventForm.maxRegistrations)}}
-            {{form_row(eventForm.duration)}}
-            {{form_row(eventForm.infos)}}
-        </div>
-
-        <div>
-{#            <div>Campus : {{ app.user.campus.name }}</div>#}
-            {{ form_row(eventForm.campus) }}
-
-{#            {{ form_row(locationForm.city) }}#}
-
+        <div class="global-div-form">
             <div>
-                {{ form_label(eventForm.location) }}
-                {{ form_widget(eventForm.location) }}
-                {{ form_errors(eventForm.location) }}
-{#                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#locationModal">+</button>#}
-{#                <a data-target="{{ path('location_create') }}" data-tooltip="voir"#}
-{#                   class="tooltipped modal-trigger btn right-align"#}
-{#                   href="#modal1">+</a>#}
-{#                <div class="wrapper contenu">#}
-{#                    <a href="#modal1" class="ouvrir">Ouvrir la fenêtre modale</a>#}
-{#                </div>#}
-{#                <a href="#modal1" class="js-modal">Ouvrir modale</a>#}
-{#                <a href="/location/location.html.twig#modal2" class="js-modal">Ouvrir modale avec ajax</a>#}
-{#                <a href="#locationModal" class="js-modal">Ouvrir modale avec ajax</a>#}
-{#                <a href="{{ path('location_create') }}" class="js-modal">Ouvrir modale avec ajax</a>#}
+                <div class="el-div-form">
+                    {{form_row(eventForm.name)}}
+                </div>
+                <div class="el-div-form">
+                    {{form_row(eventForm.startDate)}}
+                </div>
+                <div class="el-div-form">
+                    {{form_row(eventForm.registrationLimitDate)}}
+                </div>
+                <div class="el-div-form">
+                    {{form_row(eventForm.maxRegistrations)}}
+                </div>
+                <div class="el-div-form">
+                    {{form_row(eventForm.duration)}}
+                </div>
+                <div class="el-div-form">
+                    {{form_row(eventForm.infos)}}
+                </div>
             </div>
 
-            {{ form_row(eventForm.eventState) }}
+            <div>
+                <div class="el-div-form">
+                    {{ form_row(eventForm.campus) }}
+                </div>
 
-{#            <div>#}
-{#                <label for="street-select">Rue :</label>#}
-{#                <select id="street-select">#}
-{#                    {% for ev in eventRepo %}#}
-{#                        <option value="{{ ev.location.id }}">{{ ev.location.street }}</option>#}
-{#                    {% endfor %}#}
-{#                </select>#}
-{#            </div>#}
+    {#            {{ form_row(locationForm.city) }}#}
 
-{#            <div>#}
-{#                <label for="zip-select">Code postal :</label>#}
-{#                <select id="zip-select">#}
-{#                    {% for ev in eventRepo %}#}
-{#                        <option value="{{ ev.location.city.id }}">{{ ev.location.city.zip }}</option>#}
-{#                    {% endfor %}#}
-{#                </select>#}
-{#            </div>#}
+                <div class="el-div-form">
+                    {{ form_row(eventForm.location) }}
+{#                    {{ form_label(eventForm.location) }}#}
+{#                    {{ form_widget(eventForm.location) }}#}
+{#                    {{ form_errors(eventForm.location) }}#}
+    {#                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#locationModal">+</button>#}
+    {#                <a href="#locationModal" class="js-modal">Ouvrir modale avec ajax</a>#}
+                </div>
 
-{#            {{form_row(locationForm.latitude)}}#}
-{#            {{form_row(locationForm.longitude)}}#}
+                <div class="el-div-form">
+                    {{ form_row(eventForm.eventState) }}
+                </div>
+
+    {#            <div>#}
+    {#                <label for="street-select">Rue :</label>#}
+    {#                <select id="street-select">#}
+    {#                    {% for ev in eventRepo %}#}
+    {#                        <option value="{{ ev.location.id }}">{{ ev.location.street }}</option>#}
+    {#                    {% endfor %}#}
+    {#                </select>#}
+    {#            </div>#}
+
+    {#            <div>#}
+    {#                <label for="zip-select">Code postal :</label>#}
+    {#                <select id="zip-select">#}
+    {#                    {% for ev in eventRepo %}#}
+    {#                        <option value="{{ ev.location.city.id }}">{{ ev.location.city.zip }}</option>#}
+    {#                    {% endfor %}#}
+    {#                </select>#}
+    {#            </div>#}
+
+    {#            {{form_row(locationForm.latitude)}}#}
+    {#            {{form_row(locationForm.longitude)}}#}
+            </div>
         </div>
 
         <div>
-            <button type="submit">Publier la sortie</button>
-            <button type="reset">Annuler</button>
+            <input type="submit" name="button" id="btn-publish" value="Publier la sortie" />
+            <input type="submit" name="button" id="btn-register" value="Enregistrer" />
+            <input type="reset" name="button" value="Annuler" />
         </div>
         {{form_end(eventForm)}}
-
-{#        <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal" style="display: none">#}
-{#            <div class="modal-wrapper js-modal-stop">#}
-{#                <button class="js-modal-close">Fermer</button>#}
-{#                <h1 id="title-modal">Conditions d'utilisations</h1>#}
-{#                <h2>A true inspiration for the children.</h2>#}
-{#                <p>#}
-{#                    There's no part of that sentence I didn't like! Too much work. Let's burn it and say#}
-{#                    we dumped it in the sewer. As an interesting side note, as a head without a body, I#}
-{#                    envy the dead. We're also Santa Claus!#}
-{#                </p>#}
-{#                <input type="text">#}
-{#                <p>#}
-{#                    But I've never been to the moon! Oh, I don't have time for this. I have to go and buy#}
-{#                    a single piece of fruit with a coupon and then return it, making people wait behind me#}
-{#                    while I complain. <strong> Meh.</strong> <em> Tell her you just want to talk.</em> It#}
-{#                    has nothing to do with mating.#}
-{#                </p>#}
-{#                <a href="#">kdsojdwjf</a>#}
-{#            </div>#}
-{#        </aside>#}
 
         {# fenêtre modale, cachée par défaut, sera affichée au clic sur le + #}
         <div id="locationModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal" style="display: none">
@@ -122,46 +110,6 @@
                 </div>
             </div>
         </div>
-
-{#        <aside id="locationModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal" style="display: none">#}
-{#            <div class="modal-wrapper js-modal-stop">#}
-{#                <button class="js-modal-close">Fermer</button>#}
-{#                <h1 id="title-modal">Conditions d'utilisations</h1>#}
-{#                <h2>Bender, quit destroying the universe!</h2>#}
-{#                <p>#}
-{#                    Hey, what kinda party is this? There's no booze and only one hooker. I barely knew Philip,#}
-{#                    but as a clergyman I have no problem telling his most intimate friends all about him. Ven ve#}
-{#                    voke up, ve had zese wodies.#}
-{#                </p>#}
-{#                <p>#}
-{#                    You know the worst thing about being a slave? They make you work, but they don't pay you or#}
-{#                    let you go. Oh, how awful. Did he at least die painlessly? <strong> …To shreds, you say.</strong>#}
-{#                    <em> Well, how is his wife holding up?</em> …To shreds, you say.#}
-{#                </p>#}
-{#                <a href="#">kdsojdwjf</a>#}
-{#            </div>#}
-{#        </aside>#}
-
-{#        <div class="modale">#}
-{#            <div class="boite">#}
-{#                <h2>Je suis une fenêtre modale</h2>#}
-{#                <span class="fermer">#}
-{#                    <i class="material-icons">close</i>#}
-{#                </span>#}
-{#            </div>#}
-{#        </div>#}
-
-{#        <div id="modal1" class="modal">#}
-{#            <div class="modal-content">#}
-{#                {{ eventRepo.location.name }}#}
-{#                <!-- Il faut préciser l'action dans le formulaire -->#}
-{#                {{ form_start(locationForm, {'action': path('location_create'), 'attr' : {'id': 'location_form'}}) }}#}
-{#                {{ form_widget(locationForm) }}#}
-{#                {{ form_end(locationForm) }}#}
-{#            </div>#}
-{#            <div class="modal-footer">#}
-{#            </div>#}
-{#        </div>#}
     </div>
 {% endblock %}
 
@@ -178,11 +126,6 @@
         const openModal = async function (e) {
             e.preventDefault();
             const target = e.target.getAttribute('href');
-            // if (target.startsWith('#')) {
-            //     modal = document.querySelector(target);
-            // } else {
-            //     modal = await loadModal(target)
-            // }
             modal = await loadModal(target);
             focusables = Array.from(modal.querySelectorAll(focusableSelector));
             previouslyFocusedElement = document.querySelector(':focus');
@@ -253,35 +196,7 @@
         })
 
 
-        // $(document).ready(function () {
-        //     $('.ouvrir').on('click', function () {
-        //         $('.modale').css('display','flex');
-        //     });
-        //
-        //     $('.boite > .fermer').on('click', function () {
-        //         $('.modale').css('display','none');
-        //     });
-        // })
-
-
-        // $(document).ready(function() {
-        //     //On écoute le "click" sur le bouton ayant la classe "modal-trigger"
-        //     $('.modal-trigger').click(function () {
-        //         //On initialise les modales materialize
-        //         $('.modal').modal();
-        //         //On récupère l'url depuis la propriété "Data-target" de la balise html a
-        //         url = $(this).attr('data-target');
-        //         //on fait un appel ajax vers l'action symfony qui nous renvoie la vue
-        //         $.get(url, function (data) {
-        //             //on injecte le html dans la modale
-        //             $('.modal-content').html(data);
-        //             //on ouvre la modale
-        //             $('#modal1').modal('open');
-        //         });
-        //     })
-        // });
-
-
+        // Code pour les modales de Guillaume
         {#//quand on tente de soumettre le formulaire de création de lieu (modale)...#}
         {#$("#location_form").on("submit", function(e){#}
         {#    //j'empêche la soumission normale (pour que la page ne se recharge pas)#}
@@ -313,6 +228,8 @@
         {#});#}
     </script>
 
+
+{#    Code pour les modales de Guillaume#}
 {#    <script>#}
 {#        /**#}
 {#         * Ce code gère le remplissage de la liste des villes en fonction du code postal tapé#}

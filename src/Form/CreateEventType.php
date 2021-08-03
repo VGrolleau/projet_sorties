@@ -26,18 +26,28 @@ class CreateEventType extends AbstractType
             ->add('name', null, [
                 'label' => 'Nom de la sortie :'
             ])
-            ->add('startDate', DateTimeType::class,[
+//            ->add('startDate', DateTimeType::class,[
+//                'label' => 'Date et heure de la sortie :',
+//                'data'   => new \DateTime(),
+//                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+//            ])
+            ->add('startDate', DateType::class,[
                 'label' => 'Date et heure de la sortie :',
-                'data'   => new \DateTime(),
-                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+                'html5' => true,
+                'widget' => 'single_text'
             ])
             ->add('duration', null, [
                 'label' => 'Durée :'
             ])
-            ->add('registrationLimitDate', null, [
+//            ->add('registrationLimitDate', null, [
+//                'label' => 'Date limite d\'inscription :',
+//                'data'   => new \DateTime(),
+//                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+//            ])
+            ->add('registrationLimitDate', DateType::class, [
                 'label' => 'Date limite d\'inscription :',
-                'data'   => new \DateTime(),
-                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+                'html5' => true,
+                'widget' => 'single_text'
             ])
             ->add('maxRegistrations', null, [
                 'label' => 'Nombre de places :'

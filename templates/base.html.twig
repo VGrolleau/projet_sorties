@@ -30,16 +30,19 @@
                 </h1>
                 {% include 'inc/nav.html.twig' %}
             </header>
+
+            <main>
+                {% block body %}{% endblock %}
+            </main>
+
+            {# read and display all flash messages #}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="flash-{{ label }}">
+                    <div class="flash flash-{{ label }}">
                         {{ message }}
                     </div>
                 {% endfor %}
             {% endfor %}
-            <main>
-                {% block body %}{% endblock %}
-            </main>
 
             <footer>
                 <div>&copy; {{ "now"|date("Y") }} Sorties</div>
