@@ -6,18 +6,17 @@ use App\Entity\Campus;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class RegistrationFormType extends AbstractType
+class CreationUserAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -34,6 +33,7 @@ class RegistrationFormType extends AbstractType
             ->add('phone', null, [
                 'label'=>'Téléphone'
             ])
+            ->add('email')
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'name'
@@ -48,12 +48,11 @@ class RegistrationFormType extends AbstractType
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png'
-                            ],
+                        ],
                         'mimeTypesMessage' => 'Merci de charger un fichier jpeg ou png',
                     ])
                 ]
             ])
-            ->add('email')
             ->add('Password', RepeatedType::class, [
                 'mapped' => false,
                 'type' => PasswordType::class,
@@ -75,6 +74,20 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('isAdmin', ChoiceType::class,[
+                'label'=>'Est-ce un admin ?',
+                'choices' => [
+                    'Oui' => 'true',
+                    'Non' => 'false'
+                ]
+            ])
+            ->add('isActive', ChoiceType::class,[
+                'label'=>'Est-il actif ?',
+                'choices' => [
+                    'Oui' => 'true',
+                    'Non' => 'false'
+                ]
             ])
         ;
     }

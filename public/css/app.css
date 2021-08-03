@@ -261,6 +261,14 @@ tbody { border-top: 2px solid black; }
 tbody td:last-child, thead th:last-child {
     border-right: none !important;
 }
+
+
+table.scrollUsers tbody td,
+table.scrollUsers thead th {
+    width: calc(26% - 16px);
+    float: left;
+    border-right: 1px solid black;
+}
 /****** CREATE EVENT ******/
 /*html{ box-sizing: border-box; }*/
 /**,*:before,*:after{ box-sizing: inherit; }*/

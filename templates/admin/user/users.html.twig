@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    City
+{% endblock %}
+
+{% block body %}
+    <div class="gestionVilles">
+        <h2>Gérer les utilisateurs</h2>
+        <h4>Filtrer les utilisateurs</h4>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Rechercher</button>
+        {{form_end(form)}}
+
+        <div id="tableContainer" class="tableContainer">
+            <table class="scroll scrollUsers">
+                <thead class="fixedHeader">
+                <tr class="alternateRow">
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Actif ?</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody class="scrollContent">
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{% if user.isActive == 1 %}Actif{% else %}Non actif{% endif %}</td>
+                        <td>{% if user.isActive == 1 %}<a href="{{ path('admin_users_disabled', {'id': user.id}) }}">Désactiver</a>{% else %}
+                            <a href="{{ path('admin_users_activate', {'id': user.id}) }}">Activer</a>{% endif %}
+                             - <a href="{{ path('admin_users_delete', {'id': user.id}) }}">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </br>
+        <a href="{{ path('admin_users_create') }}">Ajouter un utilisateur</a>
+    </div>
+{% endblock %}
+
