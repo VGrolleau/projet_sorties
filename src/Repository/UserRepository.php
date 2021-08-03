@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -38,6 +39,38 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function findAllUser()
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder->addSelect('u')
+            ->addOrderBy('u.lastname', 'ASC');
+
+        $query=$queryBuilder->getQuery();
+
+        $paginator = new Paginator($query);
+
+        return $paginator;
+    }
+
+
+    public function findByName($value)
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder->select('u')
+            ->where('u.lastname like :name')
+            ->orWhere('u.firstname like :name')
+            ->setParameter('name', "%{$value}%")
+            ->addOrderBy('u.lastname', 'ASC');
+
+        $query=$queryBuilder->getQuery();
+
+
+        //Commun aux deux
+
+
+        $paginator = new Paginator($query);
+        return $paginator;
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

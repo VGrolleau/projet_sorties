@@ -126,10 +126,13 @@ class AdminCityController extends AbstractController
      * @Route("/admin/city/delete/{id}", name="admin-city-delete")
      */
     public function delete(City $city, EntityManagerInterface $entityManager){  //Permet aussi de récupérer aussi l'id de l'URL
-        $entityManager->remove($city);
-        $entityManager->flush();
-
-        $this->addFlash('success', 'Ville supprimée !');
+        try {
+            $entityManager->remove($city);
+            $entityManager->flush();
+            $this->addFlash('success', 'Ville supprimée !');
+        }catch (\Exception $e) {
+            $this->addFlash("danger", "Vous ne pouvez pas supprimer ce campus car une sortie est organisée dessus !");
+        }
         return $this->redirectToRoute('admin_city');
     }
 }

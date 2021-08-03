@@ -132,11 +132,15 @@ class AdminCampusController extends AbstractController
     public function delete(
         Campus $campus,
         EntityManagerInterface $entityManager
-    ){  //Permet aussi de récupérer aussi l'id de l'URL
+     ){  //Permet aussi de récupérer aussi l'id de l'URL
+        try {
         $entityManager->remove($campus);
         $entityManager->flush();
 
         $this->addFlash('success', 'Campus supprimé !');
+        }catch (\Exception $e) {
+            $this->addFlash('danger', 'Vous ne pouvez pas supprimer cette ville car une sortie est organisée dessus !');
+        }
         return $this->redirectToRoute('admin_campus');
     }
 
