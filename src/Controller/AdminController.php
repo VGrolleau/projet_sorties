@@ -103,7 +103,7 @@ class AdminController extends AbstractController
     {
         $user = new User();
         $user->setRoles(["ROLE_USER"]);
-        $user->setCreatedDate(new \DateTime());
+        $user->setCreatedDate(new \DateTime('now'));
         $user->setIsAdmin(false);
         $user->setIsActive(true);
 

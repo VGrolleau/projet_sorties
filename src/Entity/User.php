@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -40,17 +41,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
+     * @Assert\NotBlank(message="Merci d'indiquer un nom !")
+     * @Assert\Length(min=2, max=100)
      * @ORM\Column(type="string", length=100)
      */
     private $lastname;
 
     /**
+     * @Assert\NotBlank(message="Merci d'indiquer un prénom !")
+     * @Assert\Length(min=2, max=100)
      * @ORM\Column(type="string", length=100)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Merci d'indiquer un surnom !")
+     * @Assert\Length(min=2, max=100)
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     private $username;
 

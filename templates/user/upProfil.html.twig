@@ -6,17 +6,31 @@
 
 {% block body %}
     <div class="updateProfil">
-        <h1>Mon profil</h1>
-        {% if user.pictureFileName %}
-        <div><img src="{{ asset('uploads/pictures/' ~ user.pictureFileName) }}" alt="View picture" class="imgProfil"></div>
-        {% endif %}
-        <a href="{{ path('update_password') }}">Modifier mon mot de passe</a>
+        <div class="updateProfil_enTete">
+            <h1>Mon profil</h1>
+            {% if user.pictureFileName %}
+            <div><img src="{{ asset('uploads/pictures/' ~ user.pictureFileName) }}" alt="View picture" class="imgProfil"></div>
+            {% endif %}
+            <a href="{{ path('update_password') }}">Modifier mon mot de passe</a>
+        </div>
+        <div class="updateProfil_allColumn">
+            <div class="updateProfil_column">
+                {{form_start(UpdateProfil)}}
+                {{form_row(UpdateProfil.username)}}
+                {{form_row(UpdateProfil.lastname)}}
+                {{form_row(UpdateProfil.firstname)}}
+                {{form_row(UpdateProfil.phone)}}
+            </div>
+            <div class="updateProfil_column">
+                {{form_row(UpdateProfil.email)}}
+                {{form_row(UpdateProfil.campus)}}
+                {{form_row(UpdateProfil.picture)}}
+            </div>
+        </div>
+        <div class="updateProfil_footer">
+            <button type="submit">Enregistrer</button>
+            {{form_end(UpdateProfil)}}
+        </div>
 
-        {{form_start(UpdateProfil)}}
-        {{form_widget(UpdateProfil)}}
-
-        <button type="submit">Enregistrer</button>
-
-        {{form_end(UpdateProfil)}}
     </div>
 {% endblock %}

@@ -6,13 +6,15 @@
 
 {% block body %}
     <div class="gestionVilles">
-        <h2>Gérer les utilisateurs</h2>
-        <h4>Filtrer les utilisateurs</h4>
+        <div class="cityForm">
+            <h2>Gérer les utilisateurs</h2>
+            <h4>Filtrer les utilisateurs</h4>
 
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Rechercher</button>
-        {{form_end(form)}}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit">Rechercher</button>
+            {{form_end(form)}}
+        </div>
 
         <div id="tableContainer" class="tableContainer">
             <table class="scroll scrollUsers">
@@ -39,7 +41,9 @@
             </table>
         </div>
         </br>
-        <a href="{{ path('admin_users_create') }}">Ajouter un utilisateur</a>
+        <div class="cityA">
+            <a href="{{ path('admin_users_create') }}">Ajouter un utilisateur</a>
+        </div>
     </div>
 {% endblock %}
 

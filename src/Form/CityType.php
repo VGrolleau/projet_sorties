@@ -13,10 +13,12 @@ class CityType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Ville :'
+                'label' => 'Ville :',
+                'required'=>false
             ])
             ->add('zip', null, [
-                'label' => 'Code postal :'
+                'label' => 'Code postal :',
+                'required'=>false
             ])
         ;
     }
