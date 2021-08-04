@@ -129,7 +129,83 @@ a:hover{
     color: #dc71c8;
 }
 
-.register, .login, .updateProfil, .updateMDP,
+/***** update Profil ***/
+.updateProfil{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+.updateProfil_complet{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: auto;
+
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid #330728;
+}
+.updateProfil_enTete, .updateProfil_AuDessusColumn, .updateProfil_footer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.updateProfil_enTete{
+    padding-bottom: 5%;
+}
+
+.updateProfil_footer{
+    padding-top: 5%;
+}
+
+.updateProfil_allColumn{
+    display: flex;
+    justify-content: space-between;
+    text-align: justify;
+    width: 100%;
+}
+
+.updateProfil_column{
+    width: 50%;
+    padding: 15px;
+}
+.updateProfil_column:first-of-type{
+    border-right: 4px solid #330728;
+}
+
+.updateProfil input,.updateProfil textarea,.updateProfil select
+{
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    background: #f1e3ef;
+    border-radius: 5px;
+}
+.updateProfil button{
+    background: #f1e3ef;
+    padding: 13%;
+    border-radius: 5px;
+}
+
+
+
+/*.updateProfil_ligne{*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+/*.updateProfil_label{*/
+/*    width: 40%;*/
+/*}*/
+
+/*.updateProfil_event{*/
+/*    width: 60%;*/
+/*}*/
+
+.register, .login, .updateMDP,
 .gestionVilles h2, .editCity, .viewProfil{
     text-align: center;
 }
@@ -140,7 +216,6 @@ a:hover{
 
 .register input,.register textarea,.register select,
 .login input,.login textarea,.login select,
-.updateProfil input,.updateProfil textarea,.updateProfil select,
 .updateMDP input,.updateMDP textarea,.updateMDP select,
 .gestionVilles input,.gestionVilles textarea,.gestionVilles select,
 .editCity input,.editCity textarea,.editCity select
@@ -193,6 +268,17 @@ a:hover{
 .gestionVilles{
     margin: 20px;
 }
+.cityForm{
+    position: relative;
+    margin: auto;
+    width: 45%;
+    padding-bottom: 10px;
+}
+.cityA{
+    position: relative;
+    margin: auto;
+    width: 45%;
+}
 
 /*::-webkit-scrollbar {*/
 /*    -webkit-appearance: none;*/
@@ -207,14 +293,17 @@ a:hover{
 /*    padding-right: 20px;*/
 /*}*/
 
+
 table.scroll {
     width: 45%;
     border-spacing: 0;
-    border: 2px solid black;
     position: relative;
     margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid #330728;
 }
-
 table.scroll th,
 table.scroll td,
 table.scroll tr,
@@ -230,6 +319,9 @@ table.scroll thead tr {
     width:         calc(100% - 16px);
 }
 
+table.scroll td{
+
+}
 table.scroll tr:after {
     content: ' ';
     display: block;
@@ -268,6 +360,64 @@ table.scrollUsers thead th {
     float: left;
     border-right: 1px solid black;
 }
+
+
+
+/***** DETAIL EVENT ****/
+.detailEvent h1{
+    text-align: center;
+}
+.detailEvent{
+
+}
+
+.viewEvent{
+    display: flex;
+    position: relative;
+    margin: auto;
+    justify-content: space-between;
+    text-align: justify;
+    width: 50%;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid #330728;
+}
+
+.viewEvent_column{
+    width: 50%;
+    padding: 15px;
+}
+.viewEvent_column:first-of-type{
+    border-right: 4px solid #330728;
+}
+.viewEvent_ligne{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.viewEvent_label{
+    width: 40%;
+}
+
+.viewEvent_event{
+    width: 60%;
+}
+
+
+/***** Nav Admin ***/
+.admin_nav{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 20px;
+
+}
+.admin_nav ul{
+    padding-left: 30%;
+}
+
+
 /************************************/
 
 

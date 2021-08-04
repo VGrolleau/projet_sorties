@@ -6,14 +6,15 @@
 
 {% block body %}
     <div class="gestionVilles">
-        <h2>Gérer les villes</h2>
-        <h4>Filtrer les villes</h4>
+        <div class="cityForm">
+            <h2>Gérer les villes</h2>
+            <h4>Filtrer les villes</h4>
 
-        {{ form_start(searchCityForm) }}
-        {{ form_widget(searchCityForm) }}
-        <button type="submit">Rechercher</button>
-        {{form_end(searchCityForm)}}
-
+            {{ form_start(searchCityForm) }}
+            {{ form_widget(searchCityForm) }}
+            <button type="submit">Rechercher</button>
+            {{form_end(searchCityForm)}}
+        </div>
 
         <div id="tableContainer" class="tableContainer">
             <table class="scroll">
@@ -36,7 +37,9 @@
             </table>
         </div>
         </br>
-        <a href="{{ path('admin-city-create') }}">Ajouter une ville</a>
+        <div class="cityA">
+            <a href="{{ path('admin-city-create') }}">Ajouter une ville</a>
+        </div>
     </div>
 {% endblock %}
 

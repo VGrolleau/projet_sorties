@@ -6,13 +6,15 @@
 
 {% block body %}
     <div class="gestionVilles">
-        <h2>Gérer les campus</h2>
-        <h4>Filtrer les sites</h4>
+        <div class="cityForm">
+            <h2>Gérer les campus</h2>
+            <h4>Filtrer les sites</h4>
 
-        {{ form_start(searchCampusForm) }}
-        {{ form_widget(searchCampusForm) }}
-        <button type="submit">Rechercher</button>
-        {{form_end(searchCampusForm)}}
+            {{ form_start(searchCampusForm) }}
+            {{ form_widget(searchCampusForm) }}
+            <button type="submit">Rechercher</button>
+            {{form_end(searchCampusForm)}}
+        </div>
 
         <div id="tableContainer" class="tableContainer">
             <table  class="scroll">
@@ -34,7 +36,9 @@
             </table>
         </div>
         </br>
-        <a href="{{ path('admin-campus-create') }}">Ajouter un campus</a>
+        <div class="cityA">
+            <a href="{{ path('admin-campus-create') }}">Ajouter un campus</a>
+        </div>
     </div>
 {% endblock %}
 
