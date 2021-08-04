@@ -67,6 +67,7 @@ class UserController extends AbstractController
             } else {
                 //sinon ça bugue dans la session, ça me déconnecte
                 //refresh() permet de re-récupérer les données fraîches depuis la bdd
+                $this->addFlash('danger', 'Profil non modifié !');
                 $entityManager->refresh($user);
             }
         }

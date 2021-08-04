@@ -75,6 +75,7 @@ class AdminCityController extends AbstractController
             } else {
                 //sinon ça bugue dans la session, ça me déconnecte
                 //refresh() permet de re-récupérer les données fraîches depuis la bdd
+                $this->addFlash('danger', 'Ville non ajoutée !');
                 $entityManager->refresh($city);
             }
         }
@@ -104,11 +105,12 @@ class AdminCityController extends AbstractController
                 $entityManager->flush();
                 // do anything else you need here, like send an email
 
-                $this->addFlash('success', 'Ville modifié !');
+                $this->addFlash('success', 'Ville modifiée !');
                 return $this->redirectToRoute('admin_city');
             } else {
                 //sinon ça bugue dans la session, ça me déconnecte
                 //refresh() permet de re-récupérer les données fraîches depuis la bdd
+                $this->addFlash('danger', 'Ville non modifiée !');
                 $entityManager->refresh($city);
             }
         }
@@ -127,6 +129,7 @@ class AdminCityController extends AbstractController
         try {
             $entityManager->remove($city);
             $entityManager->flush();
+            $this->addFlash('success', 'Ville supprimée !');
         }catch (\Exception $e) {
             $this->addFlash("danger", "Vous ne pouvez pas supprimer ce campus car une sortie est organisée dessus !");
         }
