@@ -129,7 +129,14 @@ a:hover{
     color: #dc71c8;
 }
 
+/***** update Profil ***/
 .updateProfil{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+.updateProfil_complet{
     display: flex;
     flex-direction: column;
     position: relative;
@@ -140,12 +147,25 @@ a:hover{
     border-radius: 15px;
     border: 4px solid #330728;
 }
+.updateProfil_enTete, .updateProfil_AuDessusColumn, .updateProfil_footer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.updateProfil_enTete{
+    padding-bottom: 5%;
+}
+
+.updateProfil_footer{
+    padding-top: 5%;
+}
 
 .updateProfil_allColumn{
     display: flex;
     justify-content: space-between;
     text-align: justify;
-    width: 50%;
+    width: 100%;
 }
 
 .updateProfil_column{
@@ -155,6 +175,23 @@ a:hover{
 .updateProfil_column:first-of-type{
     border-right: 4px solid #330728;
 }
+
+.updateProfil input,.updateProfil textarea,.updateProfil select
+{
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    background: #f1e3ef;
+    border-radius: 5px;
+}
+.updateProfil button{
+    background: #f1e3ef;
+    padding: 13%;
+    border-radius: 5px;
+}
+
+
+
 /*.updateProfil_ligne{*/
 /*    display: flex;*/
 /*    justify-content: space-between;*/
@@ -179,7 +216,6 @@ a:hover{
 
 .register input,.register textarea,.register select,
 .login input,.login textarea,.login select,
-.updateProfil input,.updateProfil textarea,.updateProfil select,
 .updateMDP input,.updateMDP textarea,.updateMDP select,
 .gestionVilles input,.gestionVilles textarea,.gestionVilles select,
 .editCity input,.editCity textarea,.editCity select
@@ -229,6 +265,7 @@ a:hover{
 
 }
 
+/***** Gestion admin ****/
 .gestionVilles{
     margin: 20px;
 }
@@ -368,6 +405,21 @@ table.scrollUsers thead th {
 .viewEvent_event{
     width: 60%;
 }
+
+
+/***** Nav Admin ***/
+.admin_nav{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 20px;
+
+}
+.admin_nav ul{
+    padding-left: 30%;
+}
+
+
 /****** CREATE EVENT ******/
 /*html{ box-sizing: border-box; }*/
 /**,*:before,*:after{ box-sizing: inherit; }*/
