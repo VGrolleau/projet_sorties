@@ -38,19 +38,15 @@ class ResettingPasswordController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository(User::class)->loadUserByIdentifier($form->getData()['email']);
 
-
-        $user = $em->getRepository(User::class)->loadUserByIdentifier($form->getData()['email']);
-
-        // aucun email associé à ce compte.
-        if (!$user) {
-            $request->getSession()->getFlashBag()->add('warning', "Cet email n'existe pas.");
-            return $this->redirectToRoute('request_resetting');
-        }
-
-        return $this->redirectToRoute('resetting', ['id' => $user->getId()] );
+            // aucun email associé à ce compte.
+            if (!$user) {
+                $request->getSession()->getFlashBag()->add('warning', "Cet email n'existe pas.");
+                return $this->redirectToRoute('request_resetting');
+            }
+            return $this->redirectToRoute('resetting', ['id' => $user->getId()] );
          }
 
         return $this->render('resetting_password/request.html.twig', [

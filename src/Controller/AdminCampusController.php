@@ -70,11 +70,12 @@ class AdminCampusController extends AbstractController
                 $entityManager->flush();
                 // do anything else you need here, like send an email
 
-                $this->addFlash('success', 'Campus ajoutée !');
+                $this->addFlash('success', 'Campus ajouté !');
                 return $this->redirectToRoute('admin_campus');
             } else {
                 //sinon ça bugue dans la session, ça me déconnecte
                 //refresh() permet de re-récupérer les données fraîches depuis la bdd
+                $this->addFlash('danger', 'Campus non ajouté !');
                 $entityManager->refresh($campus);
             }
         }
@@ -114,6 +115,7 @@ class AdminCampusController extends AbstractController
             } else {
                 //sinon ça bugue dans la session, ça me déconnecte
                 //refresh() permet de re-récupérer les données fraîches depuis la bdd
+                $this->addFlash('danger', 'Campus non modifié !');
                 $entityManager->refresh($campus);
             }
         }
@@ -134,8 +136,10 @@ class AdminCampusController extends AbstractController
         try {
         $entityManager->remove($campus);
         $entityManager->flush();
+
+        $this->addFlash('success', 'Campus supprimé !');
         }catch (\Exception $e) {
-            $this->addFlash("dangerdanger", "Vous ne pouvez pas supprimer cette ville car une sortie est organisée dessus !");
+            $this->addFlash('danger', 'Vous ne pouvez pas supprimer cette ville car une sortie est organisée dessus !');
         }
         return $this->redirectToRoute('admin_campus');
     }

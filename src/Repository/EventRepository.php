@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Data\LocationData;
+//use App\Data\LocationData;
 use App\Data\SeachData;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -62,6 +62,8 @@ class EventRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('ic');
         $queryBuilder->leftJoin('ic.location', 'loc')
             ->addSelect('loc');
+        $queryBuilder->leftJoin('ic.eventState', 'evsta')
+            ->addSelect('evsta');
         $query = $queryBuilder->getQuery();
         return $query->getResult();
     }

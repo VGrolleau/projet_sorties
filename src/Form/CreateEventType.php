@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityRepository;
 use SebastianBergmann\CodeCoverage\Report\Text;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,18 +27,28 @@ class CreateEventType extends AbstractType
             ->add('name', null, [
                 'label' => 'Nom de la sortie :'
             ])
-            ->add('startDate', DateTimeType::class,[
+//            ->add('startDate', DateTimeType::class,[
+//                'label' => 'Date et heure de la sortie :',
+//                'data'   => new \DateTime(),
+//                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+//            ])
+            ->add('startDate', DateType::class,[
                 'label' => 'Date et heure de la sortie :',
-                'data'   => new \DateTime(),
-                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+                'html5' => true,
+                'widget' => 'single_text'
             ])
             ->add('duration', null, [
                 'label' => 'Durée :'
             ])
-            ->add('registrationLimitDate', null, [
+//            ->add('registrationLimitDate', null, [
+//                'label' => 'Date limite d\'inscription :',
+//                'data'   => new \DateTime(),
+//                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+//            ])
+            ->add('registrationLimitDate', DateType::class, [
                 'label' => 'Date limite d\'inscription :',
-                'data'   => new \DateTime(),
-                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+                'html5' => true,
+                'widget' => 'single_text'
             ])
             ->add('maxRegistrations', null, [
                 'label' => 'Nombre de places :'
@@ -50,15 +61,24 @@ class CreateEventType extends AbstractType
                 'class' => Campus::class,
                 'choice_label' => 'name'
             ])
-            ->add('eventState', EntityType::class, [
-                'label' => 'État de la sortie :',
-                'class' => EventState::class,
-                'choice_label' => 'name'
-            ])
+//            ->add('eventState', EntityType::class, [
+//                'label' => 'État de la sortie :',
+//                'class' => EventState::class,
+//                'choice_label' => 'name'
+//            ])
             ->add('location', EntityType::class, [
                 'label' => 'Lieu :',
                 'class' => Location::class,
                 'choice_label' => 'name'
+            ])
+            ->add('publish', SubmitType::class, [
+                'label' => 'Publier la sortie'
+            ])
+            ->add('registerEvent', SubmitType::class, [
+                'label' => 'Enregistrer'
+            ])
+            ->add('cancelEvent', SubmitType::class, [
+                'label' => 'Annuler'
             ])
 //            ->add('city', EntityType::class, [
 //                'label' => 'Ville :',
