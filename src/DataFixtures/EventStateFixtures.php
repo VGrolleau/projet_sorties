@@ -15,22 +15,22 @@ class EventStateFixtures extends Fixture
     {
         $eventState = [
             1 => [
-                'name' => "Created",
+                'name' => "Créé",
             ],
             2 => [
-                'name' => "Open",
+                'name' => "Ouvert",
                 ],
             3 => [
-                'name' => "Canceled",
+                'name' => "Annulé",
                 ],
             4 => [
-                'name' => "In progress",
+                'name' => "En cours",
                 ],
             5 => [
-                'name' => "Finished",
+                'name' => "Terminé",
                 ],
             6 => [
-                'name' => "Closed",
+                'name' => "Fermé",
             ]
         ];
 

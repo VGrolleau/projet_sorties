@@ -33,7 +33,7 @@
                                 <table>
                                     {% for event in events %}
                                         {% if  "now" |date('d/m/Y') < event.startDate|date_modify("+1 month")|date("d/m/Y") %}
-                                        {% if  event.eventState.name != 'Created' or app.user == event.organizer %}
+                                        {% if  event.eventState.name != 'Créé' or app.user == event.organizer %}
                                             <tr>
                                                 <td> {{ event.name | upper }}</td>
                                                 <td> {{ event.startDate |date('d/m/Y H:i')}} </td>
@@ -49,7 +49,7 @@
                                                 </td>
                                                 <td><a href="{{ path('user_details',{'id': event.organizer.id}) }}">{{ event.organizer.username }}</a></td>
                                                 <td> <a href="{{ path('sorties_detail',{'id': event.id}) }}">Afficher</a>
-                                                        {% if  event.eventState.name == 'Open' or event.eventState.name == 'Closed' %}
+                                                        {% if  event.eventState.name == 'Ouvert' or event.eventState.name == 'Fermé' %}
                                                             {% set booleanEvent = false %}
                                                             {% for u in event.users %}
                                                                 {% if app.user.id is same as(u.id) %}
@@ -58,14 +58,14 @@
                                                             {% endfor %}
                                                             {% if booleanEvent %}
                                                                 <a href="{{ path('sorties_unsubscribe', {'id': event.id, 'user': app.user.id}) }}">se désister</a>
-                                                            {% elseif event.eventState.name == 'Open' %}
+                                                            {% elseif event.eventState.name == 'Ouvert' %}
                                                                    <a href="{{ path('sorties_register', {'id': event.id, 'user': app.user.id}) }}">s'inscrire</a>
                                                             {% endif %}
                                                         {% endif %}
-                                                    {% if app.user == event.organizer and  event.eventState.name == 'Open' or  is_granted('ROLE_ADMIN') and  event.eventState.name == 'Open' %}
+                                                    {% if app.user == event.organizer and  event.eventState.name == 'Ouvert' or  is_granted('ROLE_ADMIN') and  event.eventState.name == 'Ouvert' %}
                                                             <a href="{{ path('sorties_canceled', {'id': event.id}) }}">Annuler</a>
                                                     {% endif %}
-                                                    {% if  app.user == event.organizer and event.eventState.name == 'Created' %}
+                                                    {% if  app.user == event.organizer and event.eventState.name == 'Créé' %}
                                                         <a href="{{ path('sorties_edit',{'id': event.id}) }}">Modifer</a>
                                                         <a href="{{ path('sorties_publish', {'id': event.id}) }}">Publier</a>
                                                     {% endif %}
