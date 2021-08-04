@@ -45,9 +45,9 @@
     {#                <a href="#locationModal" class="js-modal">Ouvrir modale avec ajax</a>#}
                 </div>
 
-                <div class="el-div-form">
-                    {{ form_row(eventForm.eventState) }}
-                </div>
+{#                <div class="el-div-form">#}
+{#                    {{ form_row(eventForm.eventState) }}#}
+{#                </div>#}
 
     {#            <div>#}
     {#                <label for="street-select">Rue :</label>#}
@@ -73,9 +73,16 @@
         </div>
 
         <div>
-            <input type="submit" name="button" id="btn-publish" value="Publier la sortie" />
-            <input type="submit" name="button" id="btn-register" value="Enregistrer" />
-            <input type="reset" name="button" value="Annuler" />
+{#            <input type="submit" name="button" id="btn-publish" value="Publier la sortie" />#}
+{#            <input type="submit" name="button" id="btn-register" value="Enregistrer" />#}
+{#            <input type="reset" name="button" value="Annuler" />#}
+{#            {% for ev in eventRepo %}#}
+{#                <a role="button" href="{{ path('sorties_publish',{'id': ev.eventState.id}) }}">Publier la sortie</a>#}
+{#                <a role="button" href="{{ path('sorties_register_event',{'id': ev.eventState.id}) }}">Enregistrer</a>#}
+{#            {% endfor %}#}
+            {{ form_row(eventForm.publish) }}
+            {{ form_row(eventForm.registerEvent) }}
+            {{ form_row(eventForm.cancelEvent) }}
         </div>
         {{form_end(eventForm)}}
 
