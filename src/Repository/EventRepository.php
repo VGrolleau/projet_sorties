@@ -5,6 +5,7 @@ namespace App\Repository;
 //use App\Data\LocationData;
 use App\Data\SeachData;
 use App\Entity\Event;
+use App\Entity\EventState;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -27,6 +28,9 @@ class EventRepository extends ServiceEntityRepository
      */
     public function findSearch(SeachData $seachData): array
     {
+//        $date = \DateTime::createFromFormat('Y-m-d H:i:s', strtotime('now'));
+//        $date = new \DateTime();
+        $eventState = 'EventState::class';
         $queryBuilder = $this->createQueryBuilder('s');
         $queryBuilder = $queryBuilder
                     ->leftJoin('s.eventState', 's_estat')
@@ -50,7 +54,7 @@ class EventRepository extends ServiceEntityRepository
 
         if (!empty($seachData->sorties4)){
             $queryBuilder = $queryBuilder
-                ->andWhere('s.eventState = 77');
+                ->andWhere('s.eventState = 95');
             // changer l'id
         }
 

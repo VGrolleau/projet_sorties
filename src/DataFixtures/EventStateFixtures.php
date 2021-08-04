@@ -21,7 +21,7 @@ class EventStateFixtures extends Fixture
                 'name' => "Open",
                 ],
             3 => [
-                'name' => "Closed",
+                'name' => "Canceled",
                 ],
             4 => [
                 'name' => "In progress",
@@ -30,7 +30,7 @@ class EventStateFixtures extends Fixture
                 'name' => "Finished",
                 ],
             6 => [
-                'name' => "Canceled",
+                'name' => "Closed",
             ]
         ];
 
