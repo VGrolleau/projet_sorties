@@ -36,21 +36,50 @@
             {# <div class="list" > #}
             <tbody class="scrollContent list">
             {% for event in events %}
-{#                {% if form.sorties4.vars.data == '0' %}#}
-{#                        {% include 'sorties/list.html.twig' %}#}
-{#                {% elseif form.sorties4.vars.data == '1' and event.eventState.name == 'Terminé' %}#}
-                        {% include 'sorties/list.html.twig' %}
+{#                {% if  "now" |date('d/m/Y') < event.startDate|date_modify("+1 month")|date("d/m/Y") %}#}
+                    {% if  event.eventState.name != 'Créé' or app.user == event.organizer %}
+                        <tr>
+                            <td> {{ event.name | upper }}</td>
+                            <td> {{ event.startDate |date('d/m/Y H:i') }} </td>
+                            <td> {{ event.registrationLimitDate |date('d/m/Y') }}</td>
+                            <td>{{ event.users|length }} / {{ event.maxRegistrations }}</td>
+                            <td>{{ event.eventState.name }}</td>
+                            <td>
+                                {% for user in event.users %}
+                                    {% if  app.user.id is same as(user.id) %}
+                                        <img src="{{ asset('img/emoticonLicorne.png') }}" alt="Logo licorne rose">
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{{ path('user_details',{'id': event.organizer.id}) }}">{{ event.organizer.username }}</a>
+                            </td>
+                            <td><a href="{{ path('sorties_detail',{'id': event.id}) }}">Afficher</a>
+                                {% if  event.eventState.name == 'Ouvert' or event.eventState.name == 'Fermé' %}
+                                    {% set booleanEvent = false %}
+                                    {% for u in event.users %}
+                                        {% if app.user.id is same as(u.id) %}
+                                            {% set booleanEvent = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if booleanEvent %}
+                                        <a href="{{ path('sorties_unsubscribe', {'id': event.id, 'user': app.user.id}) }}">se
+                                            désister</a>
+                                    {% elseif event.eventState.name == 'Ouvert' %}
+                                        <a href="{{ path('sorties_register', {'id': event.id, 'user': app.user.id}) }}">s'inscrire</a>
+                                    {% endif %}
+                                {% endif %}
+                                {% if app.user == event.organizer and  event.eventState.name == 'Ouvert' or  is_granted('ROLE_ADMIN') and  event.eventState.name == 'Ouvert' %}
+                                    <a href="{{ path('sorties_canceled', {'id': event.id}) }}">Annuler</a>
+                                {% endif %}
+                                {% if  app.user == event.organizer and event.eventState.name == 'Créé' %}
+                                    <a href="{{ path('sorties_edit',{'id': event.id}) }}">Modifer</a>
+                                    <a href="{{ path('sorties_publish', {'id': event.id}) }}">Publier</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endif %}
 {#                {% endif %}#}
-{#                {% if form.sorties.vars.data == '1' and   app.user == event.organizer %}#}
-{#                    {% include 'sorties/list.html.twig' %}#}
-{#                {% elseif form.sorties2.vars.data == '1' and  app.user.id is same as(user.id)  %}#}
-{#                    {% include 'sorties/list.html.twig' %}#}
-{#                {% elseif form.sorties3.vars.data == '1' and   app.user.id is not same as(user.id)  %}#}
-{#                    {% include 'sorties/list.html.twig' %}#}
-{#                {% else %}#}
-{#                    {% include 'sorties/list.html.twig' %}#}
-{#                {% endif %}#}
-
             {% endfor %}
             </tbody>
         </table>
