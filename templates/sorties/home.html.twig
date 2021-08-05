@@ -84,5 +84,27 @@
             </tbody>
         </table>
     </div>
-    <a href="{{ path('sorties_create') }}" title="Create event">Create event</a>
+    <div class="div-btn-create-event">
+        <button class="btn-create-event">
+            <a href="{{ path('sorties_create') }}" title="Créer une sortie">Créer une sortie</a>
+        </button>
+    </div>
+{% endblock %}
+
+{% block js %}
+<script>
+    configDateAndTime = {
+        enableTime: true,
+        dateFormat: "d/m/Y H:i",
+        altInput: true,
+        altFormat: "d/m/Y H:S",
+        ariaDateFormat: "l d F Y à H:S",
+        locale: "fr",
+        time_24hr: true
+    }
+
+    flatpickr(".flatpickrDateTime", configDateAndTime);
+    flatpickr.localize(flatpickr.l10ns.fr);
+    flatpickr.l10ns.default.firstDayOfWeek = 1; // Lundi
+</script>
 {% endblock %}
