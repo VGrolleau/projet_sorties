@@ -1,11 +1,22 @@
 {{ form_start(form) }}
-{{ form_row(form.campus) }}
-{{ form_row(form.q) }}
-{{ form_row(form.start_Date) }}
-{{ form_row(form.end_Date) }}
-{{ form_row(form.sorties) }}
-{{ form_row(form.sorties2) }}
-{{ form_row(form.sorties3) }}
-{{ form_row(form.sorties4) }}
-<button type="submit">Recherche</button>
+    <div class="search-date-home">
+{#        <div>#}
+            {{ form_row(form.campus) }}
+            {{ form_row(form.q) }}
+{#        </div>#}
+
+{#        <div>#}
+            {{ form_row(form.start_Date) }}
+            {{ form_row(form.end_Date) }}
+{#        </div>#}
+    </div>
+
+    <div class="check-home">
+        {{ form_row(form.sorties) }}
+        {{ form_row(form.sorties2) }}
+        {{ form_row(form.sorties3) }}
+        {{ form_row(form.sorties4) }}
+    </div>
+
+    <button type="submit">Recherche</button>
 {{ form_end(form) }}
