@@ -19,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Count;
 
 class SortiesController extends AbstractController
 {
@@ -28,7 +29,7 @@ class SortiesController extends AbstractController
     public function home_redirect() {
         $user = $this->getUser();
         if ($user) {
-            return new RedirectResponse('/~wahac/sorties/public/sorties_home');
+            return new RedirectResponse('/sorties/public/sorties_home');
         } else {
             return new RedirectResponse('/sorties/public/login');
         }

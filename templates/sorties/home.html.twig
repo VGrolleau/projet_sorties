@@ -45,7 +45,7 @@
                             <td>
                                 {% for user in event.users %}
                                     {% if  app.user.id is same as(user.id) %}
-                                        ✅
+                                        <img src="{{ asset('img/emoticonLicorne.png') }}" alt="Logo licorne rose">
                                     {% endif %}
                                 {% endfor %}
                             </td>
