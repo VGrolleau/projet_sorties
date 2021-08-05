@@ -11,7 +11,7 @@
                 <div class="viewEvent_ligne"><span class="viewEvent_label">Date et heure de la sortie : </span><span class="viewEvent_event">{{ event.startDate |date('d-m-Y H:m') }}</span></div>
                 <div class="viewEvent_ligne"><span class="viewEvent_label">Date limite d'inscription : </span><span class="viewEvent_event">{{ event.registrationLimitDate |date('d-m-Y H:m') }}</span></div>
                 <div class="viewEvent_ligne"><span class="viewEvent_label">Nombre de places : </span><span class="viewEvent_event">{{ event.maxRegistrations }}</span></div>
-                <div class="viewEvent_ligne"><span class="viewEvent_label">Durée : </span><span class="viewEvent_event">{{ event.duration }}</span></div>
+                <div class="viewEvent_ligne"><span class="viewEvent_label">Durée : </span><span class="viewEvent_event">{{ event.duration }} minutes</span></div>
                 <div class="viewEvent_ligne"><span class="viewEvent_label">Description et infos : </span><span class="viewEvent_event">{{ event.infos }}</span></div>
             </div>
             <div class="viewEvent_column">
@@ -23,5 +23,30 @@
                 <div class="viewEvent_ligne"><span class="viewEvent_label">longitude : </span><span class="viewEvent_event">{{ event.location.longitude }}</span></div>
             </div>
         </div>
+
+
+    {% if event.users|length > 0 %}
+    <div><h2>Liste des participants inscrits :</h2></div>
+    <div id="tableContainer" class="tableContainer">
+        <table class="scroll scrollUsers">
+            <thead class="fixedHeader">
+            <tr class="alternateRow">
+                <th>Pseudo</th>
+                <th>Nom</th>
+            </tr>
+            </thead>
+            <tbody class="scrollContent">
+            {% for user in event.users %}
+                <tr>
+                    <td><a href="{{ path('user_details',{'id': user.id}) }}">{{ user.username }}</a></td>
+                    <td>{{ user.firstname }} {{ user.lastname }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <h2>Il n'y a pas de participants inscrit</h2>
+    {% endif %}
     </div>
 {% endblock %}
