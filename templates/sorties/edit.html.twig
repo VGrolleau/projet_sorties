@@ -1,7 +1,87 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit {% endblock %}
+{% block title %}Hello SortiesController!{% endblock %}
 
 {% block body %}
-    <h1>Edit {{ parent() }} ✅</h1>
+    <div class="create-event">
+        <h1>Modifier une sortie {{ parent() }} ✅</h1>
+
+        {{form_start(eventForm)}}
+        <div class="global-div-form">
+            <div>
+                <div class="el-div-form">
+                    {{form_row(eventForm.name)}}
+                </div>
+                <div class="el-div-form date-time-div">
+                    {{form_row(eventForm.startDate)}}
+                </div>
+                <div class="el-div-form date-time-div">
+                    {{form_row(eventForm.registrationLimitDate)}}
+                </div>
+                <div class="el-div-form">
+                    {{form_row(eventForm.maxRegistrations)}}
+                </div>
+                <div class="el-div-form">
+                    {{form_row(eventForm.duration)}}
+                </div>
+                <div class="el-div-form">
+                    {{form_row(eventForm.infos)}}
+                </div>
+            </div>
+
+            <div>
+                <div class="el-div-form">
+                    {{ form_row(eventForm.campus) }}
+                </div>
+
+                <div class="el-div-form">
+                    {{ form_row(eventForm.location) }}
+                </div>
+
+            </div>
+        </div>
+
+        <div class="btn-div-create">
+            {{ form_row(eventForm.publish) }}
+            {{ form_row(eventForm.registerEvent) }}
+            <div>
+                <button>
+                    <a href="{{ path('sorties_home') }}">Annuler</a>
+                </button>
+            </div>
+        </div>
+        {{form_end(eventForm)}}
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        configDateAndTime = {
+            enableTime: true,
+            dateFormat: "d/m/Y H:i",
+            altInput: true,
+            altFormat: "d/m/Y H:S",
+            ariaDateFormat: "l d F Y à H:S",
+            locale: "fr",
+            time_24hr: true,
+            minDate: "today"
+        }
+
+        configDate = {
+            enableTime: false,
+            dateFormat: "d/m/Y",
+            altInput: true,
+            altFormat: "d/m/Y",
+            ariaDateFormat: "l d F Y",
+            locale: "fr",
+            // time_24hr: true,
+            minDate: "today"
+        }
+
+        flatpickr(".flatpickrDateTime", configDateAndTime);
+        flatpickr(".flatpickrDate", configDate);
+        flatpickr.localize(flatpickr.l10ns.fr);
+        flatpickr.l10ns.default.firstDayOfWeek = 1; // Lundi
+    </script>
+
 {% endblock %}

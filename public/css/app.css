@@ -2,8 +2,6 @@
 
 body {
     background: #f1e3ef;
-    /*font-family: 'Bebas Neue', cursive;*/
-    /*font-family: 'Krona One', sans-serif;*/
     font-family: 'Staatliches', cursive;
     color: #4b063a;
 }
@@ -318,7 +316,9 @@ a:hover {
 
 }
 /************************************/
+.mdpOublie{
 
+}
 
 /****** VIEW PROFILE ******/
 /*.viewProfil {*/
@@ -330,7 +330,7 @@ a:hover {
 /*    border-radius: 15px;*/
 /*    border: 4px solid #330728;*/
 /*}*/
-.viewProfilComplet{
+.viewProfilComplet, .mdpOublieComplet{
     min-width: 28%;
 }
 
@@ -345,7 +345,7 @@ a:hover {
     justify-content: space-between;
 }
 .viewProfil_user{
-    width: 12%;
+    width: 22%;
 }
 .viewProfil_ligne, .cancelEvent_ligne {
     padding-bottom: 10px;
@@ -384,17 +384,21 @@ a:hover {
 
 }
 /************************************/
-
+.mdpOublie button {
+    margin: 18px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
 
 /****** UPDATE PROFIL ******/
-.updateProfil, .viewProfil {
+.updateProfil, .viewProfil, .mdpOublie {
     display: flex;
     justify-content: center;
     width: 100%;
     margin-top: 20px;
 }
 
-.updateProfil_complet, .viewProfilComplet {
+.updateProfil_complet, .viewProfilComplet, .mdpOublieComplet {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -465,7 +469,7 @@ a:hover {
 /*}*/
 
 .register, .login, .updateMDP,
-.gestionVilles h2, .editCity, .viewProfil {
+.gestionVilles h2, .editCity, .viewProfil, .mdpOublie {
     text-align: center;
 }
 
@@ -594,8 +598,46 @@ table.scrollUsers thead th {
     border-right: 1px solid black;
 }
 /************************************/
+.Register{
+    margin: 20px;
+}
+.Register h1{
+    text-align: center;
+}
+.RegisterComplet{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid #330728;
+    position: relative;
+    margin: auto;
+}
 
-
+.RegisterColumns{
+    display: flex;
+    position: relative;
+    margin: auto;
+    justify-content: space-between;
+    width: 65%;
+}
+.registerButton{
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+}
+.Register_column{
+    width: 50%;
+    padding: 15px;
+}
+.Register_column:first-of-type{
+    border-right: 4px solid #330728;
+}
+.Register_column label{
+    margin-right: 6%;
+}
 /****** DETAIL EVENT ******/
 .detailEvent h1, .detailEvent h2 {
     text-align: center;

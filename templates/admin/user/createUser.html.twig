@@ -1,14 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="register">
+<div class="Register">
+    <div class="RegisterComplet">
         <h1>Création d'un nouvel utilisateur</h1>
+        <div class="RegisterColumns">
+            <div class="Register_column">
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.username) }}
+                {{ form_row(registrationForm.lastname) }}
+                {{ form_row(registrationForm.firstname) }}
+                {{ form_row(registrationForm.phone) }}
+                {{ form_row(registrationForm.campus) }}
+                {{ form_row(registrationForm.email) }}
+            </div>
+            <div class="Register_column">
+                {{ form_row(registrationForm.picture) }}
 
-        {{ form_start(registrationForm) }}
-        {{ form_widget(registrationForm) }}
-        <button type="submit" class="btn">Enregistrer</button>
-        {{ form_end(registrationForm) }}
+                {{ form_widget(registrationForm) }}
+            </div>
+        </div>
+        <div class="registerButton">
+            <button type="submit" class="btn">Enregistrer</button>
+            {{ form_end(registrationForm) }}
+        </div>
     </div>
+</div>
 {% endblock %}
 
 {% block title %}
