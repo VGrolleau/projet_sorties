@@ -50,8 +50,7 @@ header {
     background: linear-gradient(180deg, #4b063a 0%, #330728 100%);
     margin: auto;
     padding: 20px;
-    height: 80px;
-    border-bottom: 40px solid #4b063a;
+    height: 120px;
     display: flex;
 }
 
@@ -253,7 +252,7 @@ table {
 
 .scrollContent.list td {
     /*text-align: center;*/
-    height: 30px;
+    height: 50px;
     font-size: 15px;
     width: 12.27%;
     border-right: none;
@@ -261,6 +260,10 @@ table {
     align-items: center;
     justify-content: center;
 }
+.scrollContent.list td a{
+    margin: 2px;
+}
+
 
 .scrollContent.list td img {
     height: 30px;
@@ -509,6 +512,18 @@ a:hover {
 
 .btn-cityA {
     padding: 1%;
+}
+
+.editCity {
+    position: relative;
+    margin: auto;
+    width: 20%;
+    height: 250px;
+    background: white;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid #330728;
 }
 
 /*::-webkit-scrollbar {*/
