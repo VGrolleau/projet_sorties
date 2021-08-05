@@ -27,7 +27,7 @@ class EventRepository extends ServiceEntityRepository
      * @param SeachData $seachData
      * @return Event[]
      */
-    public function findSearch(SeachData $seachData): array
+    public function findSearch(SeachData $seachData, User $user): array
     {
 //        $date = \DateTime::createFromFormat('Y-m-d H:i:s', strtotime('now'));
 //        $date = new \DateTime();
@@ -42,6 +42,7 @@ class EventRepository extends ServiceEntityRepository
                     ->leftJoin('s.users', 's_users')
                         ->addSelect('s_users')
                     ->addOrderBy('s.creationDate','DESC');
+
         if (!empty($seachData->campus)){
             $queryBuilder= $queryBuilder
                 ->andWhere('s.campus IN (:campus)')
@@ -59,10 +60,32 @@ class EventRepository extends ServiceEntityRepository
                 ->andWhere('s.startDate <= :end_Date')
                 ->setParameter('end_Date', $seachData->end_Date);
         }
+        if (!empty($seachData->sorties)){
+            $userId = $user->getId();
+            $queryBuilder = $queryBuilder
+                ->andWhere('s.organizer = :userId')
+                ->setParameter('userId', $userId);
+        }
+
+        if (!empty($seachData->sorties2)){
+            $userId = $user->getId();
+            $queryBuilder = $queryBuilder
+                ->andWhere('s_users.id = :userId')
+                ->setParameter('userId', $userId);
+        }
+        if (!empty($seachData->sorties3)){
+            $userId = $user->getId();
+            $queryBuilder = $queryBuilder
+                ->andWhere('s_users.id != :userId')
+                ->andWhere('s_estat.name like \'Ouvert\'')
+                ->setParameter('userId', $userId);
+        }
 
         if (!empty($seachData->sorties4)){
+//            $term = 'Terminé';
             $queryBuilder = $queryBuilder
-                ->andWhere('s.eventState = 23');
+                ->andWhere('s_estat.name like  \'Terminé\'');
+//                ->setParameter('name', "%{$term}%");
             // changer l'id
         }
 
