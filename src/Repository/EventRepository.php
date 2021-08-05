@@ -54,7 +54,7 @@ class EventRepository extends ServiceEntityRepository
 
         if (!empty($seachData->sorties4)){
             $queryBuilder = $queryBuilder
-                ->andWhere('s.eventState = 95');
+                ->andWhere('s.eventState = 23');
             // changer l'id
         }
 

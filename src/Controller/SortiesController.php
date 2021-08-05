@@ -5,13 +5,14 @@ namespace App\Controller;
 use App\Data\SeachData;
 use App\Entity\Event;
 use App\Entity\EventState;
-use App\Entity\Location;
 use App\Entity\User;
 use App\Form\CityType;
 use App\Form\CreateEventType;
+use App\Form\EventMotifCancelledType;
 use App\Form\LocationType;
 use App\Form\SearchFormType;
 use App\Repository\EventRepository;
+use DateInterval;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +28,7 @@ class SortiesController extends AbstractController
     public function home_redirect() {
         $user = $this->getUser();
         if ($user) {
-            return new RedirectResponse('/sorties/public/sorties_home');
+            return new RedirectResponse('/~wahac/sorties/public/sorties_home');
         } else {
             return new RedirectResponse('/sorties/public/login');
         }
@@ -36,14 +37,56 @@ class SortiesController extends AbstractController
     /**
      * @Route("/sorties_home", name="sorties_home")
      */
-    public function home(EventRepository $eventRepository, Request $request): Response
+    public function home(EventRepository $eventRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $date = new \DateTime('now',new \DateTimeZone('europe/paris'));
         $data = new SeachData();
         $form = $this->createForm(SearchFormType::class, $data);
         $form ->handleRequest($request);
-        $event = $eventRepository->findSearch($data);
+        $events = $eventRepository->findSearch($data);
+        foreach($events as $event) {
+            $eventState = $event->getEventState();
+            if ($eventState != 'Annulé' || $eventState != 'Créé'){
+                $dateRegLimite = $event->getRegistrationLimitDate();
+                $dateDebutEvent = $event->getStartDate();
+                $nbRegistre = \count($event->getUsers());
+                $nbMaxRegistre = $event->getMaxRegistrations();
+                $duration = $event->getDuration();
+                $dateFinEvent = clone $dateDebutEvent;
+                $dateFinEvent->add(new DateInterval('PT' . $duration . 'M'));
+                if ($dateRegLimite <= $date) {
+                    $eventState = $this->getDoctrine()
+                        ->getRepository(EventState::class)
+                        ->findOneBy(['name' => 'Fermé']);
+                    $event->setEventState($eventState);
+                }
+                if ($dateDebutEvent <= $date and $dateFinEvent > $date) {
+                    $eventState = $this->getDoctrine()
+                        ->getRepository(EventState::class)
+                        ->findOneBy(['name' => 'En cours']);
+                    $event->setEventState($eventState);
+                    //                $entityManager->persist($event);
+                    //                $entityManager->flush();
+                }
+                if ($dateFinEvent < $date) {
+                    $eventState = $this->getDoctrine()
+                        ->getRepository(EventState::class)
+                        ->findOneBy(['name' => 'Terminé']);
+                    $event->setEventState($eventState);
+                    //                $entityManager->persist($event);
+                    //                $entityManager->flush();
+                }
+                if($nbRegistre == $nbMaxRegistre){
+                    $eventState = $this->getDoctrine()
+                        ->getRepository(EventState::class)
+                        ->findOneBy(['name' => 'Fermé']);
+                    $event->setEventState($eventState);
+                }
+
+            }
+        }
         return $this->render('sorties/home.html.twig', [
-            'events' => $event,
+            'events' => $events,
             'form' => $form->createView()
         ]);
     }
@@ -51,9 +94,16 @@ class SortiesController extends AbstractController
     /**
      * @Route("/sorties/details/{id}", name="sorties_detail")
      */
-    public function details(int $id): Response
+    public function details(
+        int $id,
+        EventRepository $eventRepository
+    ): Response
     {
-        return $this->render('sorties/detail.html.twig');
+        $event = $eventRepository->find($id);
+
+        return $this->render('sorties/detail.html.twig', [
+            'event' => $event
+        ]);
     }
 
     /**
@@ -73,53 +123,47 @@ class SortiesController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response
     {
+        $btName = $request->get( 'button' );
         $user = $this->getUser();
         $event = new Event();
-//        $location = new Location();
         $event->setCreationDate(new \DateTime());
         $event->setOrganizer($user);
         $eventForm = $this->createForm(CreateEventType::class, $event);
         $eventForm->handleRequest($request);
-//        $locationForm = $this->createForm(LocationType::class, $location);
         $locationForm = $this->createForm(LocationType::class);
         $cityForm = $this->createForm(CityType::class);
-//        $locationForm->handleRequest($request);
         $eventRepo = $eventRepository->findInfosCreate();
-        // todo : traiter le formulaire
-
-//        if ($locationForm->isSubmitted()) {
-//            //séparé en 2 if pour pouvoir faire le refresh si le form n'est pas valide
-//            if ($locationForm->isValid()) {
-//                $entityManager->persist($location);
-////                dd($location);
-//                $entityManager->flush();
-//                // do anything else you need here, like send an email
-//
-//                $this->addFlash('success', 'Lieu ajouté !');
-////                return $this->redirectToRoute('sorties_create');
-//            } else {
-//                //sinon ça bugue dans la session, ça me déconnecte
-//                //refresh() permet de re-récupérer les données fraîches depuis la bdd
-//                $entityManager->refresh($location);
-//            }
-//        }
 
         if ($eventForm->isSubmitted()) {
             //séparé en 2 if pour pouvoir faire le refresh si le form n'est pas valide
-            if ($eventForm->isValid() ) {
-//                if ($event->getStartDate() >= $event->getCreationDate()) {
-                    $entityManager->persist($event);
-//                dd($event);
-                    $entityManager->flush();
-                    // do anything else you need here, like send an email
+            if ($eventForm->get('publish')->isClicked() && $eventForm->isValid() ) {
+                $eventState = $this->getDoctrine()
+                    ->getRepository(EventState::class)
+                    ->findOneBy(['name' => 'Ouvert']);
+                $event-> setEventState($eventState);
+                $entityManager->persist($event);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
 
-                    $this->addFlash('success', 'Sortie ajoutée !');
-                    return $this->redirectToRoute('sorties_home');
-//                }
-//            } else {
-//                //sinon ça bugue dans la session, ça me déconnecte
-//                //refresh() permet de re-récupérer les données fraîches depuis la bdd
-//                $entityManager->refresh($event);
+                $this->addFlash('success', 'Sortie publiée !');
+                return $this->redirectToRoute('sorties_home');
+            } else {
+                $this->addFlash('danger', 'Sortie non publiée !');
+            }
+
+            if ($eventForm->get('registerEvent')->isClicked() && $eventForm->isValid() ) {
+                $eventState = $this->getDoctrine()
+                    ->getRepository(EventState::class)
+                    ->findOneBy(['name' => 'Créé']);
+                $event-> setEventState($eventState);
+                $entityManager->persist($event);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
+
+                $this->addFlash('success', 'Sortie enregistrée !');
+                return $this->redirectToRoute('sorties_home');
+            } else {
+                $this->addFlash('danger', 'Sortie non enregistrée !');
             }
         }
 
@@ -131,32 +175,20 @@ class SortiesController extends AbstractController
         ]);
     }
 
-//    /**
-//     * @Route("/sorties/cancel/{id}", name="sorties_canceled")
-//     */
-//    public function cancel(Event $event, EntityManagerInterface $entityManager): Response{
-//       $eventState = $this->getDoctrine()
-//           ->getRepository(EventState::class)
-//           ->findOneBy(['name' => 'Canceled']);
-//       $event-> setEventState($eventState);
-//        $entityManager->persist($event);
-//        $entityManager->flush();
-//
-//        return $this->redirectToRoute('sorties_home');
-//    }
     /**
      * @Route("/sorties/publish/{id}", name="sorties_publish")
      */
     public function publish(Event $event, EntityManagerInterface $entityManager): Response{
         $eventState = $this->getDoctrine()
             ->getRepository(EventState::class)
-            ->findOneBy(['name' => 'Created']);
+            ->findOneBy(['name' => 'Ouvert']);
         $event-> setEventState($eventState);
         $entityManager->persist($event);
         $entityManager->flush();
 
         return $this->redirectToRoute('sorties_home');
     }
+
     /**
      * @Route("/sorties/register/{id}/{user}", name="sorties_register")
      */
@@ -167,6 +199,7 @@ class SortiesController extends AbstractController
 
         return $this->redirectToRoute('sorties_home');
     }
+
     /**
      * @Route("/sorties/unsubscribe/{id}/{user}", name="sorties_unsubscribe")
      */
@@ -177,11 +210,38 @@ class SortiesController extends AbstractController
 
         return $this->redirectToRoute('sorties_home');
     }
+
     /**
      * @Route("/sorties/cancel/{id}", name="sorties_canceled")
      */
-    public function cancel(int $id)
+    public function cancel(
+        int $id,
+        EventRepository $eventRepository,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ):Response
     {
-        return $this->render('sorties/cancel.html.twig');
+        $event = $eventRepository->find($id);
+        $form = $this->createForm(EventMotifCancelledType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $motif = $form->get('infos')->getData();
+                $event->setInfos($motif);
+                $eventState = $this->getDoctrine()
+                    ->getRepository(EventState::class)
+                    ->findOneBy(['name' => 'Annulé']);
+                $event-> setEventState($eventState);
+                $entityManager->persist($event);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('sorties_home');
+            }
+        }
+        return $this->render('sorties/cancel.html.twig', [
+            'event' => $event,
+            'form' => $form->createView()
+        ]);
     }
 }
