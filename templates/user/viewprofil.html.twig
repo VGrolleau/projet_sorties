@@ -1,21 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="viewProfil">
-        <h2>{{ user.username }}</h2>
-        <img src="{{ asset('uploads/pictures/' ~ user.pictureFileName) }}" alt="View picture" class="imgProfil">
-        <div class="viewProfil_ligne"><span class="viewProfil_label">Prénom : </span><span class="viewProfil_user">{{ user.firstname }}</span></div>
-        <div class="viewProfil_ligne"><span class="viewProfil_label">Nom : </span><span class="viewProfil_user">{{ user.lastname }}</span></div>
-        <div class="viewProfil_ligne"><span class="viewProfil_label">Téléphone : </span><span class="viewProfil_user">{{ user.phone }}</span></div>
-        <div class="viewProfil_ligne"><span class="viewProfil_label">Email : </span><span class="viewProfil_user">{{ user.email }}</span></div>
-        <div class="viewProfil_ligne"><span class="viewProfil_label">Campus : </span><span class="viewProfil_user">{{ user.campus }}</span></div>
-        {% if user.id is not same as(userConnecte.id)%}<div class="viewProfil_ligne"><button class="viewProfil_label" id="button_alone"><a href="{{ path('sorties_home') }}">Retour</a></button></div>{% endif %}
-        {% if user.id is same as(userConnecte.id)%}<div class="viewProfil_ligne"><button class="viewProfil_label"><a href="{{ path('sorties_home') }}">Retour</a></button>
-            <button class="viewProfil_user"><a href="{{ path('update_profil') }}">Modifier mon profil</a></button>{% endif %}</div>
+    <div>
+        <div class="viewProfil">
+            <div class="viewProfilComplet">
+                <h2>{{ user.username }}</h2>
+                <div class="viewProfilImg"><img src="{{ asset('uploads/pictures/' ~ user.pictureFileName) }}"
+                                                alt="View picture" class="imgProfil"></div>
+                <div class="viewProfil_ligne"><span class="viewProfil_label">Prénom : </span><span
+                            class="viewProfil_user">{{ user.firstname }}</span></div>
+                <div class="viewProfil_ligne"><span class="viewProfil_label">Nom : </span><span
+                            class="viewProfil_user">{{ user.lastname }}</span></div>
+                <div class="viewProfil_ligne"><span class="viewProfil_label">Téléphone : </span><span
+                            class="viewProfil_user">{{ user.phone }}</span></div>
+                <div class="viewProfil_ligne"><span class="viewProfil_label">Email : </span><span
+                            class="viewProfil_user">{{ user.email }}</span></div>
+                <div class="viewProfil_ligne"><span class="viewProfil_label">Campus : </span><span
+                            class="viewProfil_user">{{ user.campus }}</span></div>
+                {% if user.id is not same as(userConnecte.id) %}
+                    <div class="viewProfil_ligne_Button">
+                    <button class="viewProfil_label" id="button_alone"><a href="{{ path('sorties_home') }}">Retour</a>
+                    </button></div>{% endif %}
+                {% if user.id is same as(userConnecte.id) %}
+                <div class="viewProfil_ligne_Button">
+                    <button class="viewProfil_labelButton"><a href="{{ path('sorties_home') }}">Retour</a></button>
+                    <button class="viewProfil_userButton"><a href="{{ path('update_profil') }}">Modifier mon profil</a>
+                    </button>{% endif %}</div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
 {% block title %}
-Profil de {{ user.username }}
+    Profil de {{ user.username }}
 {% endblock %}
 

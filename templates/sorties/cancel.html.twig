@@ -3,21 +3,26 @@
 {% block title %}Cancel {% endblock %}
 
 {% block body %}
-    <div class="cancel">
-        <h2>Annuler une sortie</h2>
-        <div class="cancelEvent_ligne"><span class="cancelEvent_label">Nom de la sortie : </span>
-            <span class="cancelEvent_event">{{ event.name }}</span></div>
-        <div class="cancelEvent_ligne"><span class="cancelEvent_label">Date de la sortie : </span>
-            <span class="cancelEvent_event">{{ event.startDate |date('d-m-Y') }}</span></div>
-        <div class="cancelEvent_ligne"><span class="cancelEvent_label">Campus : </span>
-            <span class="cancelEvent_event">{{ event.campus }}</span></div>
-        <div class="cancelEvent_ligne"><span class="cancelEvent_label">Lieu : </span>
-            <span class="cancelEvent_event">{{ event.location.street}} {{ event.location.city.zip}} {{ event.location.city.name}}</span></div>
+    <div>
+        <div class="cancel viewProfil">
+            <div class="viewProfilComplet cancelComplet">
+                <h2>Annuler une sortie</h2>
+                <div class="cancelEvent_ligne"><span class="cancelEvent_label">Nom de la sortie : </span>
+                    <span class="cancelEvent_event">{{ event.name }}</span></div>
+                <div class="cancelEvent_ligne"><span class="cancelEvent_label">Date de la sortie : </span>
+                    <span class="cancelEvent_event">{{ event.startDate |date('d-m-Y') }}</span></div>
+                <div class="cancelEvent_ligne"><span class="cancelEvent_label">Campus : </span>
+                    <span class="cancelEvent_event">{{ event.campus }}</span></div>
+                <div class="cancelEvent_ligne"><span class="cancelEvent_label">Lieu : </span>
+                    <span class="cancelEvent_event">{{ event.location.street }} {{ event.location.city.zip }} {{ event.location.city.name }}</span>
+                </div>
 
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Enregistrer</button>
-        <button><a href="{{ path('sorties_home') }}">Annuler</a></button>
-        {{ form_end(form) }}
+                {{ form_start(form) }}
+                <div class="cancelEvent_form">{{ form_widget(form) }}</div>
+                <div class="cancel_ligne_Button"><button type="submit">Enregistrer</button>
+                <button><a href="{{ path('sorties_home') }}">Annuler</a></button></div>
+                {{ form_end(form) }}
+            </div>
+        </div>
     </div>
 {% endblock %}

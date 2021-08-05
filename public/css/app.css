@@ -1,6 +1,6 @@
 @import url(//fonts.googleapis.com/icon?family=Material+Icons);
 
-body{
+body {
     background: #f1e3ef;
     font-family: 'Bebas Neue', cursive;
     font-family: 'Krona One', sans-serif;
@@ -8,20 +8,23 @@ body{
     color: #4b063a;
 }
 
-header{
+header {
     background: linear-gradient(180deg, #4b063a 0%, #330728 100%);
     margin: auto;
     padding: 20px;
     height: 80px;
     border-bottom: 40px solid #4b063a;
 }
-header img{
+
+header img {
     height: 100px;
     float: left;
     margin-left: 5%;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s cubic-bezier(.59,.66,0,1.71);
 }
+
+nav ul {
 header img:hover{
     -webkit-transform:  rotate(-5deg);
     transform: rotate(-5deg);
@@ -35,11 +38,13 @@ nav ul{
     justify-content: flex-end;
     flex-direction: row;
 }
+
 nav ul li{
     margin-right: 2%;
 
 }
-nav ul li a{
+
+nav ul li a {
     font-size: 25px;
     display: inline-block;
     color: rgba(255,255,255,1);
@@ -53,35 +58,39 @@ nav ul li a{
     transition: color, border-top-width 200ms cubic-bezier(.59,.66,0,1.71);
 
 }
+
 nav ul li a:hover {
     border-top: 10px solid white;
     color: rgba(255,255,255,0.2);
 
 }
 
-.nom_et_date{
+.nom_et_date {
     margin-right: 30px;
     text-align: right;
 }
-.form{
+
+.form {
     float: left;
     margin-left: 10%;
     margin-bottom: 30px;
 }
 
-.table_list{
+.table_list {
     border: 4px solid #330728;
     background-color: white;
     border-radius: 15px;
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
-    table-layout:fixed;
+    table-layout: fixed;
     width: 90%;
 }
-table{
+
+table {
     table-layout: fixed;
 }
+
 tr td:nth-child(1) {
     width: 20%;
 }
@@ -93,15 +102,19 @@ tr td:nth-child(2) {
 tr td:nth-child(3) {
     width: 25%;
 }
+
 tr td:nth-child(4) {
     width: 10%;
 }
+
 tr td:nth-child(5) {
     width: 10%;
 }
+
 tr td:nth-child(5) {
     width: 30%;
 }
+
 /*th {*/
 /*    color: white;*/
 /*    font-size: 25px;*/
@@ -112,18 +125,21 @@ tr td:nth-child(5) {
 /*}*/
 
 .list {
-    height:250px;
+    height: 250px;
     overflow: auto;
 }
-.list td{
+
+.list td {
     text-align: center;
     height: 30px;
     font-size: 15px;
 }
-.list_entete{
+
+.list_entete {
     padding-right: 15px;
 }
-.list_entete td{
+
+.list_entete td {
     text-align: center;
     color: white;
     font-size: 25px;
@@ -131,22 +147,111 @@ tr td:nth-child(5) {
     height: 60px;
     background-color: #330728;
 }
-a{
+
+a {
     color: #3c3f41;
     text-decoration: none;
 }
-a:hover{
+
+a:hover {
     color: #dc71c8;
 }
+.cancel_ligne_Button{
+    padding-bottom: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.cancelEvent_event, .cancelEvent_label{
+    display: flex;
+    flex-direction: row;
+    width: 28%;
+    justify-content: space-between;
+}
+#event_motif_cancelled{
+    position: relative;
+    margin: auto;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+.cancelEvent_form textarea{
+    vertical-align: middle;
+}
+.cancelEvent_form label{
 
+}
+/*.viewProfil {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    margin: 30px 33%;*/
+/*    background: white;*/
+/*    padding: 10px 50px;*/
+/*    border-radius: 15px;*/
+/*    border: 4px solid #330728;*/
+/*}*/
+.viewProfilComplet{
+    min-width: 28%;
+}
+
+.viewProfilImg{
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.viewProfil_label, .viewProfil_user{
+    display: flex;
+    flex-direction: row;
+    width: 35%;
+    justify-content: space-between;
+}
+.viewProfil_user{
+    width: 12%;
+}
+.viewProfil_ligne, .cancelEvent_ligne {
+    padding-bottom: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.viewProfil_ligne_Button{
+    padding-bottom: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.viewProfil button {
+    display: flex;
+    justify-content: space-around;
+    margin: 18px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.viewProfil_userButton{
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+    justify-content: space-between;
+}
+
+#button_alone {
+    margin: 18px 30%;
+}
+
+.imgProfil {
+    width: 150px;
+    height: auto;
+    max-width: 100%;
+
+}
 /***** update Profil ***/
-.updateProfil{
+.updateProfil, .viewProfil {
     display: flex;
     justify-content: center;
     width: 100%;
     margin-top: 20px;
 }
-.updateProfil_complet{
+
+.updateProfil_complet, .viewProfilComplet {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -157,49 +262,50 @@ a:hover{
     border-radius: 15px;
     border: 4px solid #330728;
 }
+
 .updateProfil_enTete, .updateProfil_AuDessusColumn, .updateProfil_footer {
     display: flex;
     justify-content: center;
     text-align: center;
 }
 
-.updateProfil_enTete{
+.updateProfil_enTete {
     padding-bottom: 5%;
 }
 
-.updateProfil_footer{
+.updateProfil_footer {
     padding-top: 5%;
 }
 
-.updateProfil_allColumn{
+.updateProfil_allColumn {
     display: flex;
     justify-content: space-between;
     text-align: justify;
     width: 100%;
 }
 
-.updateProfil_column{
+.updateProfil_column {
     width: 50%;
     padding: 15px;
 }
-.updateProfil_column:first-of-type{
+
+.updateProfil_column:first-of-type {
     border-right: 4px solid #330728;
 }
 
-.updateProfil input,.updateProfil textarea,.updateProfil select
-{
+.updateProfil input, .updateProfil textarea, .updateProfil select {
     margin-bottom: 1rem;
     box-sizing: border-box;
     width: 100%;
     background: #f1e3ef;
     border-radius: 5px;
 }
-.updateProfil button{
+
+.updateProfil button {
     background: #f1e3ef;
     padding: 13%;
     border-radius: 5px;
 }
-
 
 
 /*.updateProfil_ligne{*/
@@ -216,75 +322,39 @@ a:hover{
 /*}*/
 
 .register, .login, .updateMDP,
-.gestionVilles h2, .editCity, .viewProfil{
+.gestionVilles h2, .editCity, .viewProfil {
     text-align: center;
 }
+
 .register label, .login label, .updateProfil label,
-.updateMDP label, .gestionVilles label, .editCity label{
+.updateMDP label, .gestionVilles label, .editCity label {
     display: block;
 }
 
-.register input,.register textarea,.register select,
-.login input,.login textarea,.login select,
-.updateMDP input,.updateMDP textarea,.updateMDP select,
-.gestionVilles input,.gestionVilles textarea,.gestionVilles select,
-.editCity input,.editCity textarea,.editCity select
-{
+.register input, .register textarea, .register select,
+.login input, .login textarea, .login select,
+.updateMDP input, .updateMDP textarea, .updateMDP select,
+.gestionVilles input, .gestionVilles textarea, .gestionVilles select,
+.editCity input, .editCity textarea, .editCity select {
     margin-bottom: 1rem;
     box-sizing: border-box;
     width: 150px;
     max-width: 50%;
 }
 
-.viewProfil{
-    display: flex;
-    flex-direction: column;
-    margin: 30px 41%;
-    text-align: center;
-    align-content: center;
-}
-.viewProfil_label, .viewProfil_user{
-    display: flex;
-    flex-direction: row;
-    width: 45%;
-    justify-content: space-between;
-}
-.viewProfil_ligne{
-    padding-bottom: 10px;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-}
-.viewProfil button{
-    display: flex;
-    justify-content: space-around;
-    margin: 18px;
-    padding-top: 2%;
-    padding-bottom: 2%;
 
-}
-
-#button_alone{
-    margin: 18px 30%;
-}
-
-.imgProfil{
-    width: 150px;
-    height: auto;
-    max-width: 100%;
-
-}
-
-.gestionVilles{
+.gestionVilles {
     margin: 20px;
 }
-.cityForm{
+
+.cityForm {
     position: relative;
     margin: auto;
     width: 45%;
     padding-bottom: 10px;
 }
-.cityA{
+
+.cityA {
     position: relative;
     margin: auto;
     width: 45%;
@@ -314,24 +384,28 @@ table.scroll {
     border-radius: 15px;
     border: 4px solid #330728;
 }
+
 table.scroll th,
 table.scroll td,
 table.scroll tr,
 table.scroll thead,
-table.scroll tbody { display: block; }
+table.scroll tbody {
+    display: block;
+}
 
 table.scroll thead tr {
     /* fallback */
     width: 97%;
     /* minus scroll bar width */
     width: -webkit-calc(100% - 16px);
-    width:    -moz-calc(100% - 16px);
-    width:         calc(100% - 16px);
+    width: -moz-calc(100% - 16px);
+    width: calc(100% - 16px);
 }
 
-table.scroll td{
+table.scroll td {
 
 }
+
 table.scroll tr:after {
     content: ' ';
     display: block;
@@ -358,7 +432,9 @@ thead tr th {
     /*text-align: left;*/
 }
 
-tbody { border-top: 2px solid black; }
+tbody {
+    border-top: 2px solid black;
+}
 
 tbody td:last-child, thead th:last-child {
     border-right: none !important;
@@ -372,16 +448,16 @@ table.scrollUsers thead th {
 }
 
 
-
 /***** DETAIL EVENT ****/
-.detailEvent h1{
+.detailEvent h1, .detailEvent h2 {
     text-align: center;
 }
-.detailEvent{
+
+.detailEvent {
 
 }
 
-.viewEvent{
+.viewEvent {
     display: flex;
     position: relative;
     margin: auto;
@@ -394,36 +470,47 @@ table.scrollUsers thead th {
     border: 4px solid #330728;
 }
 
-.viewEvent_column{
+.viewEvent_column {
     width: 50%;
     padding: 15px;
 }
-.viewEvent_column:first-of-type{
+
+.viewEvent_column:first-of-type {
     border-right: 4px solid #330728;
 }
-.viewEvent_ligne{
+
+.viewEvent_ligne {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
-.viewEvent_label{
+
+.viewEvent_label {
     width: 40%;
 }
 
-.viewEvent_event{
+.viewEvent_event {
     width: 60%;
 }
 
 
 /***** Nav Admin ***/
-.admin_nav{
+.admin_nav {
     display: flex;
     justify-content: center;
     width: 100%;
     font-size: 20px;
-
+    margin-top: 20px;
 }
-.admin_nav ul{
+
+#admin_nav_petit {
+    background: white;
+    padding: 10px 50px;
+    border-radius: 15px;
+    border: 4px solid #330728;
+}
+
+.admin_nav ul {
     padding-left: 30%;
 }
 
@@ -432,7 +519,7 @@ table.scrollUsers thead th {
 
 
 /****** CREATE EVENT ******/
-.modal{
+.modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -445,7 +532,7 @@ table.scrollUsers thead th {
     animation: fadeIn 1.5s both;
 }
 
-.modal-wrapper{
+.modal-wrapper {
     border-radius: 25px;
     overflow: auto;
     width: 600px;
@@ -466,23 +553,39 @@ table.scrollUsers thead th {
 }
 
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeOut {
-    from {opacity: 1;}
-    to {opacity: 0;}
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 @keyframes slideFromTop {
-    from {transform: translateY(-200px);}
-    to {transform: translateY(0);}
+    from {
+        transform: translateY(-200px);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
 
 @keyframes slideToBottom {
-    from {transform: translateY(0);}
-    to {transform: translateY(200px);}
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(200px);
+    }
 }
 
 .create-event h1 {
@@ -534,6 +637,7 @@ table.scrollUsers thead th {
 .create-event label {
     width: 40%;
 }
+
 /************************************/
 
 /****** FLASH MESSAGES ******/
@@ -554,4 +658,5 @@ table.scrollUsers thead th {
 .flash-danger {
     background-color: darkred;
 }
+
 /************************************/
