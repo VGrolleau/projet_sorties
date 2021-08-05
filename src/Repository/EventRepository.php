@@ -6,6 +6,7 @@ namespace App\Repository;
 use App\Data\SeachData;
 use App\Entity\Event;
 use App\Entity\EventState;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -31,6 +32,7 @@ class EventRepository extends ServiceEntityRepository
 //        $date = \DateTime::createFromFormat('Y-m-d H:i:s', strtotime('now'));
 //        $date = new \DateTime();
         $eventState = 'EventState::class';
+
         $queryBuilder = $this->createQueryBuilder('s');
         $queryBuilder = $queryBuilder
                     ->leftJoin('s.eventState', 's_estat')
@@ -46,10 +48,16 @@ class EventRepository extends ServiceEntityRepository
                 ->setParameter('campus', $seachData->campus);
         }
 
-        if (!empty($seachData->q)){
+        if (!empty($seachData->start_Date)){
             $queryBuilder = $queryBuilder
-                ->andWhere('s.name LIKE :q')
-                ->setParameter('q', "%{$seachData->q}%");
+                ->andWhere('s.startDate >= :start_Date')
+                ->setParameter('start_Date', $seachData->start_Date);
+        }
+
+        if (!empty( $seachData->end_Date)){
+            $queryBuilder = $queryBuilder
+                ->andWhere('s.startDate <= :end_Date')
+                ->setParameter('end_Date', $seachData->end_Date);
         }
 
         if (!empty($seachData->sorties4)){

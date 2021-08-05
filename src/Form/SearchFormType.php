@@ -38,16 +38,16 @@ class SearchFormType extends AbstractType
                 'html5' => true,
                 'widget' => 'single_text',
                 'label' => 'Entre :',
-                'data'   => new \DateTime(),
-                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+                'data'   => new \DateTime('now',new \DateTimeZone('europe/paris')),
+                'attr'   => ['start_Date' => ( new \DateTime() )->format('d-m-Y H:i')],
             ])
 
             ->add('end_Date', DateTimeType::class,[
                 'html5' => true,
                 'widget' => 'single_text',
                 'label' => 'et',
-                'data'   => new \DateTime(),
-                'attr'   => ['min' => ( new \DateTime() )->format('d-m-Y H:i')]
+                'data'   => new \DateTime('now',new \DateTimeZone('europe/paris')),
+                'attr'   => ['end_Date' => ( new \DateTime() )->format('d-m-Y H:i')]
             ])
 
             ->add('sorties', CheckboxType::class, [
