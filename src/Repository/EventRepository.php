@@ -68,9 +68,10 @@ class EventRepository extends ServiceEntityRepository
         }
 
         if (!empty($seachData->sorties2)){
+            $expr = $queryBuilder->expr();
             $userId = $user->getId();
             $queryBuilder = $queryBuilder
-                ->andWhere('s_users.id = :userId')
+                ->andWhere($expr->neq('s_users.id', ':userId'))
                 ->setParameter('userId', $userId);
         }
 

@@ -29,9 +29,9 @@ class SortiesController extends AbstractController
     public function home_redirect() {
         $user = $this->getUser();
         if ($user) {
-            return new RedirectResponse('/~wahac/sorties/public/sorties_home');
+            return new RedirectResponse('/projet_sorties/public/sorties_home');
         } else {
-            return new RedirectResponse('/sorties/public/login');
+            return new RedirectResponse('/projet_sorties/public/login');
         }
     }
 
@@ -111,9 +111,63 @@ class SortiesController extends AbstractController
     /**
      * @Route("/sorties/edit/{id}", name="sorties_edit")
      */
-    public function edit(int $id): Response
+    public function edit(
+        int $id,
+        Request $request,
+        EventRepository $eventRepository,
+        EntityManagerInterface $entityManager
+    ): Response
     {
-        return $this->render('sorties/edit.html.twig');
+        $btName = $request->get( 'button' );
+        $user = $this->getUser();
+        $event = $eventRepository->find($id);
+        $event->setCreationDate(new \DateTime());
+        $event->setOrganizer($user);
+        $eventForm = $this->createForm(CreateEventType::class, $event);
+        $eventForm->handleRequest($request);
+        $locationForm = $this->createForm(LocationType::class);
+        $cityForm = $this->createForm(CityType::class);
+        $eventRepo = $eventRepository->findInfosCreate();
+
+        if ($eventForm->isSubmitted()) {
+            //séparé en 2 if pour pouvoir faire le refresh si le form n'est pas valide
+            if ($eventForm->get('publish')->isClicked() && $eventForm->isValid() ) {
+                $eventState = $this->getDoctrine()
+                    ->getRepository(EventState::class)
+                    ->findOneBy(['name' => 'Ouvert']);
+                $event-> setEventState($eventState);
+                $entityManager->persist($event);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
+
+                $this->addFlash('success', 'Sortie publiée !');
+                return $this->redirectToRoute('sorties_home');
+            } else {
+                $this->addFlash('danger', 'Sortie non publiée !');
+            }
+
+            if ($eventForm->get('registerEvent')->isClicked() && $eventForm->isValid() ) {
+                $eventState = $this->getDoctrine()
+                    ->getRepository(EventState::class)
+                    ->findOneBy(['name' => 'Créé']);
+                $event-> setEventState($eventState);
+                $entityManager->persist($event);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
+
+                $this->addFlash('success', 'Sortie enregistrée !');
+                return $this->redirectToRoute('sorties_home');
+            } else {
+                $this->addFlash('danger', 'Sortie non enregistrée !');
+            }
+        }
+
+        return $this->render('sorties/edit.html.twig', [
+            'eventForm' => $eventForm->createView(),
+            'locationForm' => $locationForm->createView(),
+            'cityForm' => $cityForm->createView(),
+            'eventRepo' => $eventRepo
+        ]);
     }
 
     /**

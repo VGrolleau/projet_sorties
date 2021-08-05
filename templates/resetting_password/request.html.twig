@@ -4,12 +4,18 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Mot de passe oublié ?</h1>
-    <p>Demandez à réinitialiser votre mot de passe en renseignant votre mail.</p>
+    <div>
+        <div class="mdpOublie">
+            <div class="mdpOublieComplet">
+                <h1>Mot de passe oublié ?</h1>
+                <p>Demandez à réinitialiser votre mot de passe en renseignant votre mail.</p>
 
-    {{form_start(form)}}
-    {{form_row(form.email)}}
-    <button  type="submit">Envoyer</button>
-    {{form_end(form)}}
+                {{ form_start(form) }}
+                {{ form_row(form.email) }}
+                <button type="submit">Envoyer</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
