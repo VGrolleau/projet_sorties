@@ -2,8 +2,8 @@
 
 body {
     background: #f1e3ef;
-    font-family: 'Bebas Neue', cursive;
-    font-family: 'Krona One', sans-serif;
+    /*font-family: 'Bebas Neue', cursive;*/
+    /*font-family: 'Krona One', sans-serif;*/
     font-family: 'Staatliches', cursive;
     color: #4b063a;
 }
@@ -24,7 +24,7 @@ header img {
     transition: all 0.5s cubic-bezier(.59,.66,0,1.71);
 }
 
-nav ul {
+/*nav ul {*/
 header img:hover{
     -webkit-transform:  rotate(-5deg);
     transform: rotate(-5deg);
@@ -50,10 +50,10 @@ nav ul li a {
     color: rgba(255,255,255,1);
     text-decoration: none;
     text-align: center;
-    padding: 15px 20px 0px 20px;
+    padding: 15px 20px 0 20px;
     margin: 70px 20px 10px 20px;
     border-radius: 10px;
-    border-top: 0px solid white;
+    border-top: 0 solid white;
     opacity: 1;
     transition: color, border-top-width 200ms cubic-bezier(.59,.66,0,1.71);
 
@@ -62,58 +62,102 @@ nav ul li a {
 nav ul li a:hover {
     border-top: 10px solid white;
     color: rgba(255,255,255,0.2);
+}
 
+.form-nom-home {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 5%;
+    height: 150px;
+}
+
+.form-home{
+    width: 40%;
+    height: inherit;
+}
+
+.form-home form {
+    display: flex;
+    justify-content: space-between;
+    height: inherit;
+}
+
+.check-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.search-date-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.search-date-home div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*.search-date-home label {*/
+/*    width: 30%;*/
+/*}*/
+
+#campus {
+    width: 100%;
+    background-color: white;
+}
+
+#q {
+    width: 100%;
+}
+
+.form-home button {
+    padding: 5%;
 }
 
 .nom_et_date {
-    margin-right: 30px;
+    width: 20%;
     text-align: right;
 }
 
-.form {
-    float: left;
-    margin-left: 10%;
-    margin-bottom: 30px;
+.nom_et_date h1 {
+    margin-top: 0;
 }
 
-.table_list {
-    border: 4px solid #330728;
-    background-color: white;
-    border-radius: 15px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px;
+.scroll.table_list {
+    width: 80%;
     table-layout: fixed;
-    width: 90%;
 }
 
 table {
     table-layout: fixed;
 }
 
-tr td:nth-child(1) {
-    width: 20%;
-}
+/*tr td:nth-child(1) {*/
+/*    width: 20%;*/
+/*}*/
 
-tr td:nth-child(2) {
-    width: 10%;
-}
+/*tr td:nth-child(2) {*/
+/*    width: 10%;*/
+/*}*/
 
-tr td:nth-child(3) {
-    width: 25%;
-}
+/*tr td:nth-child(3) {*/
+/*    width: 25%;*/
+/*}*/
 
-tr td:nth-child(4) {
-    width: 10%;
-}
+/*tr td:nth-child(4) {*/
+/*    width: 10%;*/
+/*}*/
 
-tr td:nth-child(5) {
-    width: 10%;
-}
+/*tr td:nth-child(5) {*/
+/*    width: 10%;*/
+/*}*/
 
-tr td:nth-child(5) {
-    width: 30%;
-}
+/*tr td:nth-child(5) {*/
+/*    width: 30%;*/
+/*}*/
 
 /*th {*/
 /*    color: white;*/
@@ -124,37 +168,41 @@ tr td:nth-child(5) {
 /*    height: 60px;*/
 /*}*/
 
-.list {
-    height: 250px;
-    overflow: auto;
-}
+/*.fixedHeader.list_entete {*/
+/*    padding-right: 15px;*/
+/*}*/
 
-.list td {
-    text-align: center;
-    height: 30px;
-    font-size: 15px;
-}
-
-.list_entete {
-    padding-right: 15px;
-}
-
-.list_entete td {
+.fixedHeader.list_entete > tr > th {
     text-align: center;
     color: white;
     font-size: 25px;
     padding: 0 5px 0 5px;
     height: 60px;
     background-color: #330728;
+    width: 11.75%;
+}
+
+.scrollContent.list {
+    height: 250px;
+    overflow: auto;
+}
+
+.scrollContent.list td {
+    text-align: center;
+    height: 30px;
+    font-size: 15px;
+    width: 12.27%;
 }
 
 a {
-    color: #3c3f41;
+    color: #dc71c8;
+    /*color: #330728;*/
     text-decoration: none;
 }
 
 a:hover {
-    color: #dc71c8;
+    color: #330728;
+    /*color: #dc71c8;*/
 }
 .cancel_ligne_Button{
     padding-bottom: 10px;
@@ -588,6 +636,16 @@ table.scrollUsers thead th {
     }
 }
 
+.create-event {
+    position: relative;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid #330728;
+    width: 50%;
+}
+
 .create-event h1 {
     text-align: center;
 }
@@ -636,6 +694,45 @@ table.scrollUsers thead th {
 
 .create-event label {
     width: 40%;
+}
+
+button,
+select,
+.flatpickrDateTime,
+.flatpickrDate {
+    cursor: pointer;
+}
+
+select,
+.create-event textarea,
+.create-event input {
+    background: #f1e3ef;
+    border-radius: 5px;
+}
+
+button {
+    background: #f1e3ef;
+    padding: 13%;
+    border-radius: 5px;
+}
+
+button a {
+    color: inherit;
+}
+
+.btn-div-create {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.btn-div-create > div {
+    width: 25%;
+}
+
+.btn-div-create button {
+    width: 100%;
+    height: 70px;
 }
 
 /************************************/

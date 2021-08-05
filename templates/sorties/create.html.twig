@@ -12,10 +12,10 @@
                 <div class="el-div-form">
                     {{form_row(eventForm.name)}}
                 </div>
-                <div class="el-div-form">
+                <div class="el-div-form date-time-div">
                     {{form_row(eventForm.startDate)}}
                 </div>
-                <div class="el-div-form">
+                <div class="el-div-form date-time-div">
                     {{form_row(eventForm.registrationLimitDate)}}
                 </div>
                 <div class="el-div-form">
@@ -67,10 +67,14 @@
             </div>
         </div>
 
-        <div>
+        <div class="btn-div-create">
             {{ form_row(eventForm.publish) }}
             {{ form_row(eventForm.registerEvent) }}
-            <button><a href="{{ path('sorties_home') }}">Annuler !</a></button>
+            <div>
+                <button>
+                    <a href="{{ path('sorties_home') }}">Annuler !</a>
+                </button>
+            </div>
         </div>
         {{form_end(eventForm)}}
 

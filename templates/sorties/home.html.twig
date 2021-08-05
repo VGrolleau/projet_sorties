@@ -3,21 +3,23 @@
 {% block title %}Hello SortiesController!{% endblock %}
 
 {% block body %}
-    <div class="form">
-        {% include 'sorties/filter.html.twig' with {form: form} only %}
+    <div class="form-nom-home">
+        <div class="form-home">
+            {% include 'sorties/filter.html.twig' with {form: form} only %}
 
-        {% if form.sorties.vars.data == '0' %}
-            <p>print 0</p>
-        {% else %}
-            <p>print 1</p>
-        {% endif %}
-    </div>
-    <div class="nom_et_date">
-        <h1> Date du jour : {{ "now" |date('d/m/Y') }}</h1>
-        <h1> Participant: {{ app.user.username }}</h1>
+{#            {% if form.sorties.vars.data == '0' %}#}
+{#                <p>print 0</p>#}
+{#            {% else %}#}
+{#                <p>print 1</p>#}
+{#            {% endif %}#}
+        </div>
+        <div class="nom_et_date">
+            <h1> Date du jour : {{ "now" |date('d/m/Y') }}</h1>
+            <h1> Participant: {{ app.user.username }}</h1>
+        </div>
     </div>
     <div id="tableContainer" class="tableContainer">
-        <table class="scroll">
+        <table class="scroll table_list">
             <thead class="fixedHeader list_entete">
             <tr class="alternateRow ">
                 {# class="list_entete" #}
