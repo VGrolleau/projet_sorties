@@ -29,7 +29,7 @@ class SortiesController extends AbstractController
     public function home_redirect() {
         $user = $this->getUser();
         if ($user) {
-            return new RedirectResponse('/sorties/public/sorties_home');
+            return new RedirectResponse('/~wahac/sorties/public/sorties_home');
         } else {
             return new RedirectResponse('/sorties/public/login');
         }
@@ -40,11 +40,12 @@ class SortiesController extends AbstractController
      */
     public function home(EventRepository $eventRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
         $date = new \DateTime('now',new \DateTimeZone('europe/paris'));
         $data = new SeachData();
         $form = $this->createForm(SearchFormType::class, $data);
         $form ->handleRequest($request);
-        $events = $eventRepository->findSearch($data);
+        $events = $eventRepository->findSearch($data, $user);
         foreach($events as $event) {
             $eventState = $event->getEventState();
             if ($eventState != 'Annulé' || $eventState != 'Créé'){
