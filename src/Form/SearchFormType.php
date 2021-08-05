@@ -4,7 +4,6 @@
 namespace App\Form;
 
 
-use App\Data\LocationData;
 use App\Data\SeachData;
 use App\Entity\Campus;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -35,19 +34,19 @@ class SearchFormType extends AbstractType
                 ])
 
             ->add('start_Date', DateTimeType::class,[
-                'html5' => true,
-                'widget' => 'single_text',
                 'label' => 'Entre :',
-                'data'   => new \DateTime('now',new \DateTimeZone('europe/paris')),
-                'attr'   => ['start_Date' => ( new \DateTime() )->format('d-m-Y H:i')],
+                'html5' => false,
+                'widget' => 'single_text',
+                'attr' => ['class' => 'flatpickrDateTime'],
+                'format' => 'dd/MM/yyyy HH:ss'
             ])
 
             ->add('end_Date', DateTimeType::class,[
-                'html5' => true,
-                'widget' => 'single_text',
                 'label' => 'et',
-                'data'   => new \DateTime('now',new \DateTimeZone('europe/paris')),
-                'attr'   => ['end_Date' => ( new \DateTime() )->format('d-m-Y H:i')]
+                'html5' => false,
+                'widget' => 'single_text',
+                'attr' => ['class' => 'flatpickrDateTime'],
+                'format' => 'dd/MM/yyyy HH:ss'
             ])
 
             ->add('sorties', CheckboxType::class, [

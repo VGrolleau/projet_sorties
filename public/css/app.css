@@ -8,12 +8,57 @@ body {
     color: #4b063a;
 }
 
+button,
+[type="submit"] {
+    background: #f1e3ef;
+    padding: 5%;
+    border-radius: 5px;
+    transition: all .1s ease;
+}
+
+[type="submit"] {
+    padding: 1%;
+}
+
+button:hover {
+    /*background: #e3d7df;*/
+    background: #330728;
+    color: #f1e3ef;
+    transition: all .1s ease;
+}
+
+button a {
+    /*background: #f1e3ef;*/
+    color: inherit;
+    transition: all .1s ease;
+}
+
+button a:hover {
+    /*background: #330728;*/
+    color: inherit;
+    transition: all .1s ease;
+}
+
+footer {
+    position: fixed;
+    bottom: 5px;
+    left: calc(50% - 45px);
+}
+/************************************/
+
+
+/****** HEADER ******/
 header {
     background: linear-gradient(180deg, #4b063a 0%, #330728 100%);
     margin: auto;
     padding: 20px;
     height: 80px;
     border-bottom: 40px solid #4b063a;
+    display: flex;
+}
+
+header h1 {
+    width: 20%;
 }
 
 header img {
@@ -24,10 +69,13 @@ header img {
     transition: all 0.5s cubic-bezier(.59,.66,0,1.71);
 }
 
-/*nav ul {*/
 header img:hover{
     -webkit-transform:  rotate(-5deg);
     transform: rotate(-5deg);
+}
+
+nav {
+    width: 80%;
 }
 
 nav ul{
@@ -41,7 +89,6 @@ nav ul{
 
 nav ul li{
     margin-right: 2%;
-
 }
 
 nav ul li a {
@@ -56,7 +103,6 @@ nav ul li a {
     border-top: 0 solid white;
     opacity: 1;
     transition: color, border-top-width 200ms cubic-bezier(.59,.66,0,1.71);
-
 }
 
 nav ul li a:hover {
@@ -64,6 +110,24 @@ nav ul li a:hover {
     color: rgba(255,255,255,0.2);
 }
 
+@media screen and (max-width: 960px) {
+    header {
+        height: 40px;
+    }
+
+    header img {
+        height: 50px;
+    }
+
+    nav ul li a {
+        margin-top: 25px;
+        margin-right: 0;
+    }
+}
+/************************************/
+
+
+/****** HOME ******/
 .form-nom-home {
     display: flex;
     justify-content: space-between;
@@ -173,13 +237,15 @@ table {
 /*}*/
 
 .fixedHeader.list_entete > tr > th {
-    text-align: center;
     color: white;
     font-size: 25px;
     padding: 0 5px 0 5px;
     height: 60px;
     background-color: #330728;
     width: 11.75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .scrollContent.list {
@@ -188,10 +254,18 @@ table {
 }
 
 .scrollContent.list td {
-    text-align: center;
+    /*text-align: center;*/
     height: 30px;
     font-size: 15px;
     width: 12.27%;
+    border-right: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scrollContent.list td img {
+    height: 30px;
 }
 
 a {
@@ -204,6 +278,20 @@ a:hover {
     color: #330728;
     /*color: #dc71c8;*/
 }
+
+.div-btn-create-event {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-create-event {
+    padding: 1%;
+}
+/************************************/
+
+
+/****** CANCEL EVENT ******/
 .cancel_ligne_Button{
     padding-bottom: 10px;
     display: flex;
@@ -229,6 +317,10 @@ a:hover {
 .cancelEvent_form label{
 
 }
+/************************************/
+
+
+/****** VIEW PROFILE ******/
 /*.viewProfil {*/
 /*    display: flex;*/
 /*    flex-direction: column;*/
@@ -291,7 +383,10 @@ a:hover {
     max-width: 100%;
 
 }
-/***** update Profil ***/
+/************************************/
+
+
+/****** UPDATE PROFIL ******/
 .updateProfil, .viewProfil {
     display: flex;
     justify-content: center;
@@ -403,9 +498,13 @@ a:hover {
 }
 
 .cityA {
-    position: relative;
-    margin: auto;
-    width: 45%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-cityA {
+    padding: 1%;
 }
 
 /*::-webkit-scrollbar {*/
@@ -494,9 +593,10 @@ table.scrollUsers thead th {
     float: left;
     border-right: 1px solid black;
 }
+/************************************/
 
 
-/***** DETAIL EVENT ****/
+/****** DETAIL EVENT ******/
 .detailEvent h1, .detailEvent h2 {
     text-align: center;
 }
@@ -561,8 +661,6 @@ table.scrollUsers thead th {
 .admin_nav ul {
     padding-left: 30%;
 }
-
-
 /************************************/
 
 
@@ -643,7 +741,7 @@ table.scrollUsers thead th {
     padding: 20px;
     border-radius: 15px;
     border: 4px solid #330728;
-    width: 50%;
+    width: 30%;
 }
 
 .create-event h1 {
@@ -708,16 +806,6 @@ select,
 .create-event input {
     background: #f1e3ef;
     border-radius: 5px;
-}
-
-button {
-    background: #f1e3ef;
-    padding: 13%;
-    border-radius: 5px;
-}
-
-button a {
-    color: inherit;
 }
 
 .btn-div-create {

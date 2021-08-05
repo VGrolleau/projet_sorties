@@ -27,7 +27,7 @@ class EventRepository extends ServiceEntityRepository
      * @param SeachData $seachData
      * @return Event[]
      */
-    public function findSearch(SeachData $seachData): array
+    public function findSearch(SeachData $seachData, User $user): array
     {
 //        $date = \DateTime::createFromFormat('Y-m-d H:i:s', strtotime('now'));
 //        $date = new \DateTime();
@@ -54,11 +54,56 @@ class EventRepository extends ServiceEntityRepository
                 ->setParameter('start_Date', $seachData->start_Date);
         }
 
-        if (!empty( $seachData->end_Date)){
+        if (!empty($seachData->end_Date)){
             $queryBuilder = $queryBuilder
                 ->andWhere('s.startDate <= :end_Date')
                 ->setParameter('end_Date', $seachData->end_Date);
         }
+
+        if (!empty($seachData->sorties)){
+            $userId = $user->getId();
+            $queryBuilder = $queryBuilder
+                ->andWhere('s.organizer = :userId')
+                ->setParameter('userId', $userId);
+        }
+
+        if (!empty($seachData->sorties2)){
+            $userId = $user->getId();
+            $queryBuilder = $queryBuilder
+                ->andWhere('s_users.id = :userId')
+                ->setParameter('userId', $userId);
+        }
+
+        if (!empty($seachData->sorties3)){
+            $userId = $user->getId();
+            $queryBuilder = $queryBuilder
+                ->andWhere('s_estat.name like \'Ouvert\'')
+                ->andWhere('s_users.id != :userId')
+                ->setParameter('userId', $userId);
+        }
+
+//        if ($criteria->getUserNoParticipant() === true) {
+//            $userNoParticipant = $user->getId();
+//            $qb2 = $this->createQueryBuilder('q');
+//            $qb2->select('q.id');
+//            $qb2->innerJoin('q.users', 'k', 'q.id = k.event_id');
+//            $qb2->andWhere('k.id = :userId')
+//                ->setParameter ('userId', $userNoParticipant);
+//            // Exclut les events organisés par le user
+//            $qb->andWhere('f.planner <> :userId')
+//                ->setParameter ('userId', $userNoParticipant);
+//            // On effectue une sous requête qui nous permet d'exclure les résultats de celle-ci (et donc les events
+//            // auquel l'user participe, et par déduction on va avoir ceux auxquels il ne participe pas
+//            $qb->andWhere($qb->expr()->notIn ('f.id', $qb2->getDQL()));
+//            // On récupère les events ouverts
+//            $qb->andWhere("f.stateEvent = 32");
+//        }
+
+//        if (!empty($seachData->sorties4)){
+//            $queryBuilder = $queryBuilder
+//                ->andWhere('s.eventState = 23');
+//            // changer l'id
+//        }
 
         if (!empty($seachData->sorties4)){
             $queryBuilder = $queryBuilder
