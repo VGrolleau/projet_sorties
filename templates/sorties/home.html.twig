@@ -3,81 +3,84 @@
 {% block title %}Hello SortiesController!{% endblock %}
 
 {% block body %}
-       <div class="form">
-            {% include 'sorties/filter.html.twig' with {form: form} only %}
-        </div>
+    <div class="form">
+        {% include 'sorties/filter.html.twig' with {form: form} only %}
+
+        {% if form.sorties.vars.data == '0' %}
+            <p>print 0</p>
+        {% else %}
+            <p>print 1</p>
+        {% endif %}
+    </div>
     <div class="nom_et_date">
         <h1> Date du jour : {{ "now" |date('d/m/Y') }}</h1>
         <h1> Participant: {{ app.user.username }}</h1>
     </div>
-                <table class="table_list">
-                    <tr>
-                        <td>
-                            <table class="list_entete" >
-                                <tr>
-                                    <td> Event name</td>
-                                    <td> Start Date</td>
-                                    <td> Limite date</td>
-                                    <td> Registre/Max</td>
-                                    <td> State</td>
-                                    <td> Registered </td>
-                                    <td> Organizere</td>
-                                    <td> Action</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="list" >
-                                <table>
-                                    {% for event in events %}
-                                        {% if  "now" |date('d/m/Y') < event.startDate|date_modify("+1 month")|date("d/m/Y") %}
-                                        {% if  event.eventState.name != 'Créé' or app.user == event.organizer %}
-                                            <tr>
-                                                <td> {{ event.name | upper }}</td>
-                                                <td> {{ event.startDate |date('d/m/Y H:i')}} </td>
-                                                <td> {{ event.registrationLimitDate |date('d/m/Y')}}</td>
-                                                <td>{{ event.users|length }} / {{ event.maxRegistrations }}</td>
-                                                <td>{{ event.eventState.name }}</td>
-                                                <td>
-                                                    {% for user in event.users %}
-                                                    {% if  app.user.id is same as(user.id) %}
-                                                        ✅
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </td>
-                                                <td><a href="{{ path('user_details',{'id': event.organizer.id}) }}">{{ event.organizer.username }}</a></td>
-                                                <td> <a href="{{ path('sorties_detail',{'id': event.id}) }}">Afficher</a>
-                                                        {% if  event.eventState.name == 'Ouvert' or event.eventState.name == 'Fermé' %}
-                                                            {% set booleanEvent = false %}
-                                                            {% for u in event.users %}
-                                                                {% if app.user.id is same as(u.id) %}
-                                                                    {% set booleanEvent = true %}
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                            {% if booleanEvent %}
-                                                                <a href="{{ path('sorties_unsubscribe', {'id': event.id, 'user': app.user.id}) }}">se désister</a>
-                                                            {% elseif event.eventState.name == 'Ouvert' %}
-                                                                   <a href="{{ path('sorties_register', {'id': event.id, 'user': app.user.id}) }}">s'inscrire</a>
-                                                            {% endif %}
-                                                        {% endif %}
-                                                    {% if app.user == event.organizer and  event.eventState.name == 'Ouvert' or  is_granted('ROLE_ADMIN') and  event.eventState.name == 'Ouvert' %}
-                                                            <a href="{{ path('sorties_canceled', {'id': event.id}) }}">Annuler</a>
-                                                    {% endif %}
-                                                    {% if  app.user == event.organizer and event.eventState.name == 'Créé' %}
-                                                        <a href="{{ path('sorties_edit',{'id': event.id}) }}">Modifer</a>
-                                                        <a href="{{ path('sorties_publish', {'id': event.id}) }}">Publier</a>
-                                                    {% endif %}
-                                                </td>
-                                            </tr>
-                                        {% endif %}
+    <div id="tableContainer" class="tableContainer">
+        <table class="scroll">
+            <thead class="fixedHeader list_entete">
+            <tr class="alternateRow ">
+                {# class="list_entete" #}
+                <th> Nom de l'event</th>
+                <th> Début</th>
+                <th> Date limite</th>
+                <th> Inscription/Max</th>
+                <th> état</th>
+                <th> Inscrit</th>
+                <th> Organisateur</th>
+                <th> Action</th>
+            </tr>
+            </thead>
+            {# <div class="list" > #}
+            <tbody class="scrollContent list">
+            {% for event in events %}
+                {% if  "now" |date('d/m/Y') < event.startDate|date_modify("+1 month")|date("d/m/Y") %}
+                    {% if  event.eventState.name != 'Créé' or app.user == event.organizer %}
+                        <tr>
+                            <td> {{ event.name | upper }}</td>
+                            <td> {{ event.startDate |date('d/m/Y H:i') }} </td>
+                            <td> {{ event.registrationLimitDate |date('d/m/Y') }}</td>
+                            <td>{{ event.users|length }} / {{ event.maxRegistrations }}</td>
+                            <td>{{ event.eventState.name }}</td>
+                            <td>
+                                {% for user in event.users %}
+                                    {% if  app.user.id is same as(user.id) %}
+                                        ✅
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{{ path('user_details',{'id': event.organizer.id}) }}">{{ event.organizer.username }}</a>
+                            </td>
+                            <td><a href="{{ path('sorties_detail',{'id': event.id}) }}">Afficher</a>
+                                {% if  event.eventState.name == 'Ouvert' or event.eventState.name == 'Fermé' %}
+                                    {% set booleanEvent = false %}
+                                    {% for u in event.users %}
+                                        {% if app.user.id is same as(u.id) %}
+                                            {% set booleanEvent = true %}
                                         {% endif %}
                                     {% endfor %}
-                                </table>
-                            </div>
-                        </td>
-                   </tr>
-                </table>
+                                    {% if booleanEvent %}
+                                        <a href="{{ path('sorties_unsubscribe', {'id': event.id, 'user': app.user.id}) }}">se
+                                            désister</a>
+                                    {% elseif event.eventState.name == 'Ouvert' %}
+                                        <a href="{{ path('sorties_register', {'id': event.id, 'user': app.user.id}) }}">s'inscrire</a>
+                                    {% endif %}
+                                {% endif %}
+                                {% if app.user == event.organizer and  event.eventState.name == 'Ouvert' or  is_granted('ROLE_ADMIN') and  event.eventState.name == 'Ouvert' %}
+                                    <a href="{{ path('sorties_canceled', {'id': event.id}) }}">Annuler</a>
+                                {% endif %}
+                                {% if  app.user == event.organizer and event.eventState.name == 'Créé' %}
+                                    <a href="{{ path('sorties_edit',{'id': event.id}) }}">Modifer</a>
+                                    <a href="{{ path('sorties_publish', {'id': event.id}) }}">Publier</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <a href="{{ path('sorties_create') }}" title="Create event">Create event</a>
 {% endblock %}

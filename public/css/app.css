@@ -19,39 +19,50 @@ header {
 header img {
     height: 100px;
     float: left;
-    margin: 0 0 0 250px;
+    margin-left: 5%;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s cubic-bezier(.59,.66,0,1.71);
 }
 
 nav ul {
+header img:hover{
+    -webkit-transform:  rotate(-5deg);
+    transform: rotate(-5deg);
+}
+
+nav ul{
     padding: 0;
     margin: 0;
     list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
 }
 
-nav ul li {
-    margin-right: 10px;
-    float: right;
+nav ul li{
+    margin-right: 2%;
+
 }
 
 nav ul li a {
     font-size: 25px;
-    display: block;
-    float: right;
-    color: white;
+    display: inline-block;
+    color: rgba(255,255,255,1);
     text-decoration: none;
     text-align: center;
-    padding: 15px 20px 5px 20px;
+    padding: 15px 20px 0px 20px;
     margin: 70px 20px 10px 20px;
     border-radius: 10px;
     border-top: 0px solid white;
     opacity: 1;
-    transition: opacity, border-top-width 200ms ease 0s;
+    transition: color, border-top-width 200ms cubic-bezier(.59,.66,0,1.71);
 
 }
 
 nav ul li a:hover {
     border-top: 10px solid white;
-    opacity: 0.4;
+    color: rgba(255,255,255,0.2);
+
 }
 
 .nom_et_date {

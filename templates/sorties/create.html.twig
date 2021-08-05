@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="create-event">
-        <h1>Create {{ parent() }} ✅</h1>
+        <h1>Créer une sortie {{ parent() }} ✅</h1>
 
         {{form_start(eventForm)}}
         <div class="global-div-form">
@@ -42,12 +42,7 @@
 {#                    {{ form_widget(eventForm.location) }}#}
 {#                    {{ form_errors(eventForm.location) }}#}
     {#                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#locationModal">+</button>#}
-    {#                <a href="#locationModal" class="js-modal">Ouvrir modale avec ajax</a>#}
                 </div>
-
-{#                <div class="el-div-form">#}
-{#                    {{ form_row(eventForm.eventState) }}#}
-{#                </div>#}
 
     {#            <div>#}
     {#                <label for="street-select">Rue :</label>#}
@@ -73,32 +68,25 @@
         </div>
 
         <div>
-{#            <input type="submit" name="button" id="btn-publish" value="Publier la sortie" />#}
-{#            <input type="submit" name="button" id="btn-register" value="Enregistrer" />#}
-{#            <input type="reset" name="button" value="Annuler" />#}
-{#            {% for ev in eventRepo %}#}
-{#                <a role="button" href="{{ path('sorties_publish',{'id': ev.eventState.id}) }}">Publier la sortie</a>#}
-{#                <a role="button" href="{{ path('sorties_register_event',{'id': ev.eventState.id}) }}">Enregistrer</a>#}
-{#            {% endfor %}#}
             {{ form_row(eventForm.publish) }}
             {{ form_row(eventForm.registerEvent) }}
-            {{ form_row(eventForm.cancelEvent) }}
+            <button><a href="{{ path('sorties_home') }}">Annuler !</a></button>
         </div>
         {{form_end(eventForm)}}
 
         {# fenêtre modale, cachée par défaut, sera affichée au clic sur le + #}
-        <div id="locationModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal" style="display: none">
-            <div class="modal-wrapper js-modal-stop" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="title-modal" id="locationModalLabel">Ajouter un nouveau lieu de sortie</h5>
-                        <button class="js-modal-close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        {{ form_start(locationForm, {'attr' : {'id': 'location_form'}}) }}
-                        {{ form_widget(locationForm) }}
+{#        <div id="locationModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal" style="display: none">#}
+{#            <div class="modal-wrapper js-modal-stop" role="document">#}
+{#                <div class="modal-content">#}
+{#                    <div class="modal-header">#}
+{#                        <h5 class="title-modal" id="locationModalLabel">Ajouter un nouveau lieu de sortie</h5>#}
+{#                        <button class="js-modal-close" aria-label="Close">#}
+{#                            <span aria-hidden="true">&times;</span>#}
+{#                        </button>#}
+{#                    </div>#}
+{#                    <div class="modal-body">#}
+{#                        {{ form_start(locationForm, {'attr' : {'id': 'location_form'}}) }}#}
+{#                        {{ form_widget(locationForm) }}#}
 {#                        {{ form_row(locationForm.city) }}#}
 {#                        <div>#}
 {#                            <label for="city-select">Ville :</label>#}
@@ -108,99 +96,126 @@
 {#                                {% endfor %}#}
 {#                            </select>#}
 {#                        </div>#}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">GO</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    </div>
-                    {{ form_end(locationForm) }}
-                </div>
-            </div>
-        </div>
+{#                    </div>#}
+{#                    <div class="modal-footer">#}
+{#                        <button type="submit" class="btn btn-primary">GO</button>#}
+{#                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>#}
+{#                    </div>#}
+{#                    {{ form_end(locationForm) }}#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
     </div>
 {% endblock %}
 
 {% block js %}
     <script>
-        /**
-         * Ce code gère la soumission du formulaire de la modale en ajax
-         */
-        let modal = null;
-        const focusableSelector = 'button, a, input, textarea';
-        let focusables = [];
-        let previouslyFocusedElement = null;
-
-        const openModal = async function (e) {
-            e.preventDefault();
-            const target = e.target.getAttribute('href');
-            modal = await loadModal(target);
-            focusables = Array.from(modal.querySelectorAll(focusableSelector));
-            previouslyFocusedElement = document.querySelector(':focus');
-            modal.style.display = null;
-            focusables[0].focus();
-            modal.removeAttribute('aria-hidden');
-            modal.setAttribute('aria-modal', 'true');
-            modal.addEventListener('click', closeModal);
-            modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
-            modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+        configDateAndTime = {
+            enableTime: true,
+            dateFormat: "d/m/Y H:i",
+            altInput: true,
+            altFormat: "d/m/Y H:S",
+            ariaDateFormat: "l d F Y à H:S",
+            locale: "fr",
+            time_24hr: true,
+            minDate: "today"
         }
 
-        const closeModal = function (e) {
-            if (modal === null) return;
-            if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
-            e.preventDefault();
-            modal.setAttribute('aria-hidden', 'true');
-            modal.removeAttribute('aria-modal');
-            modal.removeEventListener('click', closeModal);
-            modal.querySelector('.js-modal-close').removeEventListener('click', closeModal);
-            modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation);
-
-            const hideModal = function () {
-                modal.style.display = "none";
-                modal.removeEventListener('animationend', hideModal);
-                modal = null;
-            }
-            modal.addEventListener('animationend', hideModal);
-        }
-        
-        const stopPropagation = function (e) {
-            e.stopPropagation();
+        configDate = {
+            enableTime: false,
+            dateFormat: "d/m/Y",
+            altInput: true,
+            altFormat: "d/m/Y",
+            ariaDateFormat: "l d F Y",
+            locale: "fr",
+            // time_24hr: true,
+            minDate: "today"
         }
 
-        const focusInModal = function (e) {
-            e.preventDefault();
-            let index =  focusables.findIndex(f => f === modal.querySelector(':focus'));
-            e.shiftKey === true ? index-- : index++ ;
-            if (index >= focusables.length) {
-                index = 0;
-            }
-            if (index < 0) {
-                index = focusables.length - 1;
-            }
-            focusables[index].focus();
-        }
-        
-        const loadModal = async function (url) {
-            const existingModal = document.querySelector('#locationModal');
-            if (existingModal !== null) return existingModal;
-            const html = await fetch(url).then(response => response.text());
-            const element = document.createRange().createContextualFragment(html).querySelector('#locationModal');
-            document.body.append(element);
-            return element;
-        }
+        flatpickr(".flatpickrDateTime", configDateAndTime);
+        flatpickr(".flatpickrDate", configDate);
+        flatpickr.localize(flatpickr.l10ns.fr);
+        flatpickr.l10ns.default.firstDayOfWeek = 1; // Lundi
 
-        document.querySelectorAll('.js-modal').forEach(a => {
-            a.addEventListener('click', openModal);
-        })
-
-        window.addEventListener('keydown', function (e){
-            if (e.key === "Escape" || e.key === "Esc") {
-                closeModal(e)
-            }
-            if (e.key === 'Tab' && modal !== null) {
-                focusInModal(e)
-            }
-        })
+        // /**
+        //  * Ce code gère la soumission du formulaire de la modale en ajax
+        //  */
+        // let modal = null;
+        // const focusableSelector = 'button, a, input, textarea';
+        // let focusables = [];
+        // let previouslyFocusedElement = null;
+        //
+        // const openModal = async function (e) {
+        //     e.preventDefault();
+        //     const target = e.target.getAttribute('href');
+        //     modal = await loadModal(target);
+        //     focusables = Array.from(modal.querySelectorAll(focusableSelector));
+        //     previouslyFocusedElement = document.querySelector(':focus');
+        //     modal.style.display = null;
+        //     focusables[0].focus();
+        //     modal.removeAttribute('aria-hidden');
+        //     modal.setAttribute('aria-modal', 'true');
+        //     modal.addEventListener('click', closeModal);
+        //     modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
+        //     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+        // }
+        //
+        // const closeModal = function (e) {
+        //     if (modal === null) return;
+        //     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
+        //     e.preventDefault();
+        //     modal.setAttribute('aria-hidden', 'true');
+        //     modal.removeAttribute('aria-modal');
+        //     modal.removeEventListener('click', closeModal);
+        //     modal.querySelector('.js-modal-close').removeEventListener('click', closeModal);
+        //     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation);
+        //
+        //     const hideModal = function () {
+        //         modal.style.display = "none";
+        //         modal.removeEventListener('animationend', hideModal);
+        //         modal = null;
+        //     }
+        //     modal.addEventListener('animationend', hideModal);
+        // }
+        //
+        // const stopPropagation = function (e) {
+        //     e.stopPropagation();
+        // }
+        //
+        // const focusInModal = function (e) {
+        //     e.preventDefault();
+        //     let index =  focusables.findIndex(f => f === modal.querySelector(':focus'));
+        //     e.shiftKey === true ? index-- : index++ ;
+        //     if (index >= focusables.length) {
+        //         index = 0;
+        //     }
+        //     if (index < 0) {
+        //         index = focusables.length - 1;
+        //     }
+        //     focusables[index].focus();
+        // }
+        //
+        // const loadModal = async function (url) {
+        //     const existingModal = document.querySelector('#locationModal');
+        //     if (existingModal !== null) return existingModal;
+        //     const html = await fetch(url).then(response => response.text());
+        //     const element = document.createRange().createContextualFragment(html).querySelector('#locationModal');
+        //     document.body.append(element);
+        //     return element;
+        // }
+        //
+        // document.querySelectorAll('.js-modal').forEach(a => {
+        //     a.addEventListener('click', openModal);
+        // })
+        //
+        // window.addEventListener('keydown', function (e){
+        //     if (e.key === "Escape" || e.key === "Esc") {
+        //         closeModal(e)
+        //     }
+        //     if (e.key === 'Tab' && modal !== null) {
+        //         focusInModal(e)
+        //     }
+        // })
 
 
         // Code pour les modales de Guillaume
