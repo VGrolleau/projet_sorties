@@ -67,16 +67,12 @@ class SortiesController extends AbstractController
                         ->getRepository(EventState::class)
                         ->findOneBy(['name' => 'En cours']);
                     $event->setEventState($eventState);
-                    //                $entityManager->persist($event);
-                    //                $entityManager->flush();
                 }
                 if ($dateFinEvent < $date) {
                     $eventState = $this->getDoctrine()
                         ->getRepository(EventState::class)
                         ->findOneBy(['name' => 'Terminé']);
                     $event->setEventState($eventState);
-                    //                $entityManager->persist($event);
-                    //                $entityManager->flush();
                 }
                 if($nbRegistre == $nbMaxRegistre){
                     $eventState = $this->getDoctrine()
@@ -84,7 +80,8 @@ class SortiesController extends AbstractController
                         ->findOneBy(['name' => 'Fermé']);
                     $event->setEventState($eventState);
                 }
-
+                $entityManager->persist($event);
+                $entityManager->flush();
             }
         }
         return $this->render('sorties/home.html.twig', [

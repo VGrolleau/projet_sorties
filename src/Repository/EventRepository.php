@@ -48,6 +48,12 @@ class EventRepository extends ServiceEntityRepository
                 ->setParameter('campus', $seachData->campus);
         }
 
+        if (!empty($seachData->q)){
+            $queryBuilder = $queryBuilder
+                ->andWhere('s.name LIKE :q')
+                ->setParameter('q', "%{$seachData->q}%");
+        }
+
         if (!empty($seachData->start_Date)){
             $queryBuilder = $queryBuilder
                 ->andWhere('s.startDate >= :start_Date')
